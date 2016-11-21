@@ -22,4 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="爆破大队5"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="爆破大队6"/>
 </LinearLayout>
