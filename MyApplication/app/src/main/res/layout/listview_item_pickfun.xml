@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/img_loading">
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_pickfun"
+            android:text="面包的由来"
+            android:textSize="30sp"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="15dp"/>
+        <View
+            android:background="@drawable/shape_line"
+            android:layout_width="4.0px"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="35dp"
+            android:layout_marginRight="35dp"/>
+    </RelativeLayout>
+</RelativeLayout>
