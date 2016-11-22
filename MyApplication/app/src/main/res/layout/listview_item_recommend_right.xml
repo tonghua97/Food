@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="5"
+            android:src="@drawable/img_loading"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="2"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:ems="1"
+                android:text="茶泡饭"
+                android:textSize="18dp"/>
+
+            <com.foodfun.ui.VerticalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:maxLines="3"
+                android:text="茶泡饭是指用热茶水来泡冷饭。通常以盐、梅干、海笞等配料，和饭一起泡。制作方便，取材简单。"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
