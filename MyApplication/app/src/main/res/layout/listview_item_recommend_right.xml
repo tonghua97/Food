@@ -25,7 +25,7 @@
                 android:text="茶泡饭"
                 android:textSize="18dp"/>
 
-            <com.foodfun.ui.VerticalTextView
+            <com.example.administrator.ui.VerticalTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
