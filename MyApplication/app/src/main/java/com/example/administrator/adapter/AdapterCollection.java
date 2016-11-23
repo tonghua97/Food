@@ -8,8 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.administrator.domain.Data_collection;
-import com.example.administrator.myapplication.MainActivity;
+import com.example.administrator.domain.DataCollection;
 import com.example.administrator.myapplication.R;
 
 import java.util.ArrayList;
@@ -19,10 +18,10 @@ import java.util.List;
  * Created by lijing on 2016/11/23.
  */
 
-public class Adapter_collection extends BaseAdapter {
+public class AdapterCollection extends BaseAdapter {
     private Context context;
-    private List<Data_collection> ldc = new ArrayList<>();
-    public Adapter_collection(List<Data_collection> ld){
+    private List<DataCollection> ldc = new ArrayList<>();
+    public AdapterCollection(List<DataCollection> ld){
         ldc = ld;
     }
     @Override

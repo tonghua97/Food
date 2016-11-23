@@ -12,10 +12,12 @@ import com.example.administrator.myapplication.R;
 /**
  * Created by Administrator on 2016/11/22.
  */
-public class FragmentFenlei extends Fragment{
+public class FragmentHomeRank extends Fragment{
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment_fenlei,container,false);
+        return inflater.inflate(R.layout.listview_item_ranklist,container,false);
     }
+
 }

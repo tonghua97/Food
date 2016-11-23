@@ -5,7 +5,7 @@ package com.example.administrator.domain;
  * Created by 王晨阳 on 2016/11/22.
  */
 
-public class Data_Recommend {
+public class DataRecommend {
     private long Id;    //推荐表id
     private String RecipesId;   //食谱id
     private String Image;   //食谱图片URL
@@ -20,7 +20,7 @@ public class Data_Recommend {
      * @param name
      * @param recipesId
      */
-    public Data_Recommend(long id, String recipesId, String image, String name, String introduction) {
+    public DataRecommend(long id, String recipesId, String image, String name, String introduction) {
         Id = id;
         RecipesId = recipesId;
         Image = image;

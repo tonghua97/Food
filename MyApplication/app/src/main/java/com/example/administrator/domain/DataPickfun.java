@@ -4,12 +4,12 @@ package com.example.administrator.domain;
  * Created by 13173 on 2016/11/22.
  */
 
-public class Data_pickfun {
+public class DataPickfun {
     private int id;
     private int url;
     private String mPickfun_Name;
 
-    public Data_pickfun(int id, int url, String mPickfun_Name) {
+    public DataPickfun(int id, int url, String mPickfun_Name) {
         this.id = id;
         this.url = url;
         this.mPickfun_Name = mPickfun_Name;

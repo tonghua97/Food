@@ -25,12 +25,15 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/sousuo"/>
+                android:src="@drawable/sousuo"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/main_et_dafault"
+
                 android:hint="搜索"/>
         </LinearLayout>
 
@@ -63,14 +66,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="1"
-            android:id="@+id/main_Llay_shouye"
+            android:id="@+id/main_Llay_home"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/main_Llay_shouye_Iv"
+                android:id="@+id/main_Llay_home_Iv"
                 android:src="@drawable/icon_home_normal"/>
             <TextView
+                android:id="@+id/main_Llay_home_Tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="首页"/>
@@ -80,14 +84,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:id="@+id/main_Llay_fenlei"
+            android:id="@+id/main_Llay_classify"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/main_Llay_fenlei_Iv"
+                android:id="@+id/main_Llay_classify_Iv"
                 android:src="@drawable/icon_classify_normal"/>
             <TextView
+                android:id="@+id/main_Llay_classify_Tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="分类"/>
@@ -97,14 +102,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:id="@+id/main_Llay_wode"
+            android:id="@+id/main_Llay_person"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/main_Llay_wode_Iv"
+                android:id="@+id/main_Llay_person_Iv"
                 android:src="@drawable/icon_person_normal"/>
             <TextView
+                android:id="@+id/main_Llay_person_Tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="个人中心"/>

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.administrator.domain.Data_Recommend;
+import com.example.administrator.domain.DataRecommend;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.ui.VerticalTextView;
 
@@ -20,16 +20,16 @@ import java.util.List;
  * Created by 王晨阳 on 2016/11/22.
  */
 
-public class Adapter_Recommend extends BaseAdapter{
+public class AdapterRecommend extends BaseAdapter{
     private Context mContext;
-    private List<Data_Recommend> mData = new ArrayList<>();
+    private List<DataRecommend> mData = new ArrayList<>();
 
     /**
      * 带参构造函数
      * @param mContext
      * @param mData
      */
-    public Adapter_Recommend(Context mContext, List<Data_Recommend> mData) {
+    public AdapterRecommend(Context mContext, List<DataRecommend> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }

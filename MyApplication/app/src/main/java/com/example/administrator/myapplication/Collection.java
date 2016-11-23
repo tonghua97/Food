@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.administrator.adapter.Adapter_collection;
-import com.example.administrator.domain.Data_collection;
+import com.example.administrator.adapter.AdapterCollection;
+import com.example.administrator.domain.DataCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +21,13 @@ import java.util.List;
 
 public class Collection {
     private ArrayAdapter<String> adapter;
-    private List<Data_collection> ld = new ArrayList<>();
+    private List<DataCollection> ld = new ArrayList<>();
     private ListView lv_collection;
-    private Adapter_collection adapter_collection;
+    private AdapterCollection adapter_collection;
     @Nullable
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_collection,container,false);
-        adapter_collection = new Adapter_collection(ld);
+        adapter_collection = new AdapterCollection(ld);
         lv_collection = (ListView)view.findViewById(R.id.Lv_collection);
         lv_collection.setAdapter(adapter_collection);
         getData();
@@ -35,10 +35,10 @@ public class Collection {
     }
 
     private void getData() {
-        ld.add((new Data_collection(1,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new Data_collection(1,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new Data_collection(1,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new Data_collection(1,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
 
     }
 }
