@@ -27,6 +27,5 @@ public class MainActivity extends AppCompatActivity {
         mPickfun = new fragment_pickfun();
         transaction.replace(R.id.container,mPickfun);
         transaction.commit();
-        Activity_main.invalidate();
     }
 }
