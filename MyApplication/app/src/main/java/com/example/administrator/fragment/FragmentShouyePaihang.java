@@ -1,4 +1,4 @@
-package com.example.administrator.ui;
+package com.example.administrator.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,10 +12,12 @@ import com.example.administrator.myapplication.R;
 /**
  * Created by Administrator on 2016/11/22.
  */
-public class FragmentWode extends Fragment{
+public class FragmentShouyePaihang extends Fragment{
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment_wode,container,false);
+        return inflater.inflate(R.layout.main_fragment_shouye_paihang,container,false);
     }
+
 }

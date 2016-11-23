@@ -1,4 +1,4 @@
-package com.example.administrator.ui;
+package com.example.administrator.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;

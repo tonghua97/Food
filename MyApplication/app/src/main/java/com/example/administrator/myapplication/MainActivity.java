@@ -9,9 +9,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.administrator.ui.FragmentFenlei;
-import com.example.administrator.ui.FragmentShouye;
-import com.example.administrator.ui.FragmentWode;
+import com.example.administrator.fragment.FragmentFenlei;
+import com.example.administrator.fragment.FragmentShouye;
+import com.example.administrator.fragment.FragmentWode;
+
 
 public class MainActivity extends Activity {
 
@@ -27,7 +28,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //获取界面的控件
         getViews();
 
@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
         //设置默认的页面
         setDefaultPage();
     }
+
 
     private void setDefaultPage() {
         //1、获取一个fragmentManager的对象
@@ -62,6 +63,7 @@ public class MainActivity extends Activity {
         mLlayWode = (LinearLayout)findViewById(R.id.main_Llay_wode);
         mRlay = (RelativeLayout)findViewById(R.id.main_Rlay);
     }
+
 
     View.OnClickListener myListener = new View.OnClickListener() {
         @Override
