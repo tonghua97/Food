@@ -22,8 +22,9 @@ import java.util.List;
 public class adapter_pickfun extends BaseAdapter {
     private Context context;
     private List<Data_pickfun> ldp = new ArrayList<>();
-    public adapter_pickfun(List<Data_pickfun> ld){
+    public adapter_pickfun(List<Data_pickfun> ld,Context context){
         ldp = ld;
+        this.context = context;
     }
     @Override
     public int getCount() {
