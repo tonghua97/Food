@@ -2,6 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="fill_vertical">
     <ImageView
         android:id="@+id/Iv_collection"
         android:layout_width="80dp"
@@ -11,16 +15,21 @@
         android:id="@+id/Tv_collection1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/Iv_collection"/>
+        android:layout_toRightOf="@id/Iv_collection"
+        android:text="食趣食趣"/>
     <TextView
         android:id="@+id/Tv_collection2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/Iv_collection"
-        android:layout_alignBottom="@id/Tv_collection1"/>
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_below="@id/Tv_collection1"
+        android:text="食趣食趣食趣食趣食趣食趣食趣食趣"/>
+    <ImageView
+
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerInside"
         android:layout_alignParentRight="true"
-        />
+        android:src="@drawable/icon_more"/>
+    </RelativeLayout>
 </RelativeLayout>
