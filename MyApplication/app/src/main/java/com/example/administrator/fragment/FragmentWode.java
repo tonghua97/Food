@@ -16,6 +16,6 @@ public class FragmentWode extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment_wode,container,false);
+        return inflater.inflate(R.layout.activity_personal,container,false);
     }
 }

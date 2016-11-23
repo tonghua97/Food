@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -22,7 +23,11 @@ public class MainActivity extends Activity {
     private FragmentShouye mFragShouye;
     private FragmentFenlei mFragFenlei;
     private FragmentWode mFragWode;
-    private RelativeLayout mRlay;
+    private LinearLayout mRlay;
+    private RelativeLayout mRlayTop;
+    private ImageView mLlayShouyeIv;
+    private ImageView mLlayFenleiIv;
+    private ImageView mLlayWodeIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +66,11 @@ public class MainActivity extends Activity {
         mLlayShouye = (LinearLayout)findViewById(R.id.main_Llay_shouye);
         mLlayFenlei = (LinearLayout)findViewById(R.id.main_Llay_fenlei);
         mLlayWode = (LinearLayout)findViewById(R.id.main_Llay_wode);
-        mRlay = (RelativeLayout)findViewById(R.id.main_Rlay);
+        mRlay = (LinearLayout)findViewById(R.id.main_Rlay);
+        mRlayTop = (RelativeLayout)findViewById(R.id.main_Rlay_top);
+        mLlayShouyeIv = (ImageView)findViewById(R.id.main_Llay_shouye_Iv);
+        mLlayFenleiIv = (ImageView)findViewById(R.id.main_Llay_fenlei_Iv);
+        mLlayWodeIv = (ImageView)findViewById(R.id.main_Llay_wode_Iv);
     }
 
 
@@ -81,6 +90,10 @@ public class MainActivity extends Activity {
 
                     //3、设置页面
                     transaction.replace(R.id.main_Flay_center,mFragShouye);
+                    mLlayFenleiIv.setImageResource(R.drawable.icon_classify_normal);
+                    mLlayWodeIv.setImageResource(R.drawable.icon_person_normal);
+                    mLlayShouyeIv.setImageResource(R.drawable.icon_home_down);
+                    mRlayTop.setVisibility(View.VISIBLE);
 
                     break;
                 case R.id.main_Llay_fenlei:
@@ -90,6 +103,10 @@ public class MainActivity extends Activity {
 
                     //3、设置页面
                     transaction.replace(R.id.main_Flay_center,mFragFenlei);
+                    mLlayFenleiIv.setImageResource(R.drawable.icon_classify_down);
+                    mLlayWodeIv.setImageResource(R.drawable.icon_person_normal);
+                    mLlayShouyeIv.setImageResource(R.drawable.icon_home_normal);
+                    mRlayTop.setVisibility(View.VISIBLE);
 
                     break;
                 case R.id.main_Llay_wode:
@@ -99,6 +116,10 @@ public class MainActivity extends Activity {
 
                     //3、设置页面
                     transaction.replace(R.id.main_Flay_center,mFragWode);
+                    mLlayFenleiIv.setImageResource(R.drawable.icon_classify_normal);
+                    mLlayWodeIv.setImageResource(R.drawable.icon_person_down);
+                    mLlayShouyeIv.setImageResource(R.drawable.icon_home_normal);
+                    mRlayTop.setVisibility(View.GONE);
 
                     break;
             }
