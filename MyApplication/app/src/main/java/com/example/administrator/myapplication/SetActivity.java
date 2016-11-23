@@ -1,20 +1,10 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-
-import com.example.administrator.fragment.FragmentFenlei;
-import com.example.administrator.fragment.FragmentShouye;
-import com.example.administrator.fragment.FragmentWode;
-
 
 public class SetActivity extends Activity {
 
