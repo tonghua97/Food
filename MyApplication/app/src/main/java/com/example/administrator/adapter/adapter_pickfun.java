@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 public class adapter_pickfun extends BaseAdapter {
-    private Context context = MainActivity.context;
+    private Context context;
     private List<Data_pickfun> ldp = new ArrayList<>();
     public adapter_pickfun(List<Data_pickfun> ld){
         ldp = ld;

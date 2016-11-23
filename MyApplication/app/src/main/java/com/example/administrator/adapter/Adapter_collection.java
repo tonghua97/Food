@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 public class Adapter_collection extends BaseAdapter {
-    private Context context = MainActivity.context;
+    private Context context;
     private List<Data_collection> ldc = new ArrayList<>();
     public Adapter_collection(List<Data_collection> ld){
         ldc = ld;
