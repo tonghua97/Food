@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/PartRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/Iv"
+            android:src="@drawable/img_loading"
+            android:scaleType="fitXY"
+            android:layout_width="320dp"
+            android:layout_height="200dp" />
+        <ImageView
+            android:id="@+id/IvCover"
+            android:src="@drawable/img_ranklistcover"
+            android:scaleType="fitXY"
+            android:layout_width="320dp"
+            android:layout_height="200dp" />
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:text=" NO."
+                android:textSize="40dp"
+                android:textColor="#f9c515"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:singleLine="true"/>
+            <TextView
+                android:id="@+id/Tv_rank_id"
+                android:layout_weight="1"
+                android:text="00"
+                android:textSize="40dp"
+                android:textColor="#f9c515"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </FrameLayout>
+    <LinearLayout
+        android:layout_toRightOf="@+id/PartRight"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <TextView
+            android:id="@+id/Tv_foodname"
+            android:text="老北京炸酱面"
+            android:layout_width="match_parent"
+            android:layout_height="170dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/Tv_collect_num"
+                android:textAlignment="textEnd"
+                android:text="000"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textAlignment="textStart"
+                android:text="收藏"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
