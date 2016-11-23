@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wcyhp on 2016/11/22.
+ * Created by Administrator on 2016/11/22.
  */
+public class FragmentShouyeTuijian extends Fragment{
 
-public class Fragment_Recommend extends Fragment {
     private View view;
     private List<Data_Recommend> ls = new ArrayList<Data_Recommend>();
     private Adapter_Recommend recommednAdapter;
