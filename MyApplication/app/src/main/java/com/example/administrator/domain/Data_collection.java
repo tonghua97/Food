@@ -1,7 +1,7 @@
 package com.example.administrator.domain;
 
 /**
- * 推荐表类
+ * 收藏类
  * Created by lijing on 2016/11/23.
  */
 
