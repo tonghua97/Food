@@ -7,14 +7,28 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--返回键-->
-    <Button
-        android:id="@+id/Setting_Bt_Back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="返回"
-        android:textSize="15sp"
-        android:background="#00000000"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/main_rlay_top">
+        <!--返回键-->
+        <Button
+            android:id="@+id/Setting_Bt_Back"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:background="@drawable/setting_btn_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23dp"
+            android:text="设置"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
 
     <!--头像-->
     <RelativeLayout
@@ -28,6 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="头像"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             android:layout_centerVertical="true"/>
 
         <ImageView
@@ -58,11 +74,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="用户名"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="爆破大队"
+            android:textSize="15sp"
             android:layout_toLeftOf="@+id/Setting_Bt_UserNameEdit"
             android:layout_centerVertical="true"
             android:layout_marginRight="25dp"/>
@@ -86,6 +105,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码修改"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             android:layout_centerVertical="true"/>
         <Button
             android:id="@+id/Setting_Bt_UserPasswordEdit"
@@ -107,6 +128,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="性别"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             android:layout_centerVertical="true"/>
         <Spinner
             android:id="@+id/Setting_Sp_Gender"

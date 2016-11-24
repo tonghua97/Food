@@ -3,6 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
 
     defaultConfig {
         applicationId "com.example.administrator.myapplication"
@@ -16,7 +20,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
+    }/*
+
+    buildToolsVersion{
+        aaptOptions.cruncherEnabled = false
+        aaptOptions.useNewCruncher = false
+    }*/
 }
 
 dependencies {
@@ -24,3 +33,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
 }
+
