@@ -10,21 +10,21 @@
         android:background="@drawable/main_rlay_top">
         <!--返回键-->
         <Button
-            android:id="@+id/AvatarEdit_Bt_Back"
+            android:id="@+id/PwdEdit_Bt_Back"
             android:layout_width="30dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:textSize="15sp"
             android:background="@drawable/setting_btn_back"/>
         <TextView
-            android:layout_toRightOf="@+id/AvatarEdit_Bt_Back"
+            android:layout_toRightOf="@+id/PwdEdit_Bt_Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="23dp"
-            android:text="用户名修改"
+            android:text="密码修改"
             android:layout_centerVertical="true"/>
         <Button
-            android:id="@+id/AvatarEdit_Bt_Save"
+            android:id="@+id/PwdEdit_Bt_Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="保存"
@@ -32,36 +32,36 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:paddingRight="10dp"
-        android:paddingLeft="15dp">
+        android:background="@drawable/border_personal"
+        android:orientation="vertical"
+        android:paddingTop="30dp">
         <EditText
-            android:id="@+id/AvatarEdit_Et_Uname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:text="爆破大队"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"/>
-        <Button
-            android:id="@+id/AvatarEdit_btn_clear"
-            android:layout_width="45dp"
-            android:layout_height="38dp"
-            android:background="@drawable/img_avataredit"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-        <TextView
+            android:id="@+id/PwdEdit_Et_oldpwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="小提示：用户名可包含字母、数字、下划线、中文"
-            android:gravity="center"/>
-    </RelativeLayout>
+            android:textSize="20sp"
+            android:background="@null"
+            android:hint="请输入旧密码"
+            android:gravity="center"
+            android:password="true"/>
+        <EditText
+            android:id="@+id/PwdEdit_Et_newpwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:background="@null"
+            android:hint="请输入新密码"
+            android:gravity="center"
+            android:password="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认"
+            android:background="#00000000"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
 </LinearLayout>
