@@ -57,11 +57,11 @@ public class Personal_setting_UnameEditActivity extends Activity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-//                返回键
+                //返回键
                 case R.id.UnameEdit_Bt_Back:
                     finish();
                     break;
-//                保存用户名的修改
+                //保存用户名的修改
                 case R.id.UnameEdit_Bt_Save:
                     SharedPreferences spf = getSharedPreferences("UNAME_EDIT", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = spf.edit();
@@ -69,7 +69,7 @@ public class Personal_setting_UnameEditActivity extends Activity {
                     editor.commit();
                     Toast.makeText(Personal_setting_UnameEditActivity.this,"用户名修改并保存成功！",Toast.LENGTH_SHORT).show();
                     break;
-//                清空用户名
+                //清空用户名
                 case R.id.UnameEdit_btn_clear:
                     mEtUname.setText(" ");
                     break;
