@@ -16,6 +16,7 @@ import com.example.administrator.myapplication.R;
 
 /**
  * Created by Administrator on 2016/11/22.
+ * 首页fragment
  */
 public class FragmentHome extends Fragment{
     private View view;

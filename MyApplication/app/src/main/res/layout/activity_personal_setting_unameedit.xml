@@ -10,21 +10,21 @@
         android:background="@drawable/main_rlay_top">
         <!--返回键-->
         <Button
-            android:id="@+id/AvatarEdit_Bt_Back"
+            android:id="@+id/UnameEdit_Bt_Back"
             android:layout_width="30dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:textSize="15sp"
             android:background="@drawable/setting_btn_back"/>
         <TextView
-            android:layout_toRightOf="@+id/AvatarEdit_Bt_Back"
+            android:layout_toRightOf="@+id/UnameEdit_Bt_Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="23dp"
             android:text="用户名修改"
             android:layout_centerVertical="true"/>
         <Button
-            android:id="@+id/AvatarEdit_Bt_Save"
+            android:id="@+id/UnameEdit_Bt_Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="保存"
@@ -40,7 +40,7 @@
         android:paddingRight="10dp"
         android:paddingLeft="15dp">
         <EditText
-            android:id="@+id/AvatarEdit_Et_Uname"
+            android:id="@+id/UnameEdit_Et_Uname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -48,7 +48,7 @@
             android:textSize="20sp"
             android:layout_centerVertical="true"/>
         <Button
-            android:id="@+id/AvatarEdit_btn_clear"
+            android:id="@+id/UnameEdit_btn_clear"
             android:layout_width="45dp"
             android:layout_height="38dp"
             android:background="@drawable/img_avataredit"

@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/11/22.
+ * 推荐fragment
  */
 public class FragmentHomeRecommend extends Fragment{
 
@@ -26,6 +27,7 @@ public class FragmentHomeRecommend extends Fragment{
     private List<DataRecommend> ls = new ArrayList<DataRecommend>();
     private AdapterRecommend recommednAdapter;
     private ListView lv;
+    private boolean isFirst = true;
 
     @Nullable
     @Override
@@ -39,7 +41,13 @@ public class FragmentHomeRecommend extends Fragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getData();
+
+        if (isFirst){
+            getData();
+
+            isFirst = false;
+        }
+
         recommednAdapter = new AdapterRecommend(getActivity(),ls);
         lv.setAdapter(recommednAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
