@@ -22,7 +22,7 @@ public class AdapterRanklist extends BaseAdapter {
     private List<DataRanklist> lrl = new ArrayList<>();
 
     public AdapterRanklist(List<DataRanklist> lrl,Context context){
-        lrl = lrl;
+        this.lrl = lrl;
         this.context = context;
     }
 
@@ -48,18 +48,19 @@ public class AdapterRanklist extends BaseAdapter {
         }
         //食谱收藏排行
         TextView Tv_rank_id = (TextView)convertView.findViewById(R.id.Tv_rank_id);
-        //获取排行待解决 2016/11/23 ginger
+        Tv_rank_id.setText(lrl.get(position).getRank());
+        //获取排行待解决 2016/11/23 ginger lrl.get(position).getRank()
 
         //食谱收藏数 Tv_ranklist_collect
         TextView Tv_ranklist_collect = (TextView)convertView.findViewById(R.id.Tv_ranklist_collect);
-        Tv_ranklist_collect.setText(lrl.get(position).getNum());
+        Tv_ranklist_collect.setText(lrl.get(position).getNum() + "");
 
         //食谱图片 Iv_ranklist_recipeimg
         ImageView Iv_ranklist_recipeimg = (ImageView)convertView.findViewById((R.id.Iv_ranklist_recipeimg));
         String imgurl = lrl.get(position).getImage();
 
         //食谱名 Tv_ranklist_recipename
-        TextView Tv_pickfun_title = (TextView) convertView.findViewById(R.id.Tv_pickfun_title);
+        TextView Tv_pickfun_title = (TextView) convertView.findViewById(R.id.Tv_ranklist_recipename);
         Tv_pickfun_title.setText(lrl.get(position).getName());
 
         return convertView;

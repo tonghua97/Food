@@ -14,6 +14,7 @@ import com.example.administrator.myapplication.SetActivity;
 
 /**
  * Created by Administrator on 2016/11/22.
+ * 个人中心fragment
  */
 public class FragmentPerson extends Fragment{
     private View view;
