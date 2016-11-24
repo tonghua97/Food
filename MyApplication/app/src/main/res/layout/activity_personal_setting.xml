@@ -11,16 +11,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:paddingLeft="20dp"
         android:background="@drawable/main_rlay_top">
         <!--返回键-->
         <Button
             android:id="@+id/Setting_Bt_Back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="返回"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:textSize="15sp"
-            android:background="#00000000"/>
+            android:background="@drawable/setting_btn_back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
