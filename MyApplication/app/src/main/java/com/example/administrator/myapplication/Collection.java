@@ -35,10 +35,14 @@ public class Collection {
     }
 
     private void getData() {
-        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(1,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(0L,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(1L,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(2L,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(3L,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(0L,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(1L,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(2L,R.drawable.img_loading,"食趣","食趣")));
+        ld.add((new DataCollection(3L,R.drawable.img_loading,"食趣","食趣")));
 
     }
 }
