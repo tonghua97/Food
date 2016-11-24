@@ -15,8 +15,12 @@ import android.widget.Spinner;
 
 public class Personal_settingActivity extends Activity {
 
-    private Button back,avatarEdit,nameEdit,pwdEdit;//返回键，修改头像，修改用户名，修改密码
-    private Spinner gender;                           //选择性别
+    private Button back;             //返回键
+    private Button avatarEdit;      //头像修改
+    private Button nameEdit;        //用户名修改
+    private Button pwdEdit;         //密码修改
+
+    private Spinner gender;         //性别选择下拉列表
     private ArrayAdapter adapter = null;
 
     @Override
@@ -24,12 +28,19 @@ public class Personal_settingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting);
 
+        //获取控件
         getViews();
-        setListener();
-        setSpinner();
 
+        //设置监听
+        setListener();
+
+        //设置下拉列表--用户性别选择
+        setSpinner();
     }
 
+    /**
+     * 获取控件
+     */
     private void getViews(){
         back = (Button)findViewById(R.id.Setting_Bt_Back);
         avatarEdit = (Button)findViewById(R.id.Setting_Bt_avatarEdit);
@@ -37,33 +48,6 @@ public class Personal_settingActivity extends Activity {
         pwdEdit = (Button)findViewById(R.id.Setting_Bt_UserPasswordEdit);
 
         gender = (Spinner)findViewById(R.id.Setting_Sp_Gender);
-    }
-
-    /**
-     * 下拉列表的设置
-     */
-    private void setSpinner(){
-        // 建立数据源
-        String[] mItems = getResources().getStringArray(R.array.setting_gender);
-        // 建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
-        //设置下拉列表的风格
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //绑定 Adapter到控件
-        gender .setAdapter(adapter);
-        //添加事件Spinner事件监听
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                //保存用户的性别选择
-                gender.setSelection(pos,true);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Another interface callback
-            }
-        });
-
     }
 
     /**
@@ -103,6 +87,33 @@ public class Personal_settingActivity extends Activity {
                     break;
             }
         }
+    }
+
+    /**
+     * 下拉列表的设置
+     */
+    private void setSpinner(){
+        // 建立数据源
+        String[] mItems = getResources().getStringArray(R.array.setting_gender);
+        // 建立Adapter并且绑定数据源
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
+        //设置下拉列表的风格
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //绑定 Adapter到控件
+        gender .setAdapter(adapter);
+        //添加事件Spinner事件监听
+        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                //保存用户的性别选择
+                gender.setSelection(pos,true);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+            }
+        });
+
     }
 
 }
