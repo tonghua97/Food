@@ -15,10 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".SetActivity" />
         <activity android:name=".Personal_settingActivity" />
         <activity android:name=".PersonalAboutActivity" />
         <activity android:name=".LoginVerifyActivity"></activity>
+=======
+        <activity android:name=".SetActivity"/>
+>>>>>>> 83762abc4cd97bbe19fdb20ac3d6546c7038e784
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -70,13 +71,13 @@ public class Personal_settingActivity extends Activity {
                     break;
                 case R.id.Setting_Bt_avatarEdit:
                     /*跳转到头像修改页面*/
-//                    Intent intent1 = new Intent(PersonCenter_SettingActivity.this,Setting_AvatarEditActivity.class);
-//                    startActivity(intent1);
+                    Intent intent1 = new Intent(Personal_settingActivity.this,Personal_setting_PwdEditActivity.class);
+                    startActivity(intent1);
                     break;
                 case R.id.Setting_Bt_UserNameEdit:
                      /*跳转到用户名修改页面*/
-//                    Intent intent2 = new Intent(PersonCenter_SettingActivity.this,Setting_UserNameEditActivity.class);
-//                    startActivity(intent2);
+                    Intent intent2 = new Intent(Personal_settingActivity.this,Personal_setting_UnameEditActivity.class);
+                    startActivity(intent2);
                     break;
                 case R.id.Setting_Bt_UserPasswordEdit:
                      /*跳转到密码修改页面*/
