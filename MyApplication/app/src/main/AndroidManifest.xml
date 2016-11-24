@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".SetActivity" />
         <activity android:name=".Personal_settingActivity" />
-        <activity android:name=".PersonalAboutActivity"></activity>
+        <activity android:name=".PersonalAboutActivity" />
+        <activity android:name=".LoginVerifyActivity"></activity>
     </application>
 
 </manifest>
