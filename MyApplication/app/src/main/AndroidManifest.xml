@@ -15,10 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-=======
-        <activity android:name=".RegisterActivity"></activity>
->>>>>>> 7ab35e35ad53dad08e7e12a4ca356c439dcf549e
     </application>
 
 </manifest>
