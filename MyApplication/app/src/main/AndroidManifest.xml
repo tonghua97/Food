@@ -17,6 +17,7 @@
         </activity>
 
         <activity android:name=".RecipeShow"/>
+        <activity android:name=".SetActivity"/>
     </application>
 
 </manifest>
