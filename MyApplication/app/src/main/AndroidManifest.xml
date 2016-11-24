@@ -16,16 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SetActivity"/>
-
-        <!--设置页面-->
-        <activity android:name=".Personal_settingActivity"/>
-
-        <!--设置页面下的头像修改页面-->
-        <activity android:name=".Personal_setting_UnameEditActivity"/>
-
-        <!--设置页面下的密码修改页面-->
-        <activity android:name=".Personal_setting_PwdEditActivity"/>
-
     </application>
 
 </manifest>
