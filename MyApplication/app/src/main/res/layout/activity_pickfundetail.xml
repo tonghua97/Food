@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/Btn_pickfundetail_back"
+            android:background="@drawable/img_pickfun_back"
+            android:scaleType="center"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <TextView
+            android:id="@+id/Tv_pickfundetail_title"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:background="@null"
+            android:layout_marginTop="5dp"
+            android:text="拾趣题目"
+            android:textSize="25dp"
+            android:layout_width="200dp"
+            android:layout_height="55dp" />
+        <ImageView
+            android:id="@+id/Iv_pickfundetail_collect"
+            android:background="@drawable/img_collect_unclick"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/Iv_pickfundetail_recipeimg"
+        android:scaleType="fitXY"
+        android:background="@drawable/img_loading"
+        android:layout_width="match_parent"
+        android:layout_height="180dp" />
+    <ImageView
+        android:background="@drawable/img_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/Tv_pickfundetail_content"
+        android:textSize="18dp"
+        android:lineSpacingExtra="3dp"
+        android:lineSpacingMultiplier="1.5"
+        android:padding="15dp"
+        android:text="      传说公元前2600年左右，有一个为主人用水和上面粉做饼的埃及奴隶，一天晚上，饼还没有烤好他就睡着了，炉子也灭了。
+夜里，生面饼开始发酵，膨大了。等到这个奴隶一觉醒来时，生面饼已经比昨晚大了一倍。他连忙把面饼塞回炉子里去，他想这样就不会有人知道他活还没干完就大大咧咧睡着了。
+面包烤好了，奴隶和主人都发现那东西比他们过去常吃的扁薄煎饼好多了，它又松又软。
+        也许是生面饼里的面粉、水或甜味剂（或许就是蜂密）暴露在空气里的野生酵母菌或细菌下，当它们经过了一段时间的温暖后，酵母菌生长并传遍了整个面饼。
+埃及人继续用酵母菌实验，成了世界上第一代职业面包师。"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
