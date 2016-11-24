@@ -17,13 +17,30 @@
             android:text="个人中心"/>
     </LinearLayout>
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/img_personal_headexample"
-        />
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:id="@+id/personal_ll_head">
+        <com.example.administrator.ui.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_personal_headexample"
+            app:border_width="2dp"
+            app:border_color="#FFFFFF"
+            android:id="@+id/personal_iv_head"/>
+    </LinearLayout>
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="4"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:src="@drawable/img_personal_headexample"-->
+        <!--/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

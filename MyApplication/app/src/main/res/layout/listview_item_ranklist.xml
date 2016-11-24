@@ -5,7 +5,7 @@
     <FrameLayout
         android:id="@+id/PartRight"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="200dp">
         <ImageView
             android:id="@+id/Iv_ranklist_recipeimg"
             android:src="@drawable/img_loading"
@@ -49,14 +49,31 @@
         android:layout_toRightOf="@+id/PartRight"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
-        <TextView
-            android:id="@+id/Tv_ranklist_recipename"
-            android:text="老北京炸酱面"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:textIsSelectable="false"
-            android:singleLine="true" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_pickfun"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="4dp">
+            <TextView
+                android:id="@+id/Tv_ranklist_recipename"
+                android:text="老北京炸酱面"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:ems="1"
+                android:textIsSelectable="false" />
+            <View
+                android:background="@drawable/shape_line"
+                android:layout_width="18dp"
+                android:layout_height="4.0px"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -20,18 +20,20 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/11/22.
+ * 排行榜fragment
  */
 public class FragmentHomeRank extends Fragment{
     private ArrayAdapter<String> adapter;
     private List<DataRanklist> lrl = new ArrayList<>();
     private ListView lv_ranklist;
     private com.example.administrator.adapter.AdapterRanklist adapter_ranklist;
+    private boolean isFirst = true;
 
     @Nullable
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.listview_item_ranklist, container, false);
+        View view = inflater.inflate(R.layout.fragment_ranklist, container, false);
         lv_ranklist = (ListView) view.findViewById(R.id.Lv_ranklist);
         return view;
     }
@@ -39,7 +41,13 @@ public class FragmentHomeRank extends Fragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getData();
+
+        if (isFirst){
+            getData();
+
+            isFirst = false;
+        }
+
         adapter_ranklist = new AdapterRanklist(lrl, getActivity());
         lv_ranklist.setAdapter(adapter_ranklist);
         lv_ranklist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,11 +59,11 @@ public class FragmentHomeRank extends Fragment{
     }
 
     private void getData() {
-        lrl.add(new DataRanklist(1L, 1, 289, "这里放图片url", "老北京炸酱面1", "1"));
-        lrl.add(new DataRanklist(2L, 2, 204, "这里放图片url", "老北京炸酱面2", "2"));
-        lrl.add(new DataRanklist(3L, 3, 179, "这里放图片url", "老北京炸酱面3", "3"));
-        lrl.add(new DataRanklist(4L, 4, 120, "这里放图片url", "老北京炸酱面4", "4"));
-        lrl.add(new DataRanklist(5L, 5, 106, "这里放图片url", "老北京炸酱面5", "5"));
+        lrl.add(new DataRanklist(1L, 1, 289, "这里放图片url", "老北京炸酱面", "1"));
+        lrl.add(new DataRanklist(2L, 2, 204, "这里放图片url", "老北京炸酱面", "2"));
+        lrl.add(new DataRanklist(3L, 3, 179, "这里放图片url", "老北京炸酱面", "3"));
+        lrl.add(new DataRanklist(4L, 4, 120, "这里放图片url", "老北京炸酱面", "4"));
+        lrl.add(new DataRanklist(5L, 5, 106, "这里放图片url", "老北京炸酱面", "5"));
 
     }
 
