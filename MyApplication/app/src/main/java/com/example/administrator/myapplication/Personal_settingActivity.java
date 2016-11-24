@@ -16,12 +16,12 @@ import android.widget.Spinner;
 
 public class Personal_settingActivity extends Activity {
 
-    private Button back;             //返回键
-    private Button avatarEdit;      //头像修改
-    private Button nameEdit;        //用户名修改
-    private Button pwdEdit;         //密码修改
+    private Button mBtBack;             //返回键
+    private Button mBtAvatarEdit;      //头像修改
+    private Button mBtUnameEdit;        //用户名修改
+    private Button mBtPwdEdit;         //密码修改
 
-    private Spinner gender;         //性别选择下拉列表
+    private Spinner mSpGender;         //性别选择下拉列表
     private ArrayAdapter adapter = null;
 
     @Override
@@ -43,12 +43,12 @@ public class Personal_settingActivity extends Activity {
      * 获取控件
      */
     private void getViews(){
-        back = (Button)findViewById(R.id.Setting_Bt_Back);
-        avatarEdit = (Button)findViewById(R.id.Setting_Bt_avatarEdit);
-        nameEdit = (Button)findViewById(R.id.Setting_Bt_UserNameEdit);
-        pwdEdit = (Button)findViewById(R.id.Setting_Bt_UserPasswordEdit);
+        mBtBack = (Button)findViewById(R.id.Setting_Bt_Back);
+        mBtAvatarEdit = (Button)findViewById(R.id.Setting_Bt_avatarEdit);
+        mBtUnameEdit = (Button)findViewById(R.id.Setting_Bt_UserNameEdit);
+        mBtPwdEdit = (Button)findViewById(R.id.Setting_Bt_UserPasswordEdit);
 
-        gender = (Spinner)findViewById(R.id.Setting_Sp_Gender);
+        mSpGender = (Spinner)findViewById(R.id.Setting_Sp_Gender);
     }
 
     /**
@@ -56,10 +56,10 @@ public class Personal_settingActivity extends Activity {
      */
     private void setListener(){
         MyListener listener = new MyListener();
-        back.setOnClickListener(listener);
-        avatarEdit.setOnClickListener(listener);
-        nameEdit.setOnClickListener(listener);
-        pwdEdit.setOnClickListener(listener);
+        mBtBack.setOnClickListener(listener);
+        mBtAvatarEdit.setOnClickListener(listener);
+        mBtUnameEdit.setOnClickListener(listener);
+        mBtPwdEdit.setOnClickListener(listener);
     }
     class MyListener implements View.OnClickListener{
         @Override
@@ -71,8 +71,8 @@ public class Personal_settingActivity extends Activity {
                     break;
                 case R.id.Setting_Bt_avatarEdit:
                     /*跳转到头像修改页面*/
-                    Intent intent1 = new Intent(Personal_settingActivity.this,Personal_setting_PwdEditActivity.class);
-                    startActivity(intent1);
+//                    Intent intent1 = new Intent(Personal_settingActivity.this,Personal_setting_PwdEditActivity.class);
+//                    startActivity(intent1);
                     break;
                 case R.id.Setting_Bt_UserNameEdit:
                      /*跳转到用户名修改页面*/
@@ -81,8 +81,8 @@ public class Personal_settingActivity extends Activity {
                     break;
                 case R.id.Setting_Bt_UserPasswordEdit:
                      /*跳转到密码修改页面*/
-//                    Intent intent3 = new Intent(PersonCenter_SettingActivity.this,Setting_UserPwdEditActivity.class);
-//                    startActivity(intent3);
+                    Intent intent3 = new Intent(Personal_settingActivity.this,Personal_setting_PwdEditActivity.class);
+                    startActivity(intent3);
                     break;
                 default:
                     break;
@@ -101,13 +101,13 @@ public class Personal_settingActivity extends Activity {
         //设置下拉列表的风格
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //绑定 Adapter到控件
-        gender .setAdapter(adapter);
+        mSpGender .setAdapter(adapter);
         //添加事件Spinner事件监听
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 //保存用户的性别选择
-                gender.setSelection(pos,true);
+                mSpGender.setSelection(pos,true);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
