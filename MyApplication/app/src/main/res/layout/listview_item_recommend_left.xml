@@ -11,13 +11,28 @@
             android:layout_height="150dp"
             android:layout_weight="2"
             android:padding="10dp">
-            <TextView
-                android:id="@+id/Tv_recommend_name"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="1"
-                android:text="茶泡饭"
-                android:textSize="18dp"/>
+                android:background="@drawable/shape_pickfun"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="4dp">
+                <TextView
+                    android:id="@+id/Tv_recommend_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="1"
+                    android:text="茶泡饭"
+                    android:textSize="18sp"/>
+                <View
+                    android:background="@drawable/shape_line"
+                    android:layout_width="18dp"
+                    android:layout_height="4.0px"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/Tv_recommend_name"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
 
             <com.example.administrator.ui.VerticalTextView
                 android:id="@+id/Tv_recommend_introduction"

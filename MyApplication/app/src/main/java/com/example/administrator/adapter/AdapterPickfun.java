@@ -8,8 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.administrator.domain.Data_pickfun;
-import com.example.administrator.myapplication.MainActivity;
+import com.example.administrator.domain.DataPickfun;
 import com.example.administrator.myapplication.R;
 
 import java.util.ArrayList;
@@ -19,10 +18,10 @@ import java.util.List;
  * Created by 13173 on 2016/11/22.
  */
 
-public class adapter_pickfun extends BaseAdapter {
+public class AdapterPickfun extends BaseAdapter {
     private Context context;
-    private List<Data_pickfun> ldp = new ArrayList<>();
-    public adapter_pickfun(List<Data_pickfun> ld,Context context){
+    private List<DataPickfun> ldp = new ArrayList<>();
+    public AdapterPickfun(List<DataPickfun> ld, Context context){
         ldp = ld;
         this.context = context;
     }

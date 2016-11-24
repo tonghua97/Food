@@ -17,20 +17,20 @@ import com.example.administrator.myapplication.R;
 /**
  * Created by Administrator on 2016/11/22.
  */
-public class FragmentShouye extends Fragment{
+public class FragmentHome extends Fragment{
     private View view;
     private TextView Tv1;
     private TextView Tv2;
     private TextView Tv3;
-    private FragmentShouyeTuijian mTuijian;
-    private FragmentShouyeShiqu mShiqu;
-    private FragmentShouyePaihang mPaihang;
+    private FragmentHomeRecommend mTuijian;
+    private FragmentHomePickfun mShiqu;
+    private FragmentHomeRank mPaihang;
     private LinearLayout Llay;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.main_fragment_shouye,container,false);
+        view = inflater.inflate(R.layout.main_fragment_home,container,false);
         return view;
     }
 
@@ -52,10 +52,10 @@ public class FragmentShouye extends Fragment{
         FragmentManager fm = getFragmentManager();
         //2、获取fragmentTransaction对象
         FragmentTransaction transaction = fm.beginTransaction();
-        mTuijian = new FragmentShouyeTuijian();
+        mTuijian = new FragmentHomeRecommend();
         //3、设置页面
         transaction.replace(R.id.main_fragment_shouye_Flay,mTuijian);
-        Tv1.setTextColor(Color.parseColor("#FFFF00"));
+        Tv1.setTextColor(getResources().getColor(R.color.yellow));
         //4、执行更改
         transaction.commit();
     }
@@ -88,32 +88,32 @@ public class FragmentShouye extends Fragment{
             switch (view.getId()){
                 case R.id.main_fragment_shouye_Tv1:
                     if (mTuijian == null){
-                        mTuijian = new FragmentShouyeTuijian();
+                        mTuijian = new FragmentHomeRecommend();
                     }
 
                     //3、设置页面
                     transaction.replace(R.id.main_fragment_shouye_Flay,mTuijian);
-                    Tv1.setTextColor(Color.parseColor("#FFFF00"));
+                    Tv1.setTextColor(getResources().getColor(R.color.yellow));
 
                     break;
                 case R.id.main_fragment_shouye_Tv2:
                     if (mShiqu == null){
-                        mShiqu = new FragmentShouyeShiqu();
+                        mShiqu = new FragmentHomePickfun();
                     }
 
                     //3、设置页面
                     transaction.replace(R.id.main_fragment_shouye_Flay,mShiqu);
-                    Tv2.setTextColor(Color.parseColor("#FFFF00"));
+                    Tv2.setTextColor(getResources().getColor(R.color.yellow));
 
                     break;
                 case R.id.main_fragment_shouye_Tv3:
                     if (mPaihang == null){
-                        mPaihang = new FragmentShouyePaihang();
+                        mPaihang = new FragmentHomeRank();
                     }
 
                     //3、设置页面
                     transaction.replace(R.id.main_fragment_shouye_Flay,mPaihang);
-                    Tv3.setTextColor(Color.parseColor("#FFFF00"));
+                    Tv3.setTextColor(getResources().getColor(R.color.yellow));
 
                     break;
             }
