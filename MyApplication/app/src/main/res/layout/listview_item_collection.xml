@@ -14,7 +14,7 @@
             android:scaleType="fitXY"/>
         <TextView
             android:layout_marginTop="10dp"
-            android:id="@+id/Tv_collection1"
+            android:id="@+id/Tv_collection_name"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/Iv_collection"
@@ -22,11 +22,11 @@
             android:textSize="20dp"/>
         <TextView
             android:layout_marginTop="10dp"
-            android:id="@+id/Tv_collection2"
+            android:id="@+id/Tv_collection_introduction"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/Iv_collection"
-            android:layout_below="@id/Tv_collection1"
+            android:layout_below="@id/Tv_collection_name"
             android:textSize="15dp"
             android:text="食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣"/>
         <ImageView

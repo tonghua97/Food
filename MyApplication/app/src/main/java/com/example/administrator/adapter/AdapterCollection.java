@@ -44,9 +44,9 @@ public class AdapterCollection extends BaseAdapter {
         if(null == view){
             view = LayoutInflater.from(context).inflate(R.layout.listview_item_collection,null);
         }
-        TextView Tv_collection_name = (TextView)view.findViewById(R.id.Tv_collection1);
+        TextView Tv_collection_name = (TextView)view.findViewById(R.id.Tv_collection_name);
         Tv_collection_name.setText(ldc.get(position).getName());
-        TextView Tv_collection_introduction = (TextView) view.findViewById(R.id.Tv_collection2);
+        TextView Tv_collection_introduction = (TextView) view.findViewById(R.id.Tv_collection_introduction);
         Tv_collection_introduction.setText(ldc.get(position).getIntroduction());
         ImageView Im_collection_image = (ImageView) view.findViewById(R.id.Iv_collection);
         Im_collection_image.setImageResource(ldc.get(position).getImage());
