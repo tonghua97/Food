@@ -31,6 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="1"
+                    android:textColor="@color/black"
                     android:text="茶泡饭"
                     android:textSize="18sp"/>
                 <View
@@ -47,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
+                android:textColor="@color/black"
                 android:maxLines="3"
                 android:text="茶泡饭是指用热茶水来泡冷饭。通常以盐、梅干、海笞等配料，和饭一起泡。制作方便，取材简单。"/>
         </RelativeLayout>
