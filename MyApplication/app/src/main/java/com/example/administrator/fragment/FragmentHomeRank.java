@@ -56,8 +56,13 @@ public class FragmentHomeRank extends Fragment{
         lrl.add(new DataRanklist(3L, 3, 179, "这里放图片url", "老北京炸酱面3", "3"));
         lrl.add(new DataRanklist(4L, 4, 120, "这里放图片url", "老北京炸酱面4", "4"));
         lrl.add(new DataRanklist(5L, 5, 106, "这里放图片url", "老北京炸酱面5", "5"));
-
+        lrl.add(new DataRanklist(6L, 6, 106, "这里放图片url", "老北京炸酱面6", "6"));
+        lrl.add(new DataRanklist(7L, 7, 106, "这里放图片url", "老北京炸酱面7", "7"));
+        lrl.add(new DataRanklist(8L, 8, 106, "这里放图片url", "老北京炸酱面8", "8"));
+        lrl.add(new DataRanklist(9L, 9, 106, "这里放图片url", "老北京炸酱面9", "9"));
+        lrl.add(new DataRanklist(10L, 10, 106, "这里放图片url", "老北京炸酱面10", "10"));
     }
+
 
 }
 
