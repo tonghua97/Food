@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--收藏的ListView页面布局-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,28 +13,32 @@
             android:layout_height="100dp"
             android:src="@drawable/img_loading"
             android:scaleType="fitXY"/>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/Tv_collection_name"
-            android:layout_width="230dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/Iv_collection"
-            android:text="食趣食趣"
-            android:textSize="20dp"/>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/Tv_collection_introduction"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/Iv_collection"
-            android:layout_below="@id/Tv_collection_name"
-            android:textSize="15dp"
-            android:text="食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣"/>
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/Iv_collection">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/Tv_collection_name"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="食趣食趣"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/Tv_collection_introduction"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣"/>
+        </LinearLayout>
+
         <ImageView
 
             android:layout_width="50dp"
             android:layout_height="100dp"
-
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_more"/>
     </RelativeLayout>

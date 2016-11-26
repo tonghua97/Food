@@ -136,6 +136,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"></Spinner>
+            android:layout_alignParentEnd="true"
+            android:entries="@array/sex">
+        </Spinner>
     </RelativeLayout>
 </LinearLayout>

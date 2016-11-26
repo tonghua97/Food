@@ -21,7 +21,7 @@ public class FragmentClassify extends Fragment{
     private LinearLayout mStyle;
     private LinearLayout mEffect;
     private LinearLayout mTaste;
-    private FragmentClassifyStyle mFragStyle;
+    private FragmentClassifyCuisine mFragCuisine;
     private FragmentClassifyEffect mFragEffect;
     private FragmentClassifyTaste mFragTaste;
     private LinearLayout mLlay;
@@ -50,9 +50,9 @@ public class FragmentClassify extends Fragment{
         FragmentManager fm = getFragmentManager();
         //2、获取fragmentTransaction对象
         FragmentTransaction transaction = fm.beginTransaction();
-        mFragStyle = new FragmentClassifyStyle();
+        mFragCuisine = new FragmentClassifyCuisine();
         //3、设置页面
-        transaction.replace(R.id.main_fragment_classify_Flay,mFragStyle);
+        transaction.replace(R.id.main_fragment_classify_Flay,mFragCuisine);
         //4、执行更改
         transaction.commit();
     }
@@ -80,12 +80,12 @@ public class FragmentClassify extends Fragment{
 
             switch (view.getId()){
                 case R.id.main_fragment_classify_style:
-                    if (mFragStyle == null){
-                        mFragStyle = new FragmentClassifyStyle();
+                    if (mFragCuisine == null){
+                        mFragCuisine = new FragmentClassifyCuisine();
                     }
 
                     //3、设置页面
-                    transaction.replace(R.id.main_fragment_classify_Flay,mFragStyle);
+                    transaction.replace(R.id.main_fragment_classify_Flay,mFragCuisine);
 
                     break;
                 case R.id.main_fragment_classify_effect:

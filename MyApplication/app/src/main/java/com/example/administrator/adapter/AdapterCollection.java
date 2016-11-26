@@ -21,8 +21,9 @@ import java.util.List;
 public class AdapterCollection extends BaseAdapter {
     private Context context;
     private List<DataCollection> ldc = new ArrayList<>();
-    public AdapterCollection(List<DataCollection> ld){
+    public AdapterCollection(List<DataCollection> ld,Context context){
         ldc = ld;
+        this.context = context;
     }
     @Override
     public int getCount() {

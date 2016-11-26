@@ -5,6 +5,7 @@
     <ListView
         android:id="@+id/Lv_ranklist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:dividerHeight="5dp">
     </ListView>
 </LinearLayout>

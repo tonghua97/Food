@@ -48,7 +48,7 @@ public class AdapterRanklist extends BaseAdapter {
         }
         //食谱收藏排行
         TextView Tv_rank_id = (TextView)convertView.findViewById(R.id.Tv_rank_id);
-        Tv_rank_id.setText(lrl.get(position).getRank());
+        Tv_rank_id.setText(lrl.get(position).getRank() + "");
         //获取排行待解决 2016/11/23 ginger lrl.get(position).getRank()
 
         //食谱收藏数 Tv_ranklist_collect

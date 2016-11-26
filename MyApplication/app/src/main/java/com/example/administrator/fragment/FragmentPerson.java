@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.administrator.myapplication.CollectionActivity;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.SetActivity;
 
@@ -63,10 +64,12 @@ public class FragmentPerson extends Fragment{
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.personal_rl_title1:
+                    Intent intent1 = new Intent(getActivity(), CollectionActivity.class);
+                    startActivity(intent1);
                     break;
                 case R.id.personal_rl_title2:
-                    Intent intent = new Intent(getActivity(), SetActivity.class);
-                    startActivity(intent);
+                    Intent intent2 = new Intent(getActivity(), SetActivity.class);
+                    startActivity(intent2);
                     break;
                 case R.id.personal_rl_title3:
                     break;
