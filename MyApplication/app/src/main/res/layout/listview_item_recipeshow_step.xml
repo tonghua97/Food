@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/Tv_recipeshow_step_No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
+            android:textSize="30sp"
+            android:text="1、"
+            android:textStyle="normal|bold|italic" />
+        <TextView
+            android:id="@+id/Tv_recipeshow_step_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/Tv_recipeshow_step_No"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="手撕或者用干净的剪刀剪把海苔剪成丝。\n手撕或者用干净的剪刀剪把海苔剪成丝。\n手撕或者用干净的剪刀剪把海苔剪成丝。"/>
+    </RelativeLayout>
+</LinearLayout>

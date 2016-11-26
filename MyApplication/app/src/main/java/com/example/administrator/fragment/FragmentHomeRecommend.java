@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.example.administrator.adapter.AdapterRecommend;
 import com.example.administrator.domain.DataRecommend;
 import com.example.administrator.myapplication.R;
+import com.example.administrator.myapplication.RecipeShow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,9 @@ public class FragmentHomeRecommend extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();
+
+                intent.setClass(getActivity(), RecipeShow.class);
+                startActivity(intent);
             }
         });
     }

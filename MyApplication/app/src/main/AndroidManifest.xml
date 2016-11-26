@@ -18,5 +18,6 @@
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".SetActivity"></activity>
         <activity android:name=".CollectionActivity"></activity>
+        <activity android:name=".RecipeShow"/>
     </application>
 </manifest>
