@@ -3,12 +3,14 @@ package com.example.administrator.fragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.administrator.myapplication.R;
 
@@ -25,6 +27,9 @@ public class FragmentClassify extends Fragment{
     private FragmentClassifyEffect mFragEffect;
     private FragmentClassifyTaste mFragTaste;
     private LinearLayout mLlay;
+    private TextView TvCuisine;
+    private TextView TvEffect;
+    private TextView TvTaste;
 
     @Nullable
     @Override
@@ -53,6 +58,7 @@ public class FragmentClassify extends Fragment{
         mFragCuisine = new FragmentClassifyCuisine();
         //3、设置页面
         transaction.replace(R.id.main_fragment_classify_Flay,mFragCuisine);
+        TvCuisine.setTextColor(getResources().getColor(R.color.yellow));
         //4、执行更改
         transaction.commit();
     }
@@ -68,6 +74,9 @@ public class FragmentClassify extends Fragment{
         mEffect = (LinearLayout)view.findViewById(R.id.main_fragment_classify_effect);
         mTaste = (LinearLayout)view.findViewById(R.id.main_fragment_classify_taste);
         mLlay = (LinearLayout)view.findViewById(R.id.main_fragment_classify_Llay);
+        TvCuisine = (TextView)view.findViewById(R.id.classify_Tv_cuisine);
+        TvEffect = (TextView)view.findViewById(R.id.classify_Tv_effect);
+        TvTaste = (TextView)view.findViewById(R.id.classify_Tv_taste);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -78,6 +87,10 @@ public class FragmentClassify extends Fragment{
             //2、获取fragmentTransaction对象
             FragmentTransaction transaction = fm.beginTransaction();
 
+            TvCuisine.setTextColor(Color.BLACK);
+            TvEffect.setTextColor(Color.BLACK);
+            TvTaste.setTextColor(Color.BLACK);
+
             switch (view.getId()){
                 case R.id.main_fragment_classify_style:
                     if (mFragCuisine == null){
@@ -86,6 +99,7 @@ public class FragmentClassify extends Fragment{
 
                     //3、设置页面
                     transaction.replace(R.id.main_fragment_classify_Flay,mFragCuisine);
+                    TvCuisine.setTextColor(getResources().getColor(R.color.yellow));
 
                     break;
                 case R.id.main_fragment_classify_effect:
@@ -95,6 +109,7 @@ public class FragmentClassify extends Fragment{
 
                     //3、设置页面
                     transaction.replace(R.id.main_fragment_classify_Flay,mFragEffect);
+                    TvEffect.setTextColor(getResources().getColor(R.color.yellow));
 
                     break;
                 case R.id.main_fragment_classify_taste:
@@ -104,6 +119,7 @@ public class FragmentClassify extends Fragment{
 
                     //3、设置页面
                     transaction.replace(R.id.main_fragment_classify_Flay,mFragTaste);
+                    TvTaste.setTextColor(getResources().getColor(R.color.yellow));
 
                     break;
             }

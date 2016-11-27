@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--设置页面密码修改布局-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -34,18 +35,19 @@
         <EditText
             android:id="@+id/PwdEdit_Et_oldpwd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:textSize="20sp"
-            android:background="@drawable/button_background"
+            android:background="@drawable/main_llay_default"
             android:hint="请输入旧密码"
             android:gravity="center"
             android:password="true"/>
         <EditText
             android:id="@+id/PwdEdit_Et_newpwd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="50dp"
             android:textSize="20sp"
-            android:background="@drawable/button_background"
+            android:background="@drawable/main_llay_default"
             android:hint="请输入新密码"
             android:gravity="center"
             android:password="true"/>
@@ -56,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="确认"
             android:textColor="#ffffff"
-            android:background="#ff0000"
+            android:background="@drawable/login_background"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </LinearLayout>

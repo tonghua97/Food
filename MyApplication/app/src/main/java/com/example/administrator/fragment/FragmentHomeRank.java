@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.adapter.AdapterRanklist;
 import com.example.administrator.domain.DataRanklist;
 import com.example.administrator.myapplication.R;
+import com.example.administrator.myapplication.RecipeShowActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +31,15 @@ public class FragmentHomeRank extends Fragment{
     private ListView lv_ranklist;
     private com.example.administrator.adapter.AdapterRanklist adapter_ranklist;
     private boolean isFirst = true;
+    private View view;
+    private TextView Tvname;
 
     @Nullable
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ranklist, container, false);
-        lv_ranklist = (ListView) view.findViewById(R.id.Lv_ranklist);
+        view = inflater.inflate(R.layout.fragment_ranklist, container, false);
+        getViews();
         return view;
     }
 
@@ -50,10 +55,16 @@ public class FragmentHomeRank extends Fragment{
 
         adapter_ranklist = new AdapterRanklist(lrl, getActivity());
         lv_ranklist.setAdapter(adapter_ranklist);
+
         lv_ranklist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent();
+                //美食名称
+                Tvname = (TextView)view.findViewById(R.id.Tv_ranklist_recipename);
+
+                Intent intent = new Intent(getActivity(), RecipeShowActivity.class);
+                intent.putExtra("NAME",Tvname.getText().toString());
+                startActivity(intent);
             }
         });
     }
@@ -67,5 +78,9 @@ public class FragmentHomeRank extends Fragment{
 
     }
 
+    public void getViews() {
+        //listview
+        lv_ranklist = (ListView) view.findViewById(R.id.Lv_ranklist);
+    }
 }
 

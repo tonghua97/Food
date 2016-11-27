@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by wcyhp on 2016/11/24.
  */
 
-public class RecipeShow extends Activity {
+public class RecipeShowActivity extends Activity {
     private TextView mTitle;  //标题
     private ImageView mBack;  //返回按钮
     private ImageView mImage;   //食谱图片URL
@@ -38,10 +39,15 @@ public class RecipeShow extends Activity {
     private List<DataRecipeStep> mStepData = new ArrayList<DataRecipeStep>();
     private AdapterRecipeStep stepAdapter;
     private DataRecipe mRecipe;
+    private String title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipeshow);
+
+        Intent intent = getIntent();
+        title = intent.getStringExtra("NAME");
 
         //获取数据
         getData();
@@ -108,6 +114,7 @@ public class RecipeShow extends Activity {
                 "辅料、辅料、辅料、辅料",
                 103,false,
                 "功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效功");
+        mRecipe.setName(title);
         mStepData.add(new DataRecipeStep(0,"1、","第一步"));
         mStepData.add(new DataRecipeStep(1,"2、","第二步"));
         mStepData.add(new DataRecipeStep(2,"3、","第三步"));

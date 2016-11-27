@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.administrator.fragment.FragmentClassify;
 import com.example.administrator.fragment.FragmentHome;
 import com.example.administrator.fragment.FragmentPerson;
+import com.example.administrator.ui.Utils;
 
 
 public class MainActivity extends Activity {
@@ -43,11 +44,23 @@ public class MainActivity extends Activity {
         setListener();
 
         //设置默认的页面
-        setDefaultPage();
+        switch (Utils.utils){
+            case 1:
+                setDefaultPage1();
+                break;
+            case 2:
+                setDefaultPage2();
+                break;
+            case 3:
+                setDefaultPage3();
+                break;
+        }
     }
 
-
-    private void setDefaultPage() {
+    /**
+     * 显示首页
+     */
+    private void setDefaultPage1() {
         //1、获取一个fragmentManager的对象
         FragmentManager fm = getFragmentManager();
         //2、获取fragmentTransaction对象
@@ -58,6 +71,45 @@ public class MainActivity extends Activity {
         //4、设置按钮选中状态
         mLlayHomeIv.setImageResource(R.drawable.icon_home_down);
         mLlayHomeTv.setTextColor(getResources().getColor(R.color.yellow));
+        mRlayTop.setVisibility(View.VISIBLE);
+        //5、执行更改
+        transaction.commit();
+    }
+
+    /**
+     * 显示分类页
+     */
+    private void setDefaultPage2() {
+        //1、获取一个fragmentManager的对象
+        FragmentManager fm = getFragmentManager();
+        //2、获取fragmentTransaction对象
+        FragmentTransaction transaction = fm.beginTransaction();
+        mFragClassify = new FragmentClassify();
+        //3、设置页面
+        transaction.replace(R.id.main_Flay_center,mFragClassify);
+        //4、设置按钮选中状态
+        mLlayClassifyIv.setImageResource(R.drawable.icon_classify_down);
+        mLlayClassifyTv.setTextColor(getResources().getColor(R.color.yellow));
+        mRlayTop.setVisibility(View.VISIBLE);
+        //5、执行更改
+        transaction.commit();
+    }
+
+    /**
+     * 显示个人中心页面
+     */
+    private void setDefaultPage3() {
+        //1、获取一个fragmentManager的对象
+        FragmentManager fm = getFragmentManager();
+        //2、获取fragmentTransaction对象
+        FragmentTransaction transaction = fm.beginTransaction();
+        mFragPerson = new FragmentPerson();
+        //3、设置页面
+        transaction.replace(R.id.main_Flay_center,mFragPerson);
+        //4、设置按钮选中状态
+        mLlayPersonIv.setImageResource(R.drawable.icon_person_down);
+        mLlayPersonTv.setTextColor(getResources().getColor(R.color.yellow));
+        mRlayTop.setVisibility(View.GONE);
         //5、执行更改
         transaction.commit();
     }
@@ -93,42 +145,17 @@ public class MainActivity extends Activity {
 
             switch (view.getId()){
                 case R.id.main_Llay_home:
-                    if (mFragHome == null){
-                        mFragHome = new FragmentHome();
-                    }
-
-                    //3、设置页面
-                    transaction.replace(R.id.main_Flay_center,mFragHome);
                     setMenuItemColor();
-                    mLlayHomeIv.setImageResource(R.drawable.icon_home_down);
-                    mLlayHomeTv.setTextColor(getResources().getColor(R.color.yellow));
-                    mRlayTop.setVisibility(View.VISIBLE);
-
+                    setDefaultPage1();
                     break;
                 case R.id.main_Llay_classify:
-                    if (mFragClassify == null){
-                        mFragClassify = new FragmentClassify();
-                    }
-
-                    //3、设置页面
-                    transaction.replace(R.id.main_Flay_center,mFragClassify);
                     setMenuItemColor();
-                    mLlayClassifyIv.setImageResource(R.drawable.icon_classify_down);
-                    mLlayClassifyTv.setTextColor(getResources().getColor(R.color.yellow));
-                    mRlayTop.setVisibility(View.VISIBLE);
+                    setDefaultPage2();
 
                     break;
                 case R.id.main_Llay_person:
-                    if (mFragPerson == null){
-                        mFragPerson = new FragmentPerson();
-                    }
-
-                    //3、设置页面
-                    transaction.replace(R.id.main_Flay_center,mFragPerson);
                     setMenuItemColor();
-                    mLlayPersonIv.setImageResource(R.drawable.icon_person_down);
-                    mLlayPersonTv.setTextColor(getResources().getColor(R.color.yellow));
-                    mRlayTop.setVisibility(View.GONE);
+                    setDefaultPage3();
 
                     break;
             }

@@ -1,16 +1,20 @@
 package com.example.administrator.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.example.administrator.adapter.AdapterCuisine;
 import com.example.administrator.domain.DataCuisine;
+import com.example.administrator.myapplication.ClassificationListActivity;
 import com.example.administrator.myapplication.R;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ public class FragmentClassifyCuisine extends Fragment {
     private com.example.administrator.adapter.AdapterCuisine AdapterCuisine;
     private boolean isFirst = true;
     private View view;
+    private TextView TvCuisine;
 
     @Nullable
     @Override
@@ -48,6 +53,16 @@ public class FragmentClassifyCuisine extends Fragment {
         AdapterCuisine = new AdapterCuisine(ldcuisine,getActivity());
         gv_cuisine = (GridView)view.findViewById(R.id.Gv_cuisine);
         gv_cuisine.setAdapter(AdapterCuisine);
+
+        gv_cuisine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TvCuisine = (TextView)view.findViewById(R.id.Tv_cuisine);
+                Intent intent = new Intent(getActivity(), ClassificationListActivity.class);
+                intent.putExtra("NAME",TvCuisine.getText().toString());
+                startActivity(intent);
+            }
+        });
 
     }
 

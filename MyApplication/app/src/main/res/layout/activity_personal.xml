@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--个人中心页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -21,43 +22,37 @@
         android:layout_height="0dp"
         android:layout_weight="4"
         android:gravity="center_horizontal"
+        android:paddingTop="10dp"
         android:orientation="horizontal"
         android:id="@+id/personal_ll_head">
         <com.example.administrator.ui.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_personal_headexample"
+            android:src="@drawable/touxiang"
             app:border_width="2dp"
             app:border_color="#FFFFFF"
             android:id="@+id/personal_iv_head"/>
     </LinearLayout>
 
-    <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="4"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:src="@drawable/img_personal_headexample"-->
-        <!--/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:id="@+id/personal_ll_blank1"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/personal_rl_middle"
-        >
+        android:id="@+id/personal_rl_middle">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
             android:text="|"
-            android:textSize="35dp"
             android:textAlignment="center"
+            android:background="@drawable/shape_line"
             android:id="@+id/personal_tv_line"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"/>
@@ -77,6 +72,20 @@
             android:layout_toRightOf="@id/personal_tv_line"
             android:background="@android:color/transparent"/>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/personal_Llay_username"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/personal_Llay_Tv_username"
+            android:text="用户名"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -221,5 +230,25 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_weight="5"></LinearLayout>
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/personal_Llay_login"
+        android:layout_weight="5">
+        <Button
+            android:layout_width="350dp"
+            android:text="退出登录"
+            android:textColor="#FFFFFF"
+            android:id="@+id/personal_Btn_exitLogin"
+            android:background="@drawable/login_background"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:id="@+id/personal_Llay_bottom"
+        android:layout_weight="5">
+    </LinearLayout>
 </LinearLayout>

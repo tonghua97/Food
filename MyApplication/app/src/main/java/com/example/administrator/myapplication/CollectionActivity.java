@@ -3,15 +3,18 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.administrator.adapter.AdapterCollection;
 import com.example.administrator.domain.DataCollection;
@@ -30,6 +33,7 @@ public class CollectionActivity extends Activity{
     private ListView lv_collection;
     private AdapterCollection adapter_collection;
     private Button BtBack;
+    private TextView Tvname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,17 @@ public class CollectionActivity extends Activity{
 
     private void setListener() {
         BtBack.setOnClickListener(myListener);
+
+        lv_collection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Tvname = (TextView)view.findViewById(R.id.Tv_collection_name);
+
+                Intent intent = new Intent(CollectionActivity.this,RecipeShowActivity.class);
+                intent.putExtra("NAME",Tvname.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private void getData() {
@@ -74,16 +89,10 @@ public class CollectionActivity extends Activity{
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.collection_Bt_Back:
-                    new Thread(){
-                        @Override
-                        public void run() {
-                            super.run();
-                            Instrumentation inst = new Instrumentation();
-                            inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
-                        }
-                    }.start();
+                    finish();
                     break;
             }
         }
     };
+
 }

@@ -1,16 +1,20 @@
 package com.example.administrator.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.example.administrator.adapter.AdapterEffect;
 import com.example.administrator.domain.DataEffect;
+import com.example.administrator.myapplication.ClassificationListActivity;
 import com.example.administrator.myapplication.R;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ public class FragmentClassifyEffect extends Fragment {
     private com.example.administrator.adapter.AdapterEffect AdapterEffect;
     private boolean isFirst = true;
     private View view;
+    private TextView Tvname;
 
     @Nullable
     @Override
@@ -49,6 +54,15 @@ public class FragmentClassifyEffect extends Fragment {
         gv_effect = (GridView)view.findViewById(R.id.Gv_effect);
         gv_effect.setAdapter(AdapterEffect);
 
+        gv_effect.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Tvname = (TextView)view.findViewById(R.id.Tv_effect);
+                Intent intent = new Intent(getActivity(), ClassificationListActivity.class);
+                intent.putExtra("NAME",Tvname.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private void getData() {

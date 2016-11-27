@@ -12,4 +12,6 @@
     <color name="lightblack">#333333</color>
     <color name="gray">#666666</color>
     <color name="red">#f52b18</color>
+    <color name="login">#e84e40</color>
+    <color name="gray2">#D8D8D8</color>
 </resources>

@@ -9,11 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.administrator.adapter.AdapterRecommend;
 import com.example.administrator.domain.DataRecommend;
 import com.example.administrator.myapplication.R;
-import com.example.administrator.myapplication.RecipeShow;
+import com.example.administrator.myapplication.RecipeShowActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class FragmentHomeRecommend extends Fragment{
     private AdapterRecommend recommednAdapter;
     private ListView lv;
     private boolean isFirst = true;
+    private TextView Tvname;
 
     @Nullable
     @Override
@@ -54,9 +56,9 @@ public class FragmentHomeRecommend extends Fragment{
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent();
-
-                intent.setClass(getActivity(), RecipeShow.class);
+                Intent intent = new Intent(getActivity(), RecipeShowActivity.class);
+                Tvname = (TextView)view.findViewById(R.id.Tv_recommend_name);
+                intent.putExtra("NAME",Tvname.getText().toString());
                 startActivity(intent);
             }
         });

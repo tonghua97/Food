@@ -1,86 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--登录验证页面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login_verify"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.example.administrator.myapplication.LoginVerifyActivity">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:textSize="20dp"
+        android:id="@+id/login_verify_Tv_back"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:text="返回" />
     <RelativeLayout
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/login_verify_Tv_name"
             android:text="食趣"
             android:layout_centerHorizontal="true"
             android:textSize="20dp"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/login_verify_Tv_name"
             android:text="随时-有趣"
             android:textColor="#aaaaaa"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
     <EditText
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="请输入用户名"
-        android:background="@drawable/button_background"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="请输入密码"
-        android:background="@drawable/button_background"/>
-    <Button
-        android:layout_marginTop="20dp"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="登陆"
-        android:textColor="#ffffff"
-        android:background="#ff0000"/>
-    <RelativeLayout
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:layout_gravity="center"
+        android:id="@+id/login_verify_Et_username"
+        android:hint="请输入用户名"
+        android:background="@drawable/main_llay_default"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:layout_marginTop="10dp"
+        android:id="@+id/login_verify_Et_password"
+        android:layout_gravity="center"
+        android:hint="请输入密码"
+        android:background="@drawable/main_llay_default"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="1.5">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:id="@+id/login_verify_Btn_login"
+            android:text="登录"
+            android:textColor="#ffffff"
+            android:background="@drawable/login_background"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="登陆遇到问题"/>
+            android:text="登录遇到问题"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="忘记密码？"/>
     </RelativeLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:layout_centerInParent="true"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@drawable/main_fragment_classify_line"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="或"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@drawable/main_fragment_classify_line"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5">
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/login_verify_btn_register"
             android:text="快速注册"
             android:textColor="#ff0000"
-            android:background="#ffffff"/>
+            android:background="@drawable/register_background"/>
     </RelativeLayout>
 </LinearLayout>

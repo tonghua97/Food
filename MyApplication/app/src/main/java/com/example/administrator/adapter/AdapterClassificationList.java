@@ -21,8 +21,9 @@ import java.util.List;
 public class AdapterClassificationList extends BaseAdapter {
     private Context context;
     private List<DataClassificationList> ldcla = new ArrayList<>();
-    public AdapterClassificationList(List<DataClassificationList> ldc){
+    public AdapterClassificationList(List<DataClassificationList> ldc,Context context){
         ldcla = ldc;
+        this.context = context;
     }
     @Override
     public int getCount() {
@@ -45,9 +46,9 @@ public class AdapterClassificationList extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.listview_item_classificationlist,null);
         }
         TextView Tv_classification_time = (TextView)view.findViewById(R.id.Tv_classification_time);
-        Tv_classification_time.setText(ldcla.get(position).getTime());
+        Tv_classification_time.setText(ldcla.get(position).getTime() + "");
         TextView Tv_classification_number = (TextView)view.findViewById(R.id.Tv_classification_collection);
-        Tv_classification_number.setText(ldcla.get(position).getNumber());
+        Tv_classification_number.setText(ldcla.get(position).getNumber() + "");
         TextView Tv_classification_name = (TextView)view.findViewById(R.id.Tv_classification_name);
         Tv_classification_name.setText(ldcla.get(position).getName());
         TextView Tv_classification_material = (TextView) view.findViewById(R.id.Tv_classification_material);

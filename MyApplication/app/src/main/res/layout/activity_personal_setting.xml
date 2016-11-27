@@ -69,6 +69,7 @@
         android:padding="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/setting_Rlay_unameedit"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
@@ -83,6 +84,7 @@
             android:text="爆破大队"
             android:textSize="15sp"
             android:layout_toLeftOf="@+id/Setting_Bt_UserNameEdit"
+            android:id="@+id/setting_Tv_username"
             android:layout_centerVertical="true"
             android:layout_marginRight="25dp"/>
         <Button
@@ -100,6 +102,7 @@
         android:padding="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/setting_Rlay_pwdedit"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
