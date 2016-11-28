@@ -71,7 +71,7 @@ public class Personal_setting_UnameEditActivity extends Activity {
                     break;
                 //清空用户名
                 case R.id.UnameEdit_btn_clear:
-                    mEtUname.setText(" ");
+                    mEtUname.setText("");
                     break;
             }
         }

@@ -74,19 +74,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="用户名"
+            android:text="用户名修改"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:layout_centerVertical="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="爆破大队"
-            android:textSize="15sp"
-            android:layout_toLeftOf="@+id/Setting_Bt_UserNameEdit"
-            android:id="@+id/setting_Tv_username"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="25dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="爆破大队"-->
+            <!--android:textSize="15sp"-->
+            <!--android:layout_toLeftOf="@+id/Setting_Bt_UserNameEdit"-->
+            <!--android:id="@+id/setting_Tv_username"-->
+            <!--android:layout_centerVertical="true"/>-->
         <Button
             android:id="@+id/Setting_Bt_UserNameEdit"
             android:layout_width="30dp"
