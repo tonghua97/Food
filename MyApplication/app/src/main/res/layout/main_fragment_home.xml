@@ -36,9 +36,27 @@
             android:textSize="20dp"
             android:text="排行榜"/>
     </LinearLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/main_fragment_shouye_Flay">
-    </FrameLayout>
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/main_fragment_shouye_Flay">-->
+    <!--</FrameLayout>-->
+    <com.example.administrator.ui.DragFrameLayout
+        android:id="@+id/becausefloat"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="5" >
+
+        <FrameLayout
+            android:id="@+id/main_fragment_shouye_Flay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/dragImg"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/aa"/>
+    </com.example.administrator.ui.DragFrameLayout>
 </LinearLayout>
