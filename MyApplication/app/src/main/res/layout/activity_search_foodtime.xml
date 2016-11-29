@@ -5,12 +5,40 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <EditText
-            android:layout_marginLeft="20dp"
-            android:id="@+id/Et_search_foodname"
-            android:layout_width="300dp"
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:hint="识食物者为俊杰"/>
+            android:id="@+id/Iv_search_back"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/setting_btn_back"/>
+        <LinearLayout
+            android:layout_toRightOf="@id/Iv_search_back"
+            android:id="@+id/ll"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/main_llay_default">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/sousuo"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+            <EditText
+                android:id="@+id/Et_search_time"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_et_dafault"
+                android:hint="识食物者为俊杰"
+                android:textColorHint="#e60707"/>
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>
