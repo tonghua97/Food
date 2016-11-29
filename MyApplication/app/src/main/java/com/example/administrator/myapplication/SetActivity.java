@@ -34,6 +34,8 @@ import android.widget.Toast;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by 梁爽 on 16.11.24.
@@ -41,6 +43,7 @@ import java.io.File;
  */
 
 public class SetActivity extends Activity {
+
 
     private Button mBtBack;             //返回键
     private RelativeLayout mSetAvatar;  //头像修改
@@ -52,12 +55,14 @@ public class SetActivity extends Activity {
     private ArrayAdapter adapter = null;
 
     /*请求识别码*/
-    protected static final int CHOOSE_PICTURE = 0;//选择本地照片
+    protected static final int CHOOSE_PICTURE = 0;//从相册中选择图片
     protected static final int TAKE_PICTURE = 1;//拍照
     private static final int CROP_SMALL_PICTURE = 2;
 
     protected static Uri tempUri;
     private ImageView iv_personal_icon;
+    private static final String IMAGE_FILE_NAME = "image.jpg";// 头像文件
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,18 +174,21 @@ public class SetActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
-                    case CHOOSE_PICTURE: // 选择本地照片
-                        Intent openAlbumIntent = new Intent(
-                                Intent.ACTION_GET_CONTENT);
-                        openAlbumIntent.setType("image/*");
+                    /*从本地相册选取图片作为头像*/
+                    case CHOOSE_PICTURE:
+                        Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                        openAlbumIntent.setType("image/*");// 设置文件类型
                         startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
                         break;
-                    case TAKE_PICTURE:  //调用相机拍照
-                        if (isSdcardExisting()){
-                            Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    /*启动手机相机拍摄照片作为头像*/
+                    case TAKE_PICTURE:
+                        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        // 判断存储卡是否可用，存储照片文件
+                        if (hasSdcard()){
                             tempUri = Uri.fromFile(new File(Environment
-                                    .getExternalStorageDirectory(), "image.jpg"));
-                            // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
+                                    .getExternalStorageDirectory(), IMAGE_FILE_NAME));
+                            // 指定照片保存路径（SD卡），IMAGE_FILE_NAME image.jpg为一个临时文件，每次拍照后这个图片都会被替换
                             openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
                             startActivityForResult(openCameraIntent, TAKE_PICTURE);
                         }else {
@@ -198,12 +206,25 @@ public class SetActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) { // 如果返回码是可以用的
             switch (requestCode) {
+                //拍照
                 case TAKE_PICTURE:
-                    startPhotoZoom(tempUri); // 对图片进行裁剪处理
+                    if (hasSdcard()){
+                        File tempFile = new File(
+                                Environment.getExternalStorageDirectory(),
+                                IMAGE_FILE_NAME);
+                        startPhotoZoom(tempUri); // 对图片进行裁剪处理
+                    }else {
+                        Toast.makeText(getApplication(), "没有SDCard!", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+//                    startPhotoZoom(tempUri); // 对图片进行裁剪处理
                     break;
+
+                //相册
                 case CHOOSE_PICTURE:
                     startPhotoZoom(data.getData()); // 对图片进行裁剪处理
                     break;
+
                 case CROP_SMALL_PICTURE:
                     if (data != null) {
                         setImageToView(data); // 让刚才选择裁剪得到的图片显示在界面上
@@ -214,7 +235,7 @@ public class SetActivity extends Activity {
     }
 
     /**
-     * 裁剪图片方法实现
+     * 裁剪原始图片方法的实现
      * @param uri
      */
     protected void startPhotoZoom(Uri uri) {
@@ -226,35 +247,39 @@ public class SetActivity extends Activity {
         intent.setDataAndType(uri, "image/*");
         // 设置裁剪
         intent.putExtra("crop", "true");
+
         // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
+
         // outputX outputY 是裁剪图片宽高
         intent.putExtra("outputX", 150);
         intent.putExtra("outputY", 150);
         intent.putExtra("return-data", true);
+
         startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
 
     /**
-     * 保存裁剪之后的图片数据
+     * 提取保存裁剪之后的图片数据，并设置头像部分的View
      * @param data
      */
     protected void setImageToView(Intent data) {
         Bundle extras = data.getExtras();
         if (extras != null) {
             Bitmap photo = extras.getParcelable("data");
-            photo = toRoundBitmap(photo);
+            photo = toRoundBitmap(photo);//将头像设置成圆形
             Drawable drawable = new BitmapDrawable(photo);
             iv_personal_icon.setImageDrawable(drawable);
 
-          //  saveImage();
+//            //  saveImage();
 //            try {
 //                SharedPreferences mySharedPreferences=getSharedPreferences("base64", Activity.MODE_PRIVATE);
 //                SharedPreferences.Editor editor1=mySharedPreferences.edit();
 //                ByteArrayOutputStream baos=new ByteArrayOutputStream();
 //                //读取和压缩qq.png，并将其压缩结果保存在ByteArrayOutputStream对象中
-//                BitmapFactory.decodeResource(getResources(),iv_personal_icon.g).compress(Bitmap.CompressFormat.JPEG, 50, baos);
+//
+//                BitmapFactory.decodeResource(getResources(),/*图片.jpg*/).compress(Bitmap.CompressFormat.JPEG, 50, baos);
 //                //对压缩后的字节进行base64编码
 //                String imageBase64=new String(Base64.encode(baos.toByteArray(),Base64.DEFAULT));
 //                // String imageBase64=new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
@@ -266,9 +291,9 @@ public class SetActivity extends Activity {
 //            } catch (Exception e) {
 //                // TODO: handle exception
 //            }
-
-
-            //getImage
+//
+//
+//            //getImage
 //                //下面代码从base64.xml文件中读取以保存的图像，并将其显示在ImageView控件中
 //                try {
 //                    SharedPreferences mySharedPreference=getSharedPreferences("base64", Activity.MODE_PRIVATE);
@@ -287,50 +312,6 @@ public class SetActivity extends Activity {
             //  uploadPic(photo);
         }
     }
-//    private void saveImage(){
-//        /**
-//         * SharedPreferences 存取更复杂的数据类型（对象、图片等）就需要对这些数据记性编码。通常将复杂类型的数据转换
-//         * 成Base64格式的编码，然后将转换后的数据义字符串的形式保存在xml文件中。
-//         */
-//        try {
-//            SharedPreferences mySharedPreferences=getSharedPreferences("base64", Activity.MODE_PRIVATE);
-//            SharedPreferences.Editor editor1=mySharedPreferences.edit();
-//            ByteArrayOutputStream baos=new ByteArrayOutputStream();
-//            //读取和压缩qq.png，并将其压缩结果保存在ByteArrayOutputStream对象中
-//            BitmapFactory.decodeResource(getResources(),avatar).compress(Bitmap.CompressFormat.JPEG, 50, baos);
-//            //对压缩后的字节进行base64编码
-//            String imageBase64=new String(Base64.encode(baos.toByteArray(),Base64.DEFAULT));
-//           // String imageBase64=new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
-//            //保存转换后的Base64格式字符串
-//            editor1.putString("image", imageBase64);
-//            editor1.commit();
-//            baos.close();
-//
-//        } catch (Exception e) {
-//            // TODO: handle exception
-//        }
-//    }
-
-//    /**
-//     * 读取文件中图片方法
-//     */
-//    private void getImage()
-//    {
-//        //下面代码从base64.xml文件中读取以保存的图像，并将其显示在ImageView控件中
-//        try {
-//            SharedPreferences mySharedPreference=getSharedPreferences("base64", Activity.MODE_PRIVATE);
-//            //读取Base64格式的图像数据
-//            String image=mySharedPreference.getString("image", "");
-//            //对Base64格式的字符串进行解码，还原成字节数组
-//            byte[] imageBytes=Base64.decode(image.getBytes(), Base64.DEFAULT);
-//            ByteArrayInputStream bais=new ByteArrayInputStream(imageBytes);
-//            ImageView imageView=(ImageView)findViewById(R.id.imageView1);
-//            imageView.setImageDrawable(Drawable.createFromStream(bais, "image"));
-//            bais.close();
-//        } catch (Exception e) {
-//            // TODO: handle exception
-//        }
-//    }
 
     /**
      * 把bitmap转成圆形
@@ -369,7 +350,7 @@ public class SetActivity extends Activity {
      * 是否存在SD卡
      * @return
      */
-    private boolean isSdcardExisting() {
+    private boolean hasSdcard() {
         final String state = Environment.getExternalStorageState();
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             return true;
