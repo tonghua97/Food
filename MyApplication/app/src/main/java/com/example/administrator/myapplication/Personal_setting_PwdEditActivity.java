@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by 梁爽 on 16.11.24.
@@ -55,6 +56,7 @@ public class Personal_setting_PwdEditActivity extends Activity {
                 //保存修改后的密码
                 case R.id.PwdEdit_Bt_Save:
                     //Code:检验旧密码是否正确并保存新密码
+                    Toast.makeText(Personal_setting_PwdEditActivity.this,"密码修改成功！",Toast.LENGTH_SHORT).show();
                     break;
             }
         }

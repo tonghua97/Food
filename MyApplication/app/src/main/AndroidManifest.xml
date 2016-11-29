@@ -16,13 +16,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".SetActivity" />
         <activity android:name=".CollectionActivity" />
         <activity android:name=".RecipeShowActivity" />
         <activity android:name=".ClassificationListActivity" />
         <activity android:name=".PickfundetailActivity" />
         <activity android:name=".LoginVerifyActivity" />
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SetActivity"></activity>
         <activity android:name=".Personal_setting_PwdEditActivity"></activity>
         <activity android:name=".Personal_setting_UnameEditActivity"></activity>
         <activity android:name=".PersonalAboutActivity"></activity>
