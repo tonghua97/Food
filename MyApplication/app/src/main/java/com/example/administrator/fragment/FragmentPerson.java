@@ -2,7 +2,6 @@ package com.example.administrator.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import com.example.administrator.myapplication.MainActivity;
 import com.example.administrator.myapplication.PersonalAboutActivity;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.RegisterActivity;
-import com.example.administrator.myapplication.SetActivity;
 import com.example.administrator.ui.Utils;
 
 /**
