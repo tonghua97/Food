@@ -2,18 +2,24 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +31,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 /**
@@ -35,14 +43,10 @@ import java.io.File;
 public class SetActivity extends Activity {
 
     private Button mBtBack;             //返回键
-    //private Button mBtAvatarEdit;      //头像修改
-    //private Button mBtUnameEdit;        //用户名修改
-    //private Button mBtPwdEdit;         //密码修改
     private RelativeLayout mSetAvatar;  //头像修改
     private RelativeLayout mSetPwd;     //密码修改
     private RelativeLayout mSetName;    //用户名修改
     private TextView mUname;
-    private String name;
 
     private Spinner mSpGender;         //性别选择下拉列表
     private ArrayAdapter adapter = null;
@@ -50,8 +54,8 @@ public class SetActivity extends Activity {
     /*请求识别码*/
     protected static final int CHOOSE_PICTURE = 0;//选择本地照片
     protected static final int TAKE_PICTURE = 1;//拍照
-
     private static final int CROP_SMALL_PICTURE = 2;
+
     protected static Uri tempUri;
     private ImageView iv_personal_icon;
 
@@ -60,8 +64,12 @@ public class SetActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting);
 
+
         //获取控件
         getViews();
+
+        //获取用户名
+        getUname();
 
         //设置监听
         setListener();
@@ -74,21 +82,30 @@ public class SetActivity extends Activity {
      * 获取控件
      */
     private void getViews(){
+        //返回上一页
         mBtBack = (Button)findViewById(R.id.Setting_Bt_Back);
-//        mBtAvatarEdit = (Button)findViewById(R.id.Setting_Bt_avatarEdit);
-//        mBtUnameEdit = (Button)findViewById(R.id.Setting_Bt_UserNameEdit);
-//        mBtPwdEdit = (Button)findViewById(R.id.Setting_Bt_UserPasswordEdit);
         //修改头像
         mSetAvatar = (RelativeLayout)findViewById(R.id.setting_Rlay_avataredit);
-        //修改密码
-        mSetPwd = (RelativeLayout)findViewById(R.id.setting_Rlay_pwdedit);
         //修改用户名
         mSetName = (RelativeLayout)findViewById(R.id.setting_Rlay_unameedit);
+        //修改密码
+        mSetPwd = (RelativeLayout)findViewById(R.id.setting_Rlay_pwdedit);
+
+        //头像显示
+        iv_personal_icon = (ImageView)findViewById(R.id.Setting_Iv_avatar);
         //用户名
         mUname = (TextView)findViewById(R.id.setting_Tv_username);
-
+        //性别下拉列表
         mSpGender = (Spinner)findViewById(R.id.Setting_Sp_Gender);
-        iv_personal_icon = (ImageView)findViewById(R.id.Setting_Iv_avatar);
+    }
+
+    /**
+     * 获取用户名
+     */
+    private void getUname(){
+        SharedPreferences name = getSharedPreferences("UNAME_EDIT", Context.MODE_PRIVATE);
+        String Uname = name.getString("UNAME","");
+        mUname.setText(Uname);
     }
 
     /**
@@ -96,12 +113,13 @@ public class SetActivity extends Activity {
      */
     private void setListener(){
         MyListener listener = new MyListener();
+        //返回上一页
         mBtBack.setOnClickListener(listener);
-//        mBtAvatarEdit.setOnClickListener(listener);
-//        mBtUnameEdit.setOnClickListener(listener);
-//        mBtPwdEdit.setOnClickListener(listener);
+        //密码修改
         mSetPwd.setOnClickListener(listener);
+        //用户名修改
         mSetName.setOnClickListener(listener);
+        //头像修改
         mSetAvatar.setOnClickListener(listener);
     }
     class MyListener implements View.OnClickListener{
@@ -112,22 +130,26 @@ public class SetActivity extends Activity {
                     /*返回上一页*/
                     finish();
                     break;
-                case R.id.Setting_Bt_avatarEdit:
+
+                case R.id.setting_Rlay_avataredit:
                     /*修改头像*/
                     //显示修改头像的对话框
                     showChoosePicDialog();
 
+
                     break;
-                case R.id.Setting_Bt_UserNameEdit:
+                case R.id.setting_Rlay_unameedit:
                      /*跳转到用户名修改页面*/
-                    Intent intent2 = new Intent(SetActivity.this,Personal_setting_UnameEditActivity.class);
+                    Intent intent1 = new Intent(SetActivity.this,Personal_setting_UnameEditActivity.class);
+                    startActivity(intent1);
+                    break;
+
+                case R.id.setting_Rlay_pwdedit:
+                     /*跳转到密码修改页面*/
+                    Intent intent2 = new Intent(SetActivity.this,Personal_setting_PwdEditActivity.class);
                     startActivity(intent2);
                     break;
-                case R.id.Setting_Bt_UserPasswordEdit:
-                     /*跳转到密码修改页面*/
-                    Intent intent3 = new Intent(SetActivity.this,Personal_setting_PwdEditActivity.class);
-                    startActivity(intent3);
-                    break;
+
                 default:
                     break;
             }
@@ -177,10 +199,10 @@ public class SetActivity extends Activity {
         if (resultCode == RESULT_OK) { // 如果返回码是可以用的
             switch (requestCode) {
                 case TAKE_PICTURE:
-                    startPhotoZoom(tempUri); // 开始对图片进行裁剪处理
+                    startPhotoZoom(tempUri); // 对图片进行裁剪处理
                     break;
                 case CHOOSE_PICTURE:
-                    startPhotoZoom(data.getData()); // 开始对图片进行裁剪处理
+                    startPhotoZoom(data.getData()); // 对图片进行裁剪处理
                     break;
                 case CROP_SMALL_PICTURE:
                     if (data != null) {
@@ -222,11 +244,93 @@ public class SetActivity extends Activity {
         Bundle extras = data.getExtras();
         if (extras != null) {
             Bitmap photo = extras.getParcelable("data");
-            photo = toRoundBitmap(photo);//处理成圆形图片
-            iv_personal_icon.setImageBitmap(photo);
+            photo = toRoundBitmap(photo);
+            Drawable drawable = new BitmapDrawable(photo);
+            iv_personal_icon.setImageDrawable(drawable);
+
+          //  saveImage();
+//            try {
+//                SharedPreferences mySharedPreferences=getSharedPreferences("base64", Activity.MODE_PRIVATE);
+//                SharedPreferences.Editor editor1=mySharedPreferences.edit();
+//                ByteArrayOutputStream baos=new ByteArrayOutputStream();
+//                //读取和压缩qq.png，并将其压缩结果保存在ByteArrayOutputStream对象中
+//                BitmapFactory.decodeResource(getResources(),iv_personal_icon.g).compress(Bitmap.CompressFormat.JPEG, 50, baos);
+//                //对压缩后的字节进行base64编码
+//                String imageBase64=new String(Base64.encode(baos.toByteArray(),Base64.DEFAULT));
+//                // String imageBase64=new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
+//                //保存转换后的Base64格式字符串
+//                editor1.putString("image", imageBase64);
+//                editor1.commit();
+//                baos.close();
+//
+//            } catch (Exception e) {
+//                // TODO: handle exception
+//            }
+
+
+            //getImage
+//                //下面代码从base64.xml文件中读取以保存的图像，并将其显示在ImageView控件中
+//                try {
+//                    SharedPreferences mySharedPreference=getSharedPreferences("base64", Activity.MODE_PRIVATE);
+//                    //读取Base64格式的图像数据
+//                    String image=mySharedPreference.getString("image", "");
+//                    //对Base64格式的字符串进行解码，还原成字节数组
+//                    byte[] imageBytes=Base64.decode(image.getBytes(), Base64.DEFAULT);
+//                    ByteArrayInputStream bais=new ByteArrayInputStream(imageBytes);
+//                    ImageView imageView=(ImageView)findViewById(R.id.Setting_Iv_avatar);
+//                    imageView.setImageDrawable(Drawable.createFromStream(bais, "image"));
+//                    bais.close();
+//                } catch (Exception e) {
+//                    // TODO: handle exception
+//                }
+            //上传至服务器
             //  uploadPic(photo);
         }
     }
+//    private void saveImage(){
+//        /**
+//         * SharedPreferences 存取更复杂的数据类型（对象、图片等）就需要对这些数据记性编码。通常将复杂类型的数据转换
+//         * 成Base64格式的编码，然后将转换后的数据义字符串的形式保存在xml文件中。
+//         */
+//        try {
+//            SharedPreferences mySharedPreferences=getSharedPreferences("base64", Activity.MODE_PRIVATE);
+//            SharedPreferences.Editor editor1=mySharedPreferences.edit();
+//            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+//            //读取和压缩qq.png，并将其压缩结果保存在ByteArrayOutputStream对象中
+//            BitmapFactory.decodeResource(getResources(),avatar).compress(Bitmap.CompressFormat.JPEG, 50, baos);
+//            //对压缩后的字节进行base64编码
+//            String imageBase64=new String(Base64.encode(baos.toByteArray(),Base64.DEFAULT));
+//           // String imageBase64=new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
+//            //保存转换后的Base64格式字符串
+//            editor1.putString("image", imageBase64);
+//            editor1.commit();
+//            baos.close();
+//
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//        }
+//    }
+
+//    /**
+//     * 读取文件中图片方法
+//     */
+//    private void getImage()
+//    {
+//        //下面代码从base64.xml文件中读取以保存的图像，并将其显示在ImageView控件中
+//        try {
+//            SharedPreferences mySharedPreference=getSharedPreferences("base64", Activity.MODE_PRIVATE);
+//            //读取Base64格式的图像数据
+//            String image=mySharedPreference.getString("image", "");
+//            //对Base64格式的字符串进行解码，还原成字节数组
+//            byte[] imageBytes=Base64.decode(image.getBytes(), Base64.DEFAULT);
+//            ByteArrayInputStream bais=new ByteArrayInputStream(imageBytes);
+//            ImageView imageView=(ImageView)findViewById(R.id.imageView1);
+//            imageView.setImageDrawable(Drawable.createFromStream(bais, "image"));
+//            bais.close();
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//        }
+//    }
 
     /**
      * 把bitmap转成圆形
@@ -257,7 +361,6 @@ public class SetActivity extends Activity {
         p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         //canvas将bitmap画在backgroundBmp上
         canvas.drawBitmap(bitmap, null, rect, p);
-
 
         return backgroundBm;
     }
@@ -386,17 +489,43 @@ public class SetActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //绑定 Adapter到控件
         mSpGender .setAdapter(adapter);
+
+        //保存下列列表的选择
+        commitSpinnerSelection();
+
+        //读取存在SharedPreferences里的gender值
+        getSpinnerSelection();
+    }
+    /**
+     * 保存下列列表的选择
+     */
+    private void commitSpinnerSelection(){
+        SharedPreferences spf = getSharedPreferences("GENDER_SETTING",Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = spf.edit();
         //添加事件Spinner事件监听
         mSpGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                //保存用户的性别选择
-                mSpGender.setSelection(pos,true);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                editor.putInt("SelectedPosition",position);
+                //  editor.putString("SelectedGender",parent.getItemAtPosition(position).toString());
+                editor.commit();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Another interface callback
+                //Do Nothing
             }
         });
+    }
+    /**
+     * 读取存在SharedPreferences里的gender值
+     */
+    private void getSpinnerSelection(){
+        SharedPreferences spf_gender = getSharedPreferences("GENDER_SETTING",Context.MODE_PRIVATE);
+        //String gender = spf_gender.getString("SelectedGender","");
+        int position = spf_gender.getInt("SelectedPosition", 0 );
+
+        //设置spinner的值，让其当前选择项是与以前的一样
+        mSpGender.setSelection(position);
     }
 }

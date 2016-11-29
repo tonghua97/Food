@@ -49,10 +49,10 @@
 
         <ImageView
             android:id="@+id/Setting_Iv_avatar"
+            android:layout_toLeftOf="@+id/Setting_Bt_avatarEdit"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/setting_avatar"
-            android:layout_toLeftOf="@+id/Setting_Bt_avatarEdit"
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"/>
         <Button
@@ -66,11 +66,11 @@
 
     <!--用户名-->
     <RelativeLayout
+        android:id="@+id/setting_Rlay_unameedit"
         android:layout_marginTop="1dp"
         android:padding="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/setting_Rlay_unameedit"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
@@ -81,13 +81,13 @@
 
             android:layout_centerVertical="true"/>
         <TextView
+            android:id="@+id/setting_Tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="爆破大队"
+            android:text=""
             android:textSize="15sp"
             android:layout_marginRight="30dp"
             android:layout_toLeftOf="@+id/Setting_Bt_UserNameEdit"
-            android:id="@+id/setting_Tv_username"
             android:layout_centerVertical="true"/>
         <Button
             android:id="@+id/Setting_Bt_UserNameEdit"
@@ -100,11 +100,11 @@
 
     <!--密码修改-->
     <RelativeLayout
+        android:id="@+id/setting_Rlay_pwdedit"
         android:layout_marginTop="1dp"
         android:padding="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/setting_Rlay_pwdedit"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"

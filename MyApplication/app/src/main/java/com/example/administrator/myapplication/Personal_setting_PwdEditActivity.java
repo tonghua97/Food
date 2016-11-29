@@ -1,6 +1,8 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,8 +57,41 @@ public class Personal_setting_PwdEditActivity extends Activity {
                     break;
                 //保存修改后的密码
                 case R.id.PwdEdit_Bt_Save:
-                    //Code:检验旧密码是否正确并保存新密码
-                    Toast.makeText(Personal_setting_PwdEditActivity.this,"密码修改成功！",Toast.LENGTH_SHORT).show();
+                    //检验旧密码是否正确
+
+                    /*检验新密码的有效性*/
+                    //1.新密码与旧密码相同
+//                    if (mEtOldpwd.getText().toString().equals(getmEtNewpwd.getText().toString())){
+//                        //创建对话框创建器
+//                        AlertDialog.Builder ab = new AlertDialog.Builder(Personal_setting_PwdEditActivity.this);
+//                        //设置对话框
+//                        ab.setTitle("提示");
+//                        ab.setMessage("新密码与旧密码相同，请重新设置");
+//                        ab.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                Personal_setting_PwdEditActivity.this.finish();
+//                            }
+//                        });
+//                        //ab.setNegativeButton("取消",null);
+//                        ab.create().show();
+//                    }else if(/*旧密码输入错误*/){         //2.旧密码输入错误
+//                        //创建对话框创建器
+//                        AlertDialog.Builder ab = new AlertDialog.Builder(Personal_setting_PwdEditActivity.this);
+//                        //设置对话框
+//                        ab.setTitle("提示");
+//                        ab.setMessage("旧密码输入不正确，请重新输入！");
+//                        ab.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                Personal_setting_PwdEditActivity.this.finish();
+//                            }
+//                        });
+//                        //ab.setNegativeButton("取消",null);
+//                        ab.create().show();
+//                    }else {
+                           Toast.makeText(Personal_setting_PwdEditActivity.this,"密码修改成功！",Toast.LENGTH_SHORT).show();
+//                    }
                     break;
             }
         }

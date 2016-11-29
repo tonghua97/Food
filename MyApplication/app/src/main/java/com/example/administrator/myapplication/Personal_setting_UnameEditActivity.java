@@ -2,11 +2,15 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -40,7 +44,6 @@ public class Personal_setting_UnameEditActivity extends Activity {
         mBtnClear = (Button)findViewById(R.id.UnameEdit_btn_clear);
         mBtnBack = (Button)findViewById(R.id.UnameEdit_Bt_Back);
         mBtnSave = (Button)findViewById(R.id.UnameEdit_Bt_Save);
-
         mEtUname = (EditText)findViewById(R.id.UnameEdit_Et_Uname);
     }
 
@@ -61,6 +64,7 @@ public class Personal_setting_UnameEditActivity extends Activity {
                 case R.id.UnameEdit_Bt_Back:
                     finish();
                     break;
+
                 //保存用户名的修改
                 case R.id.UnameEdit_Bt_Save:
                     SharedPreferences spf = getSharedPreferences("UNAME_EDIT", Context.MODE_PRIVATE);
@@ -69,7 +73,8 @@ public class Personal_setting_UnameEditActivity extends Activity {
                     editor.commit();
                     Toast.makeText(Personal_setting_UnameEditActivity.this,"用户名修改并保存成功！",Toast.LENGTH_SHORT).show();
                     break;
-                //清空用户名
+
+                //清空用户名EditText
                 case R.id.UnameEdit_btn_clear:
                     mEtUname.setText("");
                     break;
@@ -83,6 +88,7 @@ public class Personal_setting_UnameEditActivity extends Activity {
     private void setUname(){
         SharedPreferences spf = getSharedPreferences("UNAME_EDIT",Context.MODE_PRIVATE);
         String Uname = spf.getString("UNAME","");
+
         mEtUname.setText(Uname);
     }
 }
