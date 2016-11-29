@@ -12,7 +12,5 @@
             android:layout_height="50dp"
             android:hint="识食物者为俊杰"/>
     </RelativeLayout>
-    <SeekBar
-        android:layout_width="300dp"
-        android:layout_height="50dp" />
+
 </LinearLayout>

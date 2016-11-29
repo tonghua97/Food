@@ -26,6 +26,7 @@
         <activity android:name=".Personal_setting_PwdEditActivity"></activity>
         <activity android:name=".Personal_setting_UnameEditActivity"></activity>
         <activity android:name=".PersonalAboutActivity"></activity>
+        <activity android:name=".SearchNameActivity"></activity>
     </application>
 
 </manifest>
