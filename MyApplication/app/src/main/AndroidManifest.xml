@@ -31,6 +31,9 @@
         <activity android:name=".Personal_setting_PwdEditActivity"></activity>
         <activity android:name=".Personal_setting_UnameEditActivity"></activity>
         <activity android:name=".PersonalAboutActivity"></activity>
+        <activity android:name=".SearchNameActivity"></activity>
+        <activity android:name=".SearchTimeActivity"></activity>
+        <activity android:name=".SearchMaterialActivity"></activity>
     </application>
 
 </manifest>
