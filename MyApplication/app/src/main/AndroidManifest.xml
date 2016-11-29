@@ -28,6 +28,7 @@
         <activity android:name=".PersonalAboutActivity"></activity>
         <activity android:name=".SearchNameActivity"></activity>
         <activity android:name=".SearchTimeActivity"></activity>
+        <activity android:name=".SearchMaterialActivity"></activity>
     </application>
 
 </manifest>
