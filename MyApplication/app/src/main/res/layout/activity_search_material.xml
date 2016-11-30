@@ -85,17 +85,18 @@
             android:textSize="25dp"
             android:textColor="#ffffff"
             android:background="#FF6A19"
-            android:id="@+id/Button"
+            android:id="@+id/Btn_material_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true">
         </Button>
-        <TextView
+        <SearchView
+            android:id="@+id/Sv_material"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/Button"
+            android:layout_height="48dp"
+            android:layout_toLeftOf="@id/Btn_material_search"
             android:layout_alignParentBottom="true">
-        </TextView>
+        </SearchView>
     </RelativeLayout>
 </LinearLayout>
