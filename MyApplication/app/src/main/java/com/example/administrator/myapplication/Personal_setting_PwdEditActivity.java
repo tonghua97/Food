@@ -14,11 +14,10 @@ import android.widget.Toast;
  */
 public class Personal_setting_PwdEditActivity extends Activity {
 
-    private Button mBtBack;
-    private Button mBtSave;
-    private EditText mEtOldpwd;
-    private EditText getmEtNewpwd;
-
+    private Button mBtBack;             //返回键
+    private Button mBtSave;             //保存密码的修改
+    private EditText mEtOldpwd;         //旧密码
+    private EditText getmEtNewpwd;      //新密码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,10 @@ public class Personal_setting_PwdEditActivity extends Activity {
         mEtOldpwd = (EditText)findViewById(R.id.PwdEdit_Et_oldpwd);
         getmEtNewpwd = (EditText)findViewById(R.id.PwdEdit_Et_newpwd);
     }
+
+    /**
+     * 设置监听
+     */
     private void setListener(){
         MyListener listener = new MyListener();
         mBtBack.setOnClickListener(listener);
@@ -51,17 +54,18 @@ public class Personal_setting_PwdEditActivity extends Activity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                //返回键功能
+                /*返回键功能*/
                 case R.id.PwdEdit_Bt_Back:
                     finish();
                     break;
-                //保存修改后的密码
+
+                /*保存修改后的密码*/
                 case R.id.PwdEdit_Bt_Save:
                     //检验旧密码是否正确
 
                     /*检验新密码的有效性*/
-                    //1.新密码与旧密码相同
-//                    if (mEtOldpwd.getText().toString().equals(getmEtNewpwd.getText().toString())){
+                    //1.旧密码输入正确&&新密码与旧密码相同
+//                    if (mEtOldpwd.getText().toString().equals(getmEtNewpwd.getText().toString()) && ){
 //                        //创建对话框创建器
 //                        AlertDialog.Builder ab = new AlertDialog.Builder(Personal_setting_PwdEditActivity.this);
 //                        //设置对话框
@@ -92,6 +96,8 @@ public class Personal_setting_PwdEditActivity extends Activity {
 //                    }else {
                            Toast.makeText(Personal_setting_PwdEditActivity.this,"密码修改成功！",Toast.LENGTH_SHORT).show();
 //                    }
+                    break;
+                default:
                     break;
             }
         }
