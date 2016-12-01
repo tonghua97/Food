@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridView;
+import android.widget.SearchView;
 
 import com.example.administrator.adapter.AdapterMaterial;
 import com.example.administrator.domain.DataMaterial;
+import com.example.administrator.ui.MaterialGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +18,11 @@ import java.util.List;
  * Created by 姜佳妮 on 2016/11/28.
  */
 public class SearchMaterialActivity extends Activity {
-    private ArrayAdapter<String> adapter;
-    private List<DataMaterial> list_meat = new ArrayList<DataMaterial>();
-    private List<DataMaterial> list_vegetable = new ArrayList<DataMaterial>();
-    private List<DataMaterial> list_flavour = new ArrayList<DataMaterial>();
-    private AdapterMaterial adapter_material_meat;
-    private AdapterMaterial adapter_material_vegetable;
-    private AdapterMaterial adapter_material_flavour;
-    private GridView Gv_meat,Gv_vegetable,Gv_flavour;
 
+    private AdapterMaterial a_meat,a_vegetable;       //设置肉类
+    private List<DataMaterial> ls_meat = new ArrayList<>();
+    private List<DataMaterial> ls_vegetavble = new ArrayList<>();
+    private SearchView sv_material;     //搜索框
     private Button btn_back,btn_search;
 
     @Override
@@ -34,19 +30,55 @@ public class SearchMaterialActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_material);
 
-        //设置每一类食材的布局
-        setAdapterView();
-        //获取视图
-        findview();
+        //获取食材数据
+        getMeat();          //肉类
+        getVegetable();     //蔬菜类
+
+        //给Adapter设置数据
+        a_meat = new AdapterMaterial(this,ls_meat);
+        a_vegetable = new AdapterMaterial(this,ls_vegetavble);
+
+        //获取Materialgridview，绑定Adaoter
+        MaterialGridView gv_meat = (MaterialGridView)findViewById(R.id.Gv_material_meat);
+        gv_meat.setAdapter(a_meat);
+        MaterialGridView gv_vegetable = (MaterialGridView)findViewById(R.id.Gv_material_vegetable);
+        gv_vegetable.setAdapter(a_vegetable);
+
+        //获取返回、搜索按钮
+        btn_back = (Button)findViewById(R.id.Btn_material_back);
+        btn_search = (Button)findViewById(R.id.Btn_material_search);
+
+        //设置搜索框属性
+        setSearchBar();
+
         //设置监听
         setListener();
-        //实现搜索功能
+
+
 
     }
 
-    private void findview() {
-        btn_back = (Button)findViewById(R.id.Btn_material_back);
-        btn_search = (Button)findViewById(R.id.Btn_material_search);
+    private void setSearchBar() {
+        sv_material = (SearchView)findViewById(R.id.Sv_material);
+        //设置搜索框默认是否自动缩小为图标
+        sv_material.setIconifiedByDefault(false);
+        //设置搜索框显示搜索按钮
+        sv_material.setSubmitButtonEnabled(true);
+        //设置搜索框内默认显示的提示文本
+        sv_material.setQueryHint("搜索食材");
+        //为搜索框设置事件监听器
+        sv_material.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            //单击搜索框按钮时激发该方法
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            //用户输入字符时激发该方法
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     private void setListener() {
@@ -61,59 +93,35 @@ public class SearchMaterialActivity extends Activity {
             }
         });
     }
-    /*
-    设置食材选项布局
-     */
-    private void setAdapterView() {
-        /*获取食材名称*/
-        getMeatData();      //肉类
-        getVegetableData(); //蔬菜类
-        getFlavourData();   //调料品类
 
-        adapter_material_meat = new AdapterMaterial(this,list_meat);
-        adapter_material_vegetable = new AdapterMaterial(this,list_vegetable);
-        adapter_material_flavour = new AdapterMaterial(this,list_flavour);
-        /*
-        获取肉类、蔬菜类、调料类视图
-         */
-        Gv_meat = (GridView)findViewById(R.id.Gv_material_meat);
-        Gv_vegetable = (GridView)findViewById(R.id.Gv_material_vegetable);
-        Gv_flavour = (GridView)findViewById(R.id.Gv_material_flavour);
-        /*
-        分别设置adapter
-         */
-        Gv_meat.setAdapter(adapter_material_meat);
-        Gv_vegetable.setAdapter(adapter_material_vegetable);
-        Gv_flavour.setAdapter(adapter_material_flavour);
+    public void getMeat() {
+        ls_meat.add(new DataMaterial(01l,"猪肉"));
+        ls_meat.add(new DataMaterial(02l,"牛肉"));
+        ls_meat.add(new DataMaterial(03l,"羊肉"));
+        ls_meat.add(new DataMaterial(04l,"鸡肉"));
+        ls_meat.add(new DataMaterial(05l,"鸭肉"));
+        ls_meat.add(new DataMaterial(06l,"鱼"));
     }
 
-    public void getMeatData() {
-        list_meat.add(new DataMaterial(01L,"鸡肉"));
-        list_meat.add(new DataMaterial(02L,"鸭肉"));
-        list_meat.add(new DataMaterial(03L,"猪肉"));
-        list_meat.add(new DataMaterial(04L,"牛肉"));
-        list_meat.add(new DataMaterial(05L,"羊肉"));
-        list_meat.add(new DataMaterial(06L,"鱼"));
-        list_meat.add(new DataMaterial(07L,"香肠"));
+    public void getVegetable() {
+        ls_vegetavble.add(new DataMaterial(1l,"白菜"));
+        ls_vegetavble.add(new DataMaterial(2l,"萝卜"));
+        ls_vegetavble.add(new DataMaterial(3l,"葱"));
+        ls_vegetavble.add(new DataMaterial(4l,"姜"));
+        ls_vegetavble.add(new DataMaterial(5l,"蒜"));
+        ls_vegetavble.add(new DataMaterial(6l,"西红柿"));
+        ls_vegetavble.add(new DataMaterial(7l,"白菜"));
+        ls_vegetavble.add(new DataMaterial(8l,"萝卜"));
+        ls_vegetavble.add(new DataMaterial(9l,"葱"));
+        ls_vegetavble.add(new DataMaterial(10l,"姜"));
+        ls_vegetavble.add(new DataMaterial(11l,"蒜"));
+        ls_vegetavble.add(new DataMaterial(12l,"西红柿"));
+        ls_vegetavble.add(new DataMaterial(13l,"白菜"));
+        ls_vegetavble.add(new DataMaterial(14l,"萝卜"));
+        ls_vegetavble.add(new DataMaterial(15l,"葱"));
+        ls_vegetavble.add(new DataMaterial(16l,"姜"));
+        ls_vegetavble.add(new DataMaterial(17l,"蒜"));
+        ls_vegetavble.add(new DataMaterial(18l,"西红柿"));
     }
 
-    public void getVegetableData() {
-        list_meat.add(new DataMaterial(01L,"白菜"));
-        list_meat.add(new DataMaterial(02L,"葱"));
-        list_meat.add(new DataMaterial(03L,"姜"));
-        list_meat.add(new DataMaterial(04L,"蒜"));
-        list_meat.add(new DataMaterial(05L,"豆腐"));
-        list_meat.add(new DataMaterial(06L,"香菜"));
-        list_meat.add(new DataMaterial(07L,"萝卜"));
-    }
-
-    public void getFlavourData() {
-        list_meat.add(new DataMaterial(01L,"酱油"));
-        list_meat.add(new DataMaterial(02L,"醋"));
-        list_meat.add(new DataMaterial(03L,"糖"));
-        list_meat.add(new DataMaterial(04L,"盐"));
-        list_meat.add(new DataMaterial(05L,"花椒"));
-        list_meat.add(new DataMaterial(06L,"胡椒"));
-        list_meat.add(new DataMaterial(07L,"小苏打"));
-    }
 }

@@ -4,13 +4,14 @@
     android:layout_height="match_parent">
     <CheckBox
         android:id="@+id/material_checkbox"
-        style="@style/custom_checkbox"
-        android:paddingLeft="10dp"
-        android:textSize="22dp"
         android:text="材料名"
+        style="@style/custom_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:paddingLeft="10dp"
+        android:textSize="22dp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
         android:checked="false" />
 </LinearLayout>
