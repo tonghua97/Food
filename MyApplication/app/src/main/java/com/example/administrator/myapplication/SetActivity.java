@@ -141,7 +141,6 @@ public class SetActivity extends Activity {
                     //显示修改头像的对话框
                     showChoosePicDialog();
 
-
                     break;
                 case R.id.setting_Rlay_unameedit:
                      /*跳转到用户名修改页面*/
@@ -209,15 +208,14 @@ public class SetActivity extends Activity {
                 //拍照
                 case TAKE_PICTURE:
                     if (hasSdcard()){
-                        File tempFile = new File(
-                                Environment.getExternalStorageDirectory(),
-                                IMAGE_FILE_NAME);
+//                        File tempFile = new File(
+//                                Environment.getExternalStorageDirectory(),
+//                                IMAGE_FILE_NAME);
                         startPhotoZoom(tempUri); // 对图片进行裁剪处理
                     }else {
                         Toast.makeText(getApplication(), "没有SDCard!", Toast.LENGTH_SHORT)
                                 .show();
                     }
-//                    startPhotoZoom(tempUri); // 对图片进行裁剪处理
                     break;
 
                 //相册
