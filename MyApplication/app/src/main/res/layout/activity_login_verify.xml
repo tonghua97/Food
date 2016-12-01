@@ -80,8 +80,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/login_verify_Tv_register"
             android:layout_alignParentLeft="true"
-            android:text="登录遇到问题"/>
+            android:text="快速注册"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,17 +110,58 @@
             android:layout_height="1dp"
             android:background="@drawable/main_fragment_classify_line"/>
     </LinearLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5">
-        <Button
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/login_verify_btn_register"
-            android:text="快速注册"
-            android:textColor="#ff0000"
-            android:background="@drawable/register_background"/>
-    </RelativeLayout>
+        android:orientation="horizontal"
+        android:layout_weight="1.5">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/weibo"
+                android:layout_marginBottom="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微博登录"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/qq"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="qq登录"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="2">-->
+        <!--<TextView-->
+            <!--android:layout_width="130dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:id="@+id/login_verify_btn_register"-->
+            <!--android:text="快速注册"-->
+            <!--android:textColor="#ff0000"-->
+            <!--/>-->
+    <!--</RelativeLayout>-->
 </LinearLayout>

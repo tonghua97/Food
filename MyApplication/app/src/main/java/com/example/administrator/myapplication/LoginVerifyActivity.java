@@ -22,7 +22,7 @@ public class LoginVerifyActivity extends Activity {
     private Button mLogin;
     private EditText mUsername;
     private EditText mPassword;
-    private Button mRegister;
+    private TextView mRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class LoginVerifyActivity extends Activity {
         //密码
         mPassword = (EditText)findViewById(R.id.login_verify_Et_password);
         //注册
-        mRegister = (Button)findViewById(R.id.login_verify_btn_register);
+        mRegister = (TextView)findViewById(R.id.login_verify_Tv_register);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class LoginVerifyActivity extends Activity {
                     Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.login_verify_btn_register:
+                case R.id.login_verify_Tv_register:
                     Intent intent2 = new Intent(LoginVerifyActivity.this,RegisterActivity.class);
                     startActivity(intent2);
                     finish();
