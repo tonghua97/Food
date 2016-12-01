@@ -8,6 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="custom_checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/checkbox_normal</item>
+        <item name="android:button">@drawable/searchmaterial_checbox</item>
     </style>
 </resources>
