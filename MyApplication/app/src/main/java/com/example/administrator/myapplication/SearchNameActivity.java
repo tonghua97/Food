@@ -23,6 +23,7 @@ public class SearchNameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SearchNameActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
     }

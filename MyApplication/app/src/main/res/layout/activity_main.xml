@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/main_Rlay"
     tools:context="com.example.administrator.myapplication.MainActivity">
@@ -11,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:paddingRight="20dp"
+        android:paddingRight="10dp"
         android:layout_alignParentTop="true"
         android:id="@+id/main_Rlay_top"
         android:background="@drawable/main_rlay_top">
@@ -19,8 +20,9 @@
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="250dp"
-            android:layout_height="35dp"
-            android:layout_centerInParent="true"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
             android:paddingLeft="10dp"
             android:background="@drawable/main_llay_default">
             <ImageView
@@ -32,19 +34,20 @@
                 android:focusableInTouchMode="true"/>
             <EditText
                 android:layout_width="200dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/main_et_dafault"
                 android:hint="搜索"/>
         </LinearLayout>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/boom"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/sousuo"/>
+            app:boom_button_color="@color/cornflowerblue"
+            app:boom_button_pressed_color="@color/colorPrimary">
+        </com.nightonke.boommenu.BoomMenuButton>
     </RelativeLayout>
 
     <FrameLayout
