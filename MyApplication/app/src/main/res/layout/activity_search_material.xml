@@ -12,6 +12,26 @@
             android:background="@drawable/img_pickfun_back"
             android:layout_width="50dp"
             android:layout_height="match_parent" />
+
+        <SearchView
+            android:id="@+id/Sv_material"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true">
+        </SearchView>
+        <Button
+            android:text="搜索"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:textColor="#ffffff"
+            android:background="#FF6A19"
+            android:id="@+id/Btn_material_search"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true">
+        </Button>
     </LinearLayout>
     <!--食材分类选项-->
     <ScrollView
@@ -33,12 +53,12 @@
                 android:background="#FFED66"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
-            <GridView
+            <com.example.sophia.foodgridview.MaterialGridView
+                android:numColumns="3"
                 android:id="@+id/Gv_material_meat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-            </GridView>
+            </com.example.sophia.foodgridview.MaterialGridView>
             <!--蔬菜类-->
             <TextView
                 android:id="@+id/Tv_searchmatrial_vegetabletitle"
@@ -51,52 +71,12 @@
                 android:background="#FFED66"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
-            <GridView
+            <com.example.sophia.foodgridview.MaterialGridView
+                android:numColumns="3"
                 android:id="@+id/Gv_material_vegetable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </GridView>
-            <!--调料类-->
-            <TextView
-                android:id="@+id/Tv_searchmatrial_flavourtitle"
-                android:text="调料"
-                android:textSize="25dp"
-                android:paddingTop="5dp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:background="#FFED66"
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
-            <GridView
-                android:id="@+id/Gv_material_flavour"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </GridView>
+            </com.example.sophia.foodgridview.MaterialGridView>
         </LinearLayout>
     </ScrollView>
-    <!--搜索按钮-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:text="搜索"
-            android:textAlignment="center"
-            android:textSize="25dp"
-            android:textColor="#ffffff"
-            android:background="#FF6A19"
-            android:id="@+id/Btn_material_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true">
-        </Button>
-        <SearchView
-            android:id="@+id/Sv_material"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_toLeftOf="@id/Btn_material_search"
-            android:layout_alignParentBottom="true">
-        </SearchView>
-    </RelativeLayout>
 </LinearLayout>
