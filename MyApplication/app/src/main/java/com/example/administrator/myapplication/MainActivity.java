@@ -3,7 +3,10 @@ package com.example.administrator.myapplication;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +17,11 @@ import com.example.administrator.fragment.FragmentClassify;
 import com.example.administrator.fragment.FragmentHome;
 import com.example.administrator.fragment.FragmentPerson;
 import com.example.administrator.ui.Utils;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.Types.BoomType;
+import com.nightonke.boommenu.Types.ButtonType;
+import com.nightonke.boommenu.Types.PlaceType;
+import com.nightonke.boommenu.Util;
 
 
 public class MainActivity extends Activity {
@@ -32,6 +40,8 @@ public class MainActivity extends Activity {
     private TextView mLlayHomeTv;
     private TextView mLlayClassifyTv;
     private TextView mLlayPersonTv;
+    private BoomMenuButton boomMenuButton;
+    private boolean autoDismiss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,8 +142,8 @@ public class MainActivity extends Activity {
         mLlayHomeTv = (TextView)findViewById(R.id.main_Llay_home_Tv);
         mLlayClassifyTv = (TextView)findViewById(R.id.main_Llay_classify_Tv);
         mLlayPersonTv = (TextView)findViewById(R.id.main_Llay_person_Tv);
+        boomMenuButton = (BoomMenuButton)findViewById(R.id.boom);
     }
-
 
     View.OnClickListener myListener = new View.OnClickListener() {
         @Override
@@ -159,7 +169,6 @@ public class MainActivity extends Activity {
 
                     break;
             }
-
             //4、执行更改
             transaction.commit();
             //页面刷新
@@ -179,6 +188,60 @@ public class MainActivity extends Activity {
         mLlayHomeTv.setTextColor(getResources().getColor(R.color.black));
         mLlayClassifyTv.setTextColor(getResources().getColor(R.color.black));
         mLlayPersonTv.setTextColor(getResources().getColor(R.color.black));
+    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
 
+        // Use a param to record whether the boom button has been initialized
+        // Because we don't need to init it again when onResume()
+
+        Drawable[] subButtonDrawables = new Drawable[3];
+        int[] drawablesResource = new int[]{
+                R.drawable.icon_home_normal,
+                R.drawable.icon_home_normal,
+                R.drawable.icon_home_normal
+        };
+        for (int i = 0; i < 3; i++)
+            subButtonDrawables[i] = ContextCompat.getDrawable(this, drawablesResource[i]);
+
+        String[] subButtonTexts = new String[]{"按菜名搜索", "按食材搜索", "按时间搜索"};
+
+        int[][] subButtonColors = new int[3][2];
+        for (int i = 0; i < 3; i++) {
+            subButtonColors[i][1] = ContextCompat.getColor(this, R.color.orange);
+            subButtonColors[i][0] = Util.getInstance().getPressedColor(subButtonColors[i][1]);
+        }
+        new BoomMenuButton.Builder()
+                .addSubButton(ContextCompat.getDrawable(this, R.drawable.icon_home_normal), subButtonColors[0], "按菜名搜索")
+                .addSubButton(ContextCompat.getDrawable(this, R.drawable.icon_home_normal), subButtonColors[0], "按食材搜索")
+                .addSubButton(ContextCompat.getDrawable(this, R.drawable.icon_home_normal), subButtonColors[0], "按时间搜索")
+                .button(ButtonType.CIRCLE)
+                .boom(BoomType.PARABOLA)
+                .place(PlaceType.CIRCLE_3_1)
+                .subButtonTextColor(ContextCompat.getColor(this, R.color.black))
+                .subButtonsShadow(Util.getInstance().dp2px(2), Util.getInstance().dp2px(2))
+                .init(boomMenuButton)
+                .setAutoDismiss(autoDismiss = false);
+                boomMenuButton.setOnSubButtonClickListener(new BoomMenuButton.OnSubButtonClickListener() {
+                    @Override
+                    public void onClick(int buttonIndex) {
+                        // 返回被点击的子按钮下标
+                        switch (buttonIndex){
+                            case 0:
+                                Intent i = new Intent(MainActivity.this,SearchNameActivity.class);
+                                startActivity(i);
+                                break;
+                            case 1:
+                                Intent i1 = new Intent(MainActivity.this,SearchMaterialActivity.class);
+                                startActivity(i1);
+                                break;
+                            case 2:
+                                Intent i2 = new Intent(MainActivity.this,SearchTimeActivity.class);
+                                startActivity(i2);
+                                break;
+                        }
+                    }
+                });
     }
 }
