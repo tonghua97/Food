@@ -1,5 +1,9 @@
 package com.example.administrator.myapplication;
 
+/**
+ * 首页
+ */
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;

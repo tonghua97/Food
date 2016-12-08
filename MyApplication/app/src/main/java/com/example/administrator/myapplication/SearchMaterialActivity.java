@@ -88,8 +88,7 @@ public class SearchMaterialActivity extends Activity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_back = new Intent(SearchMaterialActivity.this,MainActivity.class);
-                startActivity(intent_back);
+                finish();
             }
         });
     }

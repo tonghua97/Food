@@ -22,7 +22,7 @@ public class SearchTimeActivity extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SearchTimeActivity.this,MainActivity.class);
+                finish();
             }
         });
     }
