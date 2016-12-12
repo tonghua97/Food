@@ -4,7 +4,7 @@ package com.example.administrator.ui;
  * Created by Administrator on 2016/11/28.
  */
 import com.example.administrator.myapplication.R;
-import com.example.administrator.ui.DragFrameLayout;
+//import com.example.administrator.ui.DragFrameLayout;
 import android.content.Context;
 import android.graphics.Rect;
 import android.location.Location;
@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 import android.widget.Toast;
-
+/*
 public class DragFrameLayout extends FrameLayout {
 
     private View view;
@@ -269,3 +269,4 @@ public class DragFrameLayout extends FrameLayout {
     }
 
 }
+*/
