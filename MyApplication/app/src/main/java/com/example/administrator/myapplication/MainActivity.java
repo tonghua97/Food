@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -46,6 +47,7 @@ public class MainActivity extends Activity {
     private TextView mLlayPersonTv;
     private BoomMenuButton boomMenuButton;
     private boolean autoDismiss;
+    private TextView mTvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +134,7 @@ public class MainActivity extends Activity {
         mLlayHome.setOnClickListener(myListener);
         mLlayClassify.setOnClickListener(myListener);
         mLlayPerson.setOnClickListener(myListener);
+        mTvSearch.setOnClickListener(myListener);
     }
 
     public void getViews() {
@@ -147,6 +150,7 @@ public class MainActivity extends Activity {
         mLlayClassifyTv = (TextView)findViewById(R.id.main_Llay_classify_Tv);
         mLlayPersonTv = (TextView)findViewById(R.id.main_Llay_person_Tv);
         boomMenuButton = (BoomMenuButton)findViewById(R.id.boom);
+        mTvSearch = (TextView)findViewById(R.id.main_Tv_search);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -172,6 +176,10 @@ public class MainActivity extends Activity {
                     setDefaultPage3();
 
                     break;
+                case R.id.main_Tv_search:
+                    Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+                    startActivity(intent);
+
             }
             //4、执行更改
             transaction.commit();

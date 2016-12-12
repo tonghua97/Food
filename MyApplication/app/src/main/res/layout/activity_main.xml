@@ -32,11 +32,13 @@
                 android:src="@drawable/sousuo"
                 android:focusable="true"
                 android:focusableInTouchMode="true"/>
-            <EditText
+            <TextView
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:gravity="left|center"
                 android:layout_marginLeft="10dp"
+                android:id="@+id/main_Tv_search"
                 android:background="@drawable/main_et_dafault"
                 android:hint="搜索"/>
         </LinearLayout>

@@ -67,15 +67,20 @@ public class FragmentClassifyCuisine extends Fragment {
     }
 
     private void getData() {
-        ldcuisine.add((new DataCuisine(1,R.drawable.icon_home_normal,"鲁菜")));
-        ldcuisine.add((new DataCuisine(2,R.drawable.icon_home_normal,"川菜")));
-        ldcuisine.add((new DataCuisine(3,R.drawable.icon_home_normal,"浙菜")));
-        ldcuisine.add((new DataCuisine(4,R.drawable.icon_home_normal,"湘菜")));
-        ldcuisine.add((new DataCuisine(5,R.drawable.icon_home_normal,"鄂菜")));
-        ldcuisine.add((new DataCuisine(6,R.drawable.icon_home_normal,"苏菜")));
-        ldcuisine.add((new DataCuisine(7,R.drawable.icon_home_normal,"闽菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.icon_home_normal,"京菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.icon_home_normal,"沪菜")));
+        ldcuisine.add((new DataCuisine(1,R.drawable.chuan,"鲁菜")));
+        ldcuisine.add((new DataCuisine(2,R.drawable.chuan,"川菜")));
+        ldcuisine.add((new DataCuisine(3,R.drawable.chuan,"浙菜")));
+        ldcuisine.add((new DataCuisine(4,R.drawable.chuan,"湘菜")));
+        ldcuisine.add((new DataCuisine(5,R.drawable.chuan,"鄂菜")));
+        ldcuisine.add((new DataCuisine(6,R.drawable.chuan,"苏菜")));
+        ldcuisine.add((new DataCuisine(7,R.drawable.chuan,"闽菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.chuan,"京菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.chuan,"沪菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.chuan,"沪菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.chuan,"沪菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.chuan,"沪菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.chuan,"沪菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.chuan,"沪菜")));
     }
 
 }

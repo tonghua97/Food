@@ -36,6 +36,7 @@ public class AdapterRecommend extends BaseAdapter{
 
     @Override
     public int getCount() {
+//        return 3;
         return mData.size();
     }
 
