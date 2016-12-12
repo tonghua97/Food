@@ -2,12 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.myapplication">
 
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-=======
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
@@ -15,8 +13,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
->>>>>>> 566b4edee7fc95b0e95110e41b148576e8f7dccf
 
     <application
         android:allowBackup="true"
@@ -37,7 +33,6 @@
         <activity android:name=".ClassificationListActivity" />
         <activity android:name=".PickfundetailActivity" />
         <activity android:name=".LoginVerifyActivity" />
-<<<<<<< HEAD
         <activity android:name=".LoginActivity" />
         <activity android:name=".SetActivity" />
         <activity android:name=".Personal_setting_PwdEditActivity" />
@@ -47,7 +42,6 @@
         <activity android:name=".SearchTimeActivity" />
         <activity android:name=".SearchMaterialActivity" />
         <activity android:name=".SearchActivity"></activity>
-=======
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SetActivity"></activity>
         <activity android:name=".Personal_setting_PwdEditActivity"></activity>
@@ -56,8 +50,6 @@
         <activity android:name=".SearchNameActivity"></activity>
         <activity android:name=".SearchTimeActivity"></activity>
         <activity android:name=".SearchMaterialActivity"></activity>
-
->>>>>>> 566b4edee7fc95b0e95110e41b148576e8f7dccf
     </application>
 
 </manifest>
