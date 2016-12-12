@@ -40,5 +40,25 @@
                 android:textColorHint="#e60707"/>
         </LinearLayout>
     </RelativeLayout>
-
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_SearchTime_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:gravity="center_horizontal"
+            android:textSize="60sp"
+            android:textColor="#ffff0000"
+            />
+        <com.example.administrator.myapplication.ZJBCircleSeekBar
+            android:id="@+id/circleSeekBar"
+            android:layout_width="350px"
+            android:layout_height="350px"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 </LinearLayout>
