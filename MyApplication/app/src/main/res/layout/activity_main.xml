@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--主页面-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,8 +9,7 @@
     android:id="@+id/main_Rlay"
     tools:context="com.example.administrator.myapplication.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingRight="10dp"
         android:layout_alignParentTop="true"
@@ -40,86 +39,29 @@
                 android:background="@drawable/main_et_dafault"
                 android:hint="搜索"/>
         </LinearLayout>
-        <com.nightonke.boommenu.BoomMenuButton
-            android:id="@+id/boom"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentRight="true"
-            app:boom_button_color="@color/cornflowerblue"
-            app:boom_button_pressed_color="@color/colorPrimary">
-        </com.nightonke.boommenu.BoomMenuButton>
     </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:id="@+id/main_Flay_center"
-        android:layout_weight="5"
         android:layout_below="@id/main_Rlay_top">
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:id="@+id/main_Llay_bottom"
-        android:layout_gravity="bottom"
-        android:background="@drawable/main_rlay_top">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_Llay_home"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/main_Llay_home_Iv"
-                android:src="@drawable/icon_home_normal"/>
-            <TextView
-                android:id="@+id/main_Llay_home_Tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="首页"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/main_Llay_classify"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/main_Llay_classify_Iv"
-                android:src="@drawable/icon_classify_normal"/>
-            <TextView
-                android:id="@+id/main_Llay_classify_Tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="分类"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/main_Llay_person"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/main_Llay_person_Iv"
-                android:src="@drawable/icon_person_normal"/>
-            <TextView
-                android:id="@+id/main_Llay_person_Tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="个人中心"/>
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+    <include layout="@layout/activity_main_bottom"/>
+
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/boom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="10dp"
+        app:boom_inActionBar="false"
+        app:boom_button_color="@color/cornflowerblue"
+        app:boom_button_pressed_color="@color/colorPrimary">
+    </com.nightonke.boommenu.BoomMenuButton>
+
+</RelativeLayout>
 
