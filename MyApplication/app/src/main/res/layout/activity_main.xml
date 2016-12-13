@@ -39,6 +39,18 @@
                 android:background="@drawable/main_et_dafault"
                 android:hint="搜索"/>
         </LinearLayout>
+<<<<<<< HEAD
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/boom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_alignParentRight="true"
+            app:boom_button_color="@color/cornflowerblue"
+            app:boom_button_pressed_color="@color/colorPrimary">
+        </com.nightonke.boommenu.BoomMenuButton>
+=======
+>>>>>>> 4798d255556446de46f99505aa42f6acdec9de35
     </RelativeLayout>
 
 

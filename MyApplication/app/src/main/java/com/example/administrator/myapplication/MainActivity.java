@@ -244,6 +244,12 @@ public class MainActivity extends Activity {
             @Override
             public void onBackgroundClick() { }
 
+<<<<<<< HEAD
+        int[][] subButtonColors = new int[3][2];
+        for (int i = 0; i < 3; i++) {
+            subButtonColors[i][1] = ContextCompat.getColor(this, R.color.lawngreen);
+            subButtonColors[i][0] = Util.getInstance().getPressedColor(subButtonColors[i][1]);
+=======
             @Override
             public void onBoomWillHide() { }
 
@@ -276,6 +282,7 @@ public class MainActivity extends Activity {
             return false;
         }else {
             return super.onKeyDown(keyCode, event);
+>>>>>>> 4798d255556446de46f99505aa42f6acdec9de35
         }
 
     }

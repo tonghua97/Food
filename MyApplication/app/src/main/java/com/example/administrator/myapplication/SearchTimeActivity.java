@@ -29,6 +29,7 @@ public class SearchTimeActivity extends AppCompatActivity implements ZJBCircleSe
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SearchTimeActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
     }
