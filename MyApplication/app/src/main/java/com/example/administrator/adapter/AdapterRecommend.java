@@ -1,6 +1,7 @@
 package com.example.administrator.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +55,10 @@ public class AdapterRecommend extends BaseAdapter{
         if (view == null) {
             if (i%2 == 0) {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_right, null);
+                Log.e("=======", i+"+right" );
             }else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_left, null);
+                Log.e("=======", i+"+left" );
             }
         }
         ImageView Rec_Image = (ImageView)view.findViewById(R.id.Iv_recommend_image);

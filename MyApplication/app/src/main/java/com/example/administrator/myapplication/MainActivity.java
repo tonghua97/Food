@@ -210,7 +210,7 @@ public class MainActivity extends Activity {
                     .normalImageRes(iamgeResource[i])  //设置按钮图片
                     .normalText(buttonText[i])  //设置文字
                     .textSize(18)  //设置字体大小
-                    .textWidth(300)  //设置字体区域宽度
+                    .textWidth(150)  //设置字体区域宽度
                     .textHeight(80)  //设置字体区域高度
                     .normalColor(Color.argb(255, 249, 197, 21))  //设置按钮颜色
                     .highlightedColor(Color.RED)  //设置按钮点击颜色

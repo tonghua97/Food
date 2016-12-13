@@ -8,12 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/Tv_recommend_image"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_weight="5"
-            android:src="@drawable/img_loading"/>
+            android:layout_weight="5">
+            <ImageView
+                android:id="@+id/Iv_recommend_image"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/img_loading"/>
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="150dp"
