@@ -3,17 +3,29 @@ package com.example.administrator.myapplication;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.TextView;
+
+import com.example.administrator.adapter.AdapterSearchGirdView;
+import com.example.administrator.adapter.AdapterSearchListView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,69 +39,112 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends Activity {
-    private String uri = "http://10.7.92.81/http/getRecipesName2";
-    private MultiAutoCompleteTextView searchTv;
+    private String uri = "http://10.7.92.118/http/search";
+    private ListView mListView;
+    private GridView mGirdView;
     private List<String> list = new ArrayList<>();
+    private List<String> listGrid = new ArrayList<>();
+    private AdapterSearchGirdView adapter;
+    private AdapterSearchListView adapter2;
+    private EditText mEt;
     private String array[];
     private String str;
 
-//    private Handler h = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            setParse();
-//        }
-//    };
+    private Handler h = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            setParse();
 
-//    private void setParse() {
-//        str = str.substring(str.indexOf("["), str.length());
-//
-//        try {
-//            JSONArray jsonArray = new JSONArray(str);
-//
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//                JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                String string = jsonObject.getString("recipesName");
-//                list.add(string);
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
+            adapter2 = new AdapterSearchListView(getApplicationContext(),list);
+            mListView.setAdapter(adapter2);
+            mListView.deferNotifyDataSetChanged();
+        }
+    };
+
+    private void setParse() {
+        if (str == ""){
+            return;
+        }else{
+            str = str.substring(str.indexOf("["), str.length());
+
+            try {
+                JSONArray jsonArray = new JSONArray(str);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String string = jsonObject.getString("recipesName");
+                    list.add(string);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchTv = (MultiAutoCompleteTextView)findViewById(R.id.search_Tv_edit);
-//
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                super.run();
-//                getHttpRecipesName();
-//
-//                Message m = new Message();
-//                h.sendMessage(m);
-//            }
-//        }.start();
-//        for (int i = 0;i < list.size(); i++){
-//            array[i] = list.get(i);
-//        }
-        String array[] = {"limei", "wangmei", "liming", "jianglan",
-                "huangbei", "lihong", "liwen"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array);
-        searchTv.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        searchTv.setAdapter(adapter);
+        getViews();
+        getData2();
+        adapter = new AdapterSearchGirdView(this,listGrid);
+        mGirdView.setAdapter(adapter);
+        adapter2 = new AdapterSearchListView(this,list);
+        mListView.setAdapter(adapter2);
+
+        mEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                list.clear();
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        getHttpRecipesName();
+
+                        Message m = new Message();
+                        h.sendMessage(m);
+                    }
+                }.start();
+            }
+        });
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView Tv = (TextView) view.findViewById(R.id.search_listview_Tv_name);
+                mEt.setText(Tv.getText().toString());
+            }
+        });
+
     }
 
     public void getHttpRecipesName() {
+        str = "";
         try {
             URI u = new URI(uri);
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair = new BasicNameValuePair("recipesName",mEt.getText().toString());
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
             HttpResponse response = httpClient.execute(httpPost);
 
             HttpEntity httpentity = response.getEntity();
@@ -109,5 +164,20 @@ public class SearchActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getViews() {
+        mListView = (ListView)findViewById(R.id.search_list);
+        mGirdView = (GridView)findViewById(R.id.search_Gird);
+        mEt = (EditText)findViewById(R.id.search_Et);
+    }
+
+    public void getData2() {
+        listGrid.add("鱼香肉丝");
+        listGrid.add("鱼香肉丝");
+        listGrid.add("鱼香肉丝");
+        listGrid.add("鱼香肉丝");
+        listGrid.add("鱼香肉丝");
+        listGrid.add("鱼香肉丝");
     }
 }

@@ -47,8 +47,8 @@ public class AdapterCuisine extends BaseAdapter {
         }
         ImageView Iv_cuisine = (ImageView) view.findViewById(R.id.Iv_cuisine);
         Iv_cuisine.setImageResource(ldcuisine.get(position).getUrl());
-//        TextView Tv_cuisine = (TextView) view.findViewById(R.id.Tv_cuisine);
-//        Tv_cuisine.setText(ldcuisine.get(position).getmCuisine_Name());
+        TextView Tv_cuisine = (TextView) view.findViewById(R.id.Tv_cuisine);
+        Tv_cuisine.setText(ldcuisine.get(position).getmCuisine_Name());
         return view;
     }
 }

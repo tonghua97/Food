@@ -66,15 +66,22 @@ public class FragmentClassifyEffect extends Fragment {
     }
 
     private void getData() {
-        ldeffect.add((new DataEffect(1,R.drawable.icon_home_normal,"增强记忆力")));
-        ldeffect.add((new DataEffect(2,R.drawable.icon_home_normal,"增强免疫力")));
-        ldeffect.add((new DataEffect(3,R.drawable.icon_home_normal,"缓解疲劳")));
-        ldeffect.add((new DataEffect(4,R.drawable.icon_home_normal,"增强体质")));
-        ldeffect.add((new DataEffect(5,R.drawable.icon_home_normal,"延缓衰老")));
-        ldeffect.add((new DataEffect(6,R.drawable.icon_home_normal,"滋补养生")));
-        ldeffect.add((new DataEffect(7,R.drawable.icon_home_normal,"促进消化")));
-        ldeffect.add((new DataEffect(8,R.drawable.icon_home_normal,"清热解毒")));
-        ldeffect.add((new DataEffect(8,R.drawable.icon_home_normal,"增强抵抗力")));
+        ldeffect.add((new DataEffect(1,R.drawable.duikangwumai,"对抗雾霾")));
+        ldeffect.add((new DataEffect(2,R.drawable.fangfushe,"防辐射")));
+        ldeffect.add((new DataEffect(3,R.drawable.runchangtongbian,"润肠通便")));
+        ldeffect.add((new DataEffect(4,R.drawable.mingmu,"明目")));
+        ldeffect.add((new DataEffect(5,R.drawable.runfeizhike,"润肺止咳")));
+        ldeffect.add((new DataEffect(6,R.drawable.tongjing,"痛经")));
+        ldeffect.add((new DataEffect(7,R.drawable.qushi,"祛湿")));
+        ldeffect.add((new DataEffect(8,R.drawable.ziyinzhuangyang,"滋阴壮阳")));
+        ldeffect.add((new DataEffect(8,R.drawable.neifenmi,"调节内分泌")));
+        ldeffect.add((new DataEffect(8,R.drawable.qiudongjinbu,"秋冬进补")));
+        ldeffect.add((new DataEffect(8,R.drawable.quhannuanshen,"驱寒暖身")));
+        ldeffect.add((new DataEffect(8,R.drawable.xiaoshujieke,"消暑解渴")));
+        ldeffect.add((new DataEffect(8,R.drawable.qingrequhuo,"清热去火")));
+        ldeffect.add((new DataEffect(8,R.drawable.ruanchangtongbian,"健脾养胃")));
+        ldeffect.add((new DataEffect(8,R.drawable.tigaomianyi,"提高免疫")));
+        ldeffect.add((new DataEffect(8,R.drawable.jiyili,"增强记忆力")));
     }
 
 }

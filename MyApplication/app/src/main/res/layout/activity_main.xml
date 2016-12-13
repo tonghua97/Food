@@ -39,6 +39,7 @@
                 android:gravity="left|center"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/main_Tv_search"
+                android:textSize="18dp"
                 android:background="@drawable/main_et_dafault"
                 android:hint="搜索"/>
         </LinearLayout>
