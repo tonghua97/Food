@@ -20,7 +20,7 @@
             android:id="@+id/ll"
             android:layout_width="250dp"
             android:layout_height="45dp"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="30dp"
             android:paddingLeft="10dp"
             android:background="@drawable/main_llay_default">
@@ -41,14 +41,78 @@
         </LinearLayout>
     </RelativeLayout>
 
+
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/main_Llay_bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/main_rlay_top">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_Llay_home"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/main_Llay_home_Iv"
+                android:src="@drawable/icon_home_normal"/>
+            <TextView
+                android:id="@+id/main_Llay_home_Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:id="@+id/main_Llay_classify"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/main_Llay_classify_Iv"
+                android:src="@drawable/icon_classify_normal"/>
+            <TextView
+                android:id="@+id/main_Llay_classify_Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分类"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:id="@+id/main_Llay_person"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/main_Llay_person_Iv"
+                android:src="@drawable/icon_person_normal"/>
+            <TextView
+                android:id="@+id/main_Llay_person_Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个人中心"/>
+        </LinearLayout>
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_Flay_center"
-        android:layout_below="@id/main_Rlay_top">
+        android:layout_below="@id/main_Rlay_top"
+        android:layout_above="@id/main_Llay_bottom">
     </FrameLayout>
-
-    <include layout="@layout/activity_main_bottom"/>
 
     <com.nightonke.boommenu.BoomMenuButton
         android:id="@+id/boom"
