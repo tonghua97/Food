@@ -35,5 +35,6 @@ dependencies {
     compile 'com.nightonke:boommenu:1.0.9'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile files('libs/universal-image-loader-1.9.5.jar')
+    compile 'com.nightonke:boommenu:2.0.1'
 }
 

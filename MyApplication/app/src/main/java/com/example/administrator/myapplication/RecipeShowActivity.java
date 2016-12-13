@@ -65,14 +65,14 @@ public class RecipeShowActivity extends Activity {
     private String mRecipesById;
     private String str;
 
-    private Handler h = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            
-            setParse();
-        }
-    };
+//    private Handler h = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//
+//            setParse();
+//        }
+//    };
 
     private void setParse() {
         if (str == ""){
@@ -102,18 +102,18 @@ public class RecipeShowActivity extends Activity {
         //获取控件
         getView();
         //获取数据
-//        getData();
-        Thread t = new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                getHttpData();
-                
-                Message m = new Message();
-                h.sendMessage(m);
-            }
-        };
-        t.start();
+        getData();
+//        Thread t = new Thread(){
+//            @Override
+//            public void run() {
+//                super.run();
+//                getHttpData();
+//
+//                Message m = new Message();
+//                h.sendMessage(m);
+//            }
+//        };
+//        t.start();
         
         //绑定控件
         setListener();

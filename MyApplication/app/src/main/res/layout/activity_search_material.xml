@@ -9,7 +9,7 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/Btn_material_back"
-            android:background="@drawable/img_pickfun_back"
+            android:background="@drawable/icon_back"
             android:layout_width="50dp"
             android:layout_height="match_parent" />
 

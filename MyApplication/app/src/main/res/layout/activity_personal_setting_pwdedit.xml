@@ -16,7 +16,7 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:textSize="15sp"
-            android:background="@drawable/setting_btn_back"/>
+            android:background="@drawable/icon_back"/>
         <TextView
             android:layout_toRightOf="@+id/PwdEdit_Bt_Back"
             android:layout_width="wrap_content"
