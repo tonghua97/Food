@@ -95,7 +95,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:id="@+id/login_ib_collection"
-            android:src="@drawable/icon_personal_more"
+            android:src="@drawable/icon_more"
             android:background="@android:color/transparent"
             />
     </RelativeLayout>

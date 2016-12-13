@@ -12,7 +12,7 @@
             android:layout_height="50dp"
             android:id="@+id/Iv_search_back"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/setting_btn_back"/>
+            android:src="@drawable/icon_back"/>
         <LinearLayout
             android:layout_toRightOf="@id/Iv_search_back"
             android:id="@+id/ll"
@@ -26,7 +26,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/sousuo"
+                android:src="@drawable/img_search"
                 android:focusable="true"
                 android:focusableInTouchMode="true"/>
             <EditText
@@ -40,5 +40,25 @@
                 android:textColorHint="#e60707"/>
         </LinearLayout>
     </RelativeLayout>
-
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_SearchTime_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:gravity="center_horizontal"
+            android:textSize="60sp"
+            android:textColor="#ffff0000"
+            />
+        <com.example.administrator.myapplication.ZJBCircleSeekBar
+            android:id="@+id/circleSeekBar"
+            android:layout_width="350px"
+            android:layout_height="350px"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 </LinearLayout>

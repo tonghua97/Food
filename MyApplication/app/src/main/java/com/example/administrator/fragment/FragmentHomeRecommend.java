@@ -68,7 +68,14 @@ public class FragmentHomeRecommend extends Fragment{
         ls.add(new DataRecommend(0L,"1","茶泡饭","茶泡饭","茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭11111111111"));
         ls.add(new DataRecommend(1L,"1","茶泡饭","茶泡饭","茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭。"));
         ls.add(new DataRecommend(2L,"1","茶泡饭","茶泡饭","茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭"));
-        ls.add(new DataRecommend(3L,"1","茶泡饭","茶泡饭","茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭"));
+        ls.add(new DataRecommend(3L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
         ls.add(new DataRecommend(4L,"1","茶泡饭","茶泡饭","茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭茶泡饭"));
+        ls.add(new DataRecommend(5L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
+        ls.add(new DataRecommend(6L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
+        ls.add(new DataRecommend(7L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
+        ls.add(new DataRecommend(8L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
+        ls.add(new DataRecommend(9L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
+        ls.add(new DataRecommend(10L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
+        ls.add(new DataRecommend(11L,"1","茶泡饭","茶泡饭","茶泡饭茶"));
     }
 }

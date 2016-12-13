@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--主页面-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,9 +9,8 @@
     android:id="@+id/main_Rlay"
     tools:context="com.example.administrator.myapplication.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:paddingRight="10dp"
         android:layout_alignParentTop="true"
         android:id="@+id/main_Rlay_top"
@@ -20,8 +19,8 @@
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="30dp"
             android:paddingLeft="10dp"
             android:background="@drawable/main_llay_default">
@@ -29,17 +28,18 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/sousuo"
+                android:src="@drawable/img_search"
                 android:focusable="true"
                 android:focusableInTouchMode="true"/>
             <EditText
                 android:layout_width="200dp"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/main_et_dafault"
                 android:hint="搜索"/>
         </LinearLayout>
+<<<<<<< HEAD
         <com.nightonke.boommenu.BoomMenuButton
             android:id="@+id/boom"
             android:layout_width="wrap_content"
@@ -49,23 +49,18 @@
             app:boom_button_color="@color/cornflowerblue"
             app:boom_button_pressed_color="@color/colorPrimary">
         </com.nightonke.boommenu.BoomMenuButton>
+=======
+>>>>>>> 4798d255556446de46f99505aa42f6acdec9de35
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/main_Flay_center"
-        android:layout_weight="5"
-        android:layout_below="@id/main_Rlay_top">
-    </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:id="@+id/main_Llay_bottom"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/main_rlay_top">
         <LinearLayout
             android:layout_width="0dp"
@@ -83,6 +78,7 @@
                 android:id="@+id/main_Llay_home_Tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="首页"/>
         </LinearLayout>
         <LinearLayout
@@ -101,6 +97,7 @@
                 android:id="@+id/main_Llay_classify_Tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="分类"/>
         </LinearLayout>
         <LinearLayout
@@ -119,8 +116,30 @@
                 android:id="@+id/main_Llay_person_Tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="个人中心"/>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_Flay_center"
+        android:layout_below="@id/main_Rlay_top"
+        android:layout_above="@id/main_Llay_bottom">
+    </FrameLayout>
+
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/boom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="10dp"
+        app:bmb_normalColor="@color/cornflowerblue"
+        app:bmb_buttonEnum="textOutsideCircle">
+    </com.nightonke.boommenu.BoomMenuButton>
+
+</RelativeLayout>
 

@@ -16,7 +16,7 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:textSize="15sp"
-            android:background="@drawable/setting_btn_back"/>
+            android:background="@drawable/icon_back"/>
         <TextView
             android:layout_toRightOf="@+id/PwdEdit_Bt_Back"
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/PwdEdit_Et_oldpwd"
             android:layout_width="match_parent"
@@ -51,6 +51,16 @@
             android:hint="请输入新密码"
             android:gravity="center"
             android:password="true"/>
+        <EditText
+            android:id="@+id/PwdEdit_Et_isnewpwd"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="50dp"
+            android:textSize="20sp"
+            android:background="@drawable/main_llay_default"
+            android:hint="请确认新密码"
+            android:gravity="center"
+            android:password="true"/>
         <Button
             android:id="@+id/PwdEdit_Bt_Save"
             android:layout_marginTop="20dp"
@@ -59,6 +69,7 @@
             android:text="确认"
             android:textColor="#ffffff"
             android:background="@drawable/login_background"
+
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </LinearLayout>
