@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--主页面-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,8 +9,7 @@
     android:id="@+id/main_Rlay"
     tools:context="com.example.administrator.myapplication.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingRight="10dp"
         android:layout_alignParentTop="true"
@@ -21,7 +20,7 @@
             android:id="@+id/ll"
             android:layout_width="250dp"
             android:layout_height="45dp"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="30dp"
             android:paddingLeft="10dp"
             android:background="@drawable/main_llay_default">
@@ -43,31 +42,16 @@
                 android:background="@drawable/main_et_dafault"
                 android:hint="搜索"/>
         </LinearLayout>
-        <com.nightonke.boommenu.BoomMenuButton
-            android:id="@+id/boom"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentRight="true"
-            app:boom_button_color="@color/cornflowerblue"
-            app:boom_button_pressed_color="@color/colorPrimary">
-        </com.nightonke.boommenu.BoomMenuButton>
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/main_Flay_center"
-        android:layout_weight="5"
-        android:layout_below="@id/main_Rlay_top">
-    </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:id="@+id/main_Llay_bottom"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/main_rlay_top">
         <LinearLayout
             android:layout_width="0dp"
@@ -124,5 +108,27 @@
                 android:text="个人中心"/>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_Flay_center"
+        android:layout_below="@id/main_Rlay_top"
+        android:layout_above="@id/main_Llay_bottom">
+    </FrameLayout>
+
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/boom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="10dp"
+        app:boom_inActionBar="false"
+        app:boom_button_color="@color/cornflowerblue"
+        app:boom_button_pressed_color="@color/colorPrimary">
+    </com.nightonke.boommenu.BoomMenuButton>
+
+</RelativeLayout>
 

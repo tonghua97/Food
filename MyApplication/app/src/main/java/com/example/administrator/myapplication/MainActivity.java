@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.administrator.fragment.FragmentClassify;
 import com.example.administrator.fragment.FragmentHome;
 import com.example.administrator.fragment.FragmentPerson;
@@ -37,7 +36,7 @@ public class MainActivity extends Activity {
     private FragmentHome mFragHome;
     private FragmentClassify mFragClassify;
     private FragmentPerson mFragPerson;
-    private LinearLayout mRlay;
+    private RelativeLayout mRlay;
     private RelativeLayout mRlayTop;
     private ImageView mLlayHomeIv;
     private ImageView mLlayClassifyIv;
@@ -141,7 +140,7 @@ public class MainActivity extends Activity {
         mLlayHome = (LinearLayout)findViewById(R.id.main_Llay_home);
         mLlayClassify = (LinearLayout)findViewById(R.id.main_Llay_classify);
         mLlayPerson = (LinearLayout)findViewById(R.id.main_Llay_person);
-        mRlay = (LinearLayout)findViewById(R.id.main_Rlay);
+        mRlay = (RelativeLayout)findViewById(R.id.main_Rlay);
         mRlayTop = (RelativeLayout)findViewById(R.id.main_Rlay_top);
         mLlayHomeIv = (ImageView)findViewById(R.id.main_Llay_home_Iv);
         mLlayClassifyIv = (ImageView)findViewById(R.id.main_Llay_classify_Iv);
@@ -231,6 +230,7 @@ public class MainActivity extends Activity {
                 .button(ButtonType.CIRCLE)
                 .boom(BoomType.PARABOLA)
                 .place(PlaceType.CIRCLE_3_1)
+                .rotateDegree(0)
                 .subButtonTextColor(ContextCompat.getColor(this, R.color.black))
                 .subButtonsShadow(Util.getInstance().dp2px(2), Util.getInstance().dp2px(2))
                 .init(boomMenuButton)
@@ -255,5 +255,14 @@ public class MainActivity extends Activity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (boomMenuButton.isClosed()) {
+            super.onBackPressed();
+        } else {
+            boomMenuButton.dismiss();
+        }
     }
 }

@@ -52,9 +52,9 @@ public class AdapterRecommend extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null){
-            if(i%2 == 0){
-                view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_right,null);
+        if (view == null) {
+            if (i%2 == 0) {
+                view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_right, null);
             }else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_left, null);
             }
