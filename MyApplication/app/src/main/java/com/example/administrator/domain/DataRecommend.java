@@ -28,6 +28,9 @@ public class DataRecommend {
         Introduction = introduction;
     }
 
+    public DataRecommend() {
+    }
+
     /**
      * getter,setter 方法
      */

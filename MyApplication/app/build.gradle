@@ -34,5 +34,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.nightonke:boommenu:1.0.9'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    compile files('libs/universal-image-loader-1.9.5.jar')
 }
 

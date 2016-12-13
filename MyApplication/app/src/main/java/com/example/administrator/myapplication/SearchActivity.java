@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.administrator.adapter.AdapterSearchGirdView;
 import com.example.administrator.adapter.AdapterSearchListView;
+import com.example.administrator.ui.Urls;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -39,7 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends Activity {
-    private String uri = "http://10.7.92.118/http/search";
     private ListView mListView;
     private GridView mGirdView;
     private List<String> list = new ArrayList<>();
@@ -135,7 +135,7 @@ public class SearchActivity extends Activity {
     public void getHttpRecipesName() {
         str = "";
         try {
-            URI u = new URI(uri);
+            URI u = new URI(Urls.urlSearch);
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(u);
 

@@ -3,6 +3,8 @@ package com.example.administrator.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -11,7 +13,27 @@ import android.widget.TextView;
 import com.example.administrator.adapter.AdapterRecipeStep;
 import com.example.administrator.domain.DataRecipe;
 import com.example.administrator.domain.DataRecipeStep;
+import com.example.administrator.ui.Urls;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +62,33 @@ public class RecipeShowActivity extends Activity {
     private AdapterRecipeStep stepAdapter;
     private DataRecipe mRecipe;
     private String title;
+    private String mRecipesById;
+    private String str;
+
+    private Handler h = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            
+            setParse();
+        }
+    };
+
+    private void setParse() {
+        if (str == ""){
+            return;
+        }else{
+            str = str.substring(str.indexOf("["), str.length());
+
+            try {
+                JSONArray jsonArray = new JSONArray(str);
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +97,24 @@ public class RecipeShowActivity extends Activity {
 
         Intent intent = getIntent();
         title = intent.getStringExtra("NAME");
+        mRecipesById = intent.getStringExtra("Id");
 
-        //获取数据
-        getData();
         //获取控件
         getView();
+        //获取数据
+//        getData();
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                getHttpData();
+                
+                Message m = new Message();
+                h.sendMessage(m);
+            }
+        };
+        t.start();
+        
         //绑定控件
         setListener();
         //添加数据
@@ -141,5 +203,41 @@ public class RecipeShowActivity extends Activity {
 
         stepAdapter = new AdapterRecipeStep(this,mStepData);
         mStep.setAdapter(stepAdapter);
+    }
+
+    public void getHttpData() {
+        try {
+            URI u = new URI(Urls.urlRecipesById);
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(u);
+
+            NameValuePair pair1 = new BasicNameValuePair("recipesId", mRecipesById);
+
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair1);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httppost.setEntity(entity);
+            HttpResponse response = httpclient.execute(httppost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = null;
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

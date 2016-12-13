@@ -66,15 +66,25 @@ public class FragmentClassifyTaste extends Fragment {
     }
 
     private void getData() {
-        ldtaste.add((new DataTaste(1,R.drawable.icon_home_normal,"清淡")));
-        ldtaste.add((new DataTaste(2,R.drawable.icon_home_normal,"咸鲜")));
-        ldtaste.add((new DataTaste(3,R.drawable.icon_home_normal,"辣")));
-        ldtaste.add((new DataTaste(4,R.drawable.icon_home_normal,"甜")));
-        ldtaste.add((new DataTaste(5,R.drawable.icon_home_normal,"酸")));
-        ldtaste.add((new DataTaste(6,R.drawable.icon_home_normal,"苦")));
-        ldtaste.add((new DataTaste(7,R.drawable.icon_home_normal,"咖喱")));
-        ldtaste.add((new DataTaste(8,R.drawable.icon_home_normal,"水果味")));
-        ldtaste.add((new DataTaste(8,R.drawable.icon_home_normal,"爽口")));
+        ldtaste.add((new DataTaste(1,R.drawable.suan,"酸")));
+        ldtaste.add((new DataTaste(2,R.drawable.tian,"甜")));
+        ldtaste.add((new DataTaste(3,R.drawable.la,"辣")));
+        ldtaste.add((new DataTaste(4,R.drawable.xian,"咸")));
+        ldtaste.add((new DataTaste(5,R.drawable.xiang2,"香")));
+        ldtaste.add((new DataTaste(6,R.drawable.ku,"苦")));
+        ldtaste.add((new DataTaste(7,R.drawable.gali,"咖喱")));
+        ldtaste.add((new DataTaste(8,R.drawable.mala1,"麻辣")));
+        ldtaste.add((new DataTaste(8,R.drawable.ziran,"孜然")));
+        ldtaste.add((new DataTaste(8,R.drawable.qingdan,"清淡")));
+        ldtaste.add((new DataTaste(8,R.drawable.suanla,"酸辣")));
+        ldtaste.add((new DataTaste(8,R.drawable.xiangla,"香辣")));
+        ldtaste.add((new DataTaste(8,R.drawable.suantian,"酸甜")));
+        ldtaste.add((new DataTaste(8,R.drawable.xiangsu,"香酥")));
+        ldtaste.add((new DataTaste(8,R.drawable.naixiang,"奶香")));
+        ldtaste.add((new DataTaste(8,R.drawable.yvxiang,"鱼香")));
+        ldtaste.add((new DataTaste(8,R.drawable.wuxiang,"五香")));
+        ldtaste.add((new DataTaste(8,R.drawable.jiaoyan,"椒盐")));
+        ldtaste.add((new DataTaste(8,R.drawable.shuangkou,"爽口")));
     }
 
 }

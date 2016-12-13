@@ -1,17 +1,30 @@
 package com.example.administrator.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.domain.DataRecommend;
 import com.example.administrator.myapplication.R;
+import com.example.administrator.ui.Urls;
 import com.example.administrator.ui.VerticalTextView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +36,9 @@ import java.util.List;
 public class AdapterRecommend extends BaseAdapter{
     private Context mContext;
     private List<DataRecommend> mData = new ArrayList<>();
+    private Bitmap bitmap;
+    private String Url;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
 
     /**
      * 带参构造函数
@@ -60,21 +76,24 @@ public class AdapterRecommend extends BaseAdapter{
             }
         }
         ImageView Rec_Image = (ImageView)view.findViewById(R.id.Iv_recommend_image);
-        String Url = mData.get(i).getImage();
-        /*
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
+        Url = mData.get(i).getImage();
+        String string = Url.substring(7, Url.indexOf("/", 7));
+        Url = Url.replaceAll(string, Urls.mIp);
 
-                .showImageOnLoading(R.drawable.loading)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
-        ImageLoader.getInstance().displayImage(Url, Img_Goods, options);
-*/
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
+                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
+                .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
+                .build();//构建完成
+        imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
+        imageLoader.displayImage(Url,Rec_Image,options);
+
         TextView Rec_Name = (TextView)view.findViewById(R.id.Tv_recommend_name);
         Rec_Name.setText(mData.get(i).getName());
         VerticalTextView Rec_Intr = (VerticalTextView) view.findViewById(R.id.Tv_recommend_introduction);
         Rec_Intr.setText(mData.get(i).getIntroduction());
         return view;
     }
+
 }
