@@ -9,7 +9,7 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/Btn_material_back"
-            android:background="@drawable/img_pickfun_back"
+            android:background="@drawable/icon_back"
             android:layout_width="50dp"
             android:layout_height="match_parent" />
 
@@ -53,12 +53,12 @@
                 android:background="#FFED66"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
-            <com.example.sophia.foodgridview.MaterialGridView
+            <com.example.administrator.ui.MaterialGridView
                 android:numColumns="3"
                 android:id="@+id/Gv_material_meat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </com.example.sophia.foodgridview.MaterialGridView>
+            </com.example.administrator.ui.MaterialGridView>
             <!--蔬菜类-->
             <TextView
                 android:id="@+id/Tv_searchmatrial_vegetabletitle"
@@ -71,12 +71,12 @@
                 android:background="#FFED66"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
-            <com.example.sophia.foodgridview.MaterialGridView
+            <com.example.administrator.ui.MaterialGridView
                 android:numColumns="3"
                 android:id="@+id/Gv_material_vegetable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </com.example.sophia.foodgridview.MaterialGridView>
+            </com.example.administrator.ui.MaterialGridView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
