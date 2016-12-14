@@ -29,6 +29,8 @@ public class SearchTimeActivity extends Activity implements ZJBCircleSeekBar.OnC
             @Override
             public void onClick(View v) {
                 finish();
+                Intent i = new Intent(SearchTimeActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
     }

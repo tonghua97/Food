@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--推荐item布局-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,12 +47,19 @@
                 android:maxLines="3"
                 android:text="茶泡饭是指用热茶水来泡冷饭。通常以盐、梅干、海笞等配料，和饭一起泡。制作方便，取材简单。"/>
         </RelativeLayout>
-        <ImageView
-            android:id="@+id/Iv_recommend_image"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="5"
             android:scaleType="fitXY"
-            android:src="@drawable/img_loading"/>
+            android:src="@drawable/img_loading">
+            <ImageView
+                android:id="@+id/Iv_recommend_image"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_loading"/>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

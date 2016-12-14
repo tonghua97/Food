@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -19,7 +18,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,57 +29,46 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Created by 梁爽 on 16.11.24.
  * 说明：“设置”页面的编码
  */
-
 public class SetActivity extends Activity {
-
-
     private Button mBtBack;             //返回键
     private RelativeLayout mSetAvatar;  //头像修改
     private RelativeLayout mSetPwd;     //密码修改
     private RelativeLayout mSetName;    //用户名修改
+    private RelativeLayout mSetPhone;   //手机号修改
+    private RelativeLayout mSetEmail;   //邮箱修改
     private TextView mUname;
-
+    private TextView mPhone;
+    private TextView mEmail;
     private Spinner mSpGender;         //性别选择下拉列表
     private ArrayAdapter adapter = null;
-
     /*请求识别码*/
     protected static final int CHOOSE_PICTURE = 0;//从相册中选择图片
     protected static final int TAKE_PICTURE = 1;//拍照
     private static final int CROP_SMALL_PICTURE = 2;
-
     protected static Uri tempUri;
     private ImageView iv_personal_icon;
     private static final String IMAGE_FILE_NAME = "image.jpg";// 头像文件
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting);
-
-
         //获取控件
         getViews();
-
-        //获取用户名
+        //获取用户名、手机号、邮箱
         getUname();
-
+        getPhone();
+        getEmail();
         //设置监听
         setListener();
-
         //设置下拉列表--用户性别选择
         setSpinner();
     }
+
 
     /**
      * 获取控件
@@ -93,17 +80,23 @@ public class SetActivity extends Activity {
         mSetAvatar = (RelativeLayout)findViewById(R.id.setting_Rlay_avataredit);
         //修改用户名
         mSetName = (RelativeLayout)findViewById(R.id.setting_Rlay_unameedit);
+        //修改电话号码
+        mSetPhone = (RelativeLayout)findViewById(R.id.setting_Rlay_phone);
+        //修改邮箱
+        mSetEmail = (RelativeLayout)findViewById(R.id.setting_Rlay_Emailedit);
         //修改密码
         mSetPwd = (RelativeLayout)findViewById(R.id.setting_Rlay_pwdedit);
-
         //头像显示
         iv_personal_icon = (ImageView)findViewById(R.id.Setting_Iv_avatar);
         //用户名
         mUname = (TextView)findViewById(R.id.setting_Tv_username);
+        //电话号码
+        mPhone = (TextView)findViewById(R.id.setting_Tv_phone);
+        //邮箱
+        mEmail = (TextView)findViewById(R.id.setting_Tv_Email);
         //性别下拉列表
         mSpGender = (Spinner)findViewById(R.id.Setting_Sp_Gender);
     }
-
     /**
      * 获取用户名
      */
@@ -111,6 +104,22 @@ public class SetActivity extends Activity {
         SharedPreferences name = getSharedPreferences("UNAME_EDIT", Context.MODE_PRIVATE);
         String Uname = name.getString("UNAME","");
         mUname.setText(Uname);
+    }
+    /**
+     * 获取手机号
+     */
+    private void getPhone(){
+        SharedPreferences phone = getSharedPreferences("PHONE_EDIT", Context.MODE_PRIVATE);
+        String Phone = phone.getString("PHONE","");
+        mPhone.setText(Phone);
+    }
+    /**
+     * 获取邮箱
+     */
+    private void getEmail(){
+        SharedPreferences mail = getSharedPreferences("EMAIL_EDIT", Context.MODE_PRIVATE);
+        String Email = mail.getString("EMAIL","");
+        mEmail.setText(Email);
     }
 
     /**
@@ -124,6 +133,10 @@ public class SetActivity extends Activity {
         mSetPwd.setOnClickListener(listener);
         //用户名修改
         mSetName.setOnClickListener(listener);
+        //手机号
+        mSetPhone.setOnClickListener(listener);
+        //邮箱
+        mSetEmail.setOnClickListener(listener);
         //头像修改
         mSetAvatar.setOnClickListener(listener);
     }
@@ -140,21 +153,27 @@ public class SetActivity extends Activity {
                     /*修改头像*/
                     //显示修改头像的对话框
                     showChoosePicDialog();
-
-
                     break;
                 case R.id.setting_Rlay_unameedit:
                      /*跳转到用户名修改页面*/
                     Intent intent1 = new Intent(SetActivity.this,Personal_setting_UnameEditActivity.class);
                     startActivity(intent1);
                     break;
-
+                case R.id.setting_Rlay_phone:
+                     /*跳转到手机号修改页面*/
+                    //Intent intent3 = new Intent(SetActivity.this,Personal_setting_PhoneActivity.class);
+                    //startActivity(intent3);
+                    break;
+                case R.id.setting_Rlay_Emailedit:
+                     /*跳转到邮箱修改页面*/
+                   // Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailEditActivity.class);
+                   // startActivity(intent4);
+                    break;
                 case R.id.setting_Rlay_pwdedit:
                      /*跳转到密码修改页面*/
                     Intent intent2 = new Intent(SetActivity.this,Personal_setting_PwdEditActivity.class);
                     startActivity(intent2);
                     break;
-
                 default:
                     break;
             }
