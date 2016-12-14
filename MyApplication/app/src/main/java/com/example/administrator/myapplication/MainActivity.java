@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,7 +40,6 @@ public class MainActivity extends Activity {
     private FragmentClassify mFragClassify;
     private FragmentPerson mFragPerson;
     private RelativeLayout mRlay;
-    private RelativeLayout mRlayTop;
     private ImageView mLlayHomeIv;
     private ImageView mLlayClassifyIv;
     private ImageView mLlayPersonIv;
@@ -52,6 +50,8 @@ public class MainActivity extends Activity {
     private boolean autoDismiss;
     private TextView mTvSearch;
     private LinearLayout mLayTop;
+    private LinearLayout mLaySearch;
+    private TextView mTvPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,8 @@ public class MainActivity extends Activity {
         //4、设置按钮选中状态
         mLlayHomeIv.setImageResource(R.drawable.icon_home_down);
         mLlayHomeTv.setTextColor(getResources().getColor(R.color.yellow));
-        mRlayTop.setVisibility(View.VISIBLE);
+        mLaySearch.setVisibility(View.VISIBLE);
+        mTvPerson.setVisibility(View.GONE);
         //5、执行更改
         transaction.commit();
     }
@@ -111,7 +112,8 @@ public class MainActivity extends Activity {
         //4、设置按钮选中状态
         mLlayClassifyIv.setImageResource(R.drawable.icon_classify_down);
         mLlayClassifyTv.setTextColor(getResources().getColor(R.color.yellow));
-        mRlayTop.setVisibility(View.VISIBLE);
+        mLaySearch.setVisibility(View.VISIBLE);
+        mTvPerson.setVisibility(View.GONE);
         //5、执行更改
         transaction.commit();
     }
@@ -130,7 +132,8 @@ public class MainActivity extends Activity {
         //4、设置按钮选中状态
         mLlayPersonIv.setImageResource(R.drawable.icon_person_down);
         mLlayPersonTv.setTextColor(getResources().getColor(R.color.yellow));
-        mRlayTop.setVisibility(View.GONE);
+        mLaySearch.setVisibility(View.GONE);
+        mTvPerson.setVisibility(View.VISIBLE);
         //5、执行更改
         transaction.commit();
     }
@@ -147,7 +150,7 @@ public class MainActivity extends Activity {
         mLlayClassify = (LinearLayout)findViewById(R.id.main_Llay_classify);
         mLlayPerson = (LinearLayout)findViewById(R.id.main_Llay_person);
         mRlay = (RelativeLayout)findViewById(R.id.main_Rlay);
-        mRlayTop = (RelativeLayout)findViewById(R.id.main_Rlay_top);
+        mLaySearch = (LinearLayout)findViewById(R.id.main_Llay_search);
         mLlayHomeIv = (ImageView)findViewById(R.id.main_Llay_home_Iv);
         mLlayClassifyIv = (ImageView)findViewById(R.id.main_Llay_classify_Iv);
         mLlayPersonIv = (ImageView)findViewById(R.id.main_Llay_person_Iv);
@@ -156,6 +159,7 @@ public class MainActivity extends Activity {
         mLlayPersonTv = (TextView)findViewById(R.id.main_Llay_person_Tv);
         boomMenuButton = (BoomMenuButton)findViewById(R.id.boom);
         mTvSearch = (TextView)findViewById(R.id.main_Tv_search);
+        mTvPerson = (TextView)findViewById(R.id.main_Tv_person);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -228,19 +232,19 @@ public class MainActivity extends Activity {
             TextOutsideCircleButton.Builder mBuilder = new TextOutsideCircleButton.Builder()
                     .normalImageRes(iamgeResource[i])  //设置按钮图片
                     .normalText(buttonText[i])  //设置文字
-                    .textWidth(150)  //设置字体区域宽度
+                    .textSize(18) //设置字体大小
                     .textHeight(80)  //设置字体区域高度
                     .normalColor(Color.argb(255, 249, 197, 21))  //设置按钮颜色
                     .highlightedColor(Color.argb(255, 255, 112, 85))  //设置按钮点击颜色
                     .unableColor(Color.BLACK); //设置按钮禁止点击颜色
             /**
              * 设置字体区域宽度
-             * 如果屏幕宽度小于等于720，则设置宽度为150；否则为200
+             * 如果屏幕宽度小于等于720，则设置宽度为150；否则为270
              */
             if(dm.widthPixels <=720 ){
                 mBuilder.textWidth(150);
             }else {
-                mBuilder.textWidth(200);
+                mBuilder.textWidth(270);
             }
             boomMenuButton.addBuilder(mBuilder);
         }

@@ -1,17 +1,13 @@
 package com.example.administrator.adapter;
+
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.domain.DataRecommend;
 import com.example.administrator.myapplication.R;
@@ -21,10 +17,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,21 +63,10 @@ public class AdapterRecommend extends BaseAdapter{
 //        if (view == null) {
             if (i%2 == 0) {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_right, null);
-                Toast.makeText(mContext,i+"",Toast.LENGTH_SHORT).show();
             }else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_left, null);
-                Toast.makeText(mContext,i+"",Toast.LENGTH_SHORT).show();
             }
-//        }
-        //if (view == null) {
-            if (i%2 == 0) {
-                view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_right, null);
-                Log.e("=======", i+"+right" );
-            }else {
-                view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_left, null);
-                Log.e("=======", i+"+left" );
-            }
-        //}
+//
         ImageView Rec_Image = (ImageView)view.findViewById(R.id.Iv_recommend_image);
         Url = mData.get(i).getImage();
         String string = Url.substring(7, Url.indexOf("/", 7));
@@ -102,6 +83,17 @@ public class AdapterRecommend extends BaseAdapter{
 
         TextView Rec_Name = (TextView)view.findViewById(R.id.Tv_recommend_name);
         Rec_Name.setText(mData.get(i).getName());
+        /**
+         * 依据字符串长度修改字体大小
+         */
+        if ((mData.get(i).getName()).length() > 6) {
+            Rec_Name.setTextSize(12);
+        }else if((mData.get(i).getName()).length() > 5){
+            Rec_Name.setTextSize(14);
+        }
+        else if((mData.get(i).getName()).length() > 4){
+            Rec_Name.setTextSize(16);
+        }
         VerticalTextView Rec_Intr = (VerticalTextView) view.findViewById(R.id.Tv_recommend_introduction);
         Rec_Intr.setText(mData.get(i).getIntroduction());
         return view;
