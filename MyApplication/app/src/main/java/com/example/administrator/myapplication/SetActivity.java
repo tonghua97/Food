@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -19,7 +18,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,11 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 /**
  * Created by 梁爽 on 16.11.24.
  * 说明：“设置”页面的编码
@@ -167,13 +161,13 @@ public class SetActivity extends Activity {
                     break;
                 case R.id.setting_Rlay_phone:
                      /*跳转到手机号修改页面*/
-                    Intent intent3 = new Intent(SetActivity.this,Personal_setting_PhoneActivity.class);
-                    startActivity(intent3);
+                    //Intent intent3 = new Intent(SetActivity.this,Personal_setting_PhoneActivity.class);
+                    //startActivity(intent3);
                     break;
                 case R.id.setting_Rlay_Emailedit:
                      /*跳转到邮箱修改页面*/
-                    Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailEditActivity.class);
-                    startActivity(intent4);
+                   // Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailEditActivity.class);
+                   // startActivity(intent4);
                     break;
                 case R.id.setting_Rlay_pwdedit:
                      /*跳转到密码修改页面*/

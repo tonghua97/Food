@@ -50,15 +50,12 @@
         <activity android:name=".SearchNameActivity"></activity>
         <activity android:name=".SearchTimeActivity"></activity>
         <activity android:name=".SearchMaterialActivity"></activity>
-<<<<<<< HEAD
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
-=======
 
->>>>>>> 4798d255556446de46f99505aa42f6acdec9de35
     </application>
 
 </manifest>

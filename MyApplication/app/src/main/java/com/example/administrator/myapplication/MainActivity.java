@@ -200,7 +200,7 @@ public class MainActivity extends Activity {
         boomMenuButton.setButtonPlaceEnum(ButtonPlaceEnum.SC_3_1);   //设置点击后按钮排列样式
         boomMenuButton.setShadowColor(Color.parseColor("#66000000"));
         int[] iamgeResource = new int[]{
-                R.drawable.time, R.drawable.name, R.drawable.icon_time
+                R.drawable.icon_name, R.drawable.icon_material, R.drawable.icon_time
         };
         final String [] buttonText = new String[]{
                 "按名称搜索", "按食材搜索", "按时间搜索"
@@ -213,7 +213,7 @@ public class MainActivity extends Activity {
                     .textWidth(150)  //设置字体区域宽度
                     .textHeight(80)  //设置字体区域高度
                     .normalColor(Color.argb(255, 249, 197, 21))  //设置按钮颜色
-                    .highlightedColor(Color.RED)  //设置按钮点击颜色
+                    .highlightedColor(Color.argb(255, 255, 112, 85))  //设置按钮点击颜色
                     .unableColor(Color.BLACK); //设置按钮禁止点击颜色
             boomMenuButton.addBuilder(mBuilder);
         }
@@ -244,12 +244,6 @@ public class MainActivity extends Activity {
             @Override
             public void onBackgroundClick() { }
 
-<<<<<<< HEAD
-        int[][] subButtonColors = new int[3][2];
-        for (int i = 0; i < 3; i++) {
-            subButtonColors[i][1] = ContextCompat.getColor(this, R.color.lawngreen);
-            subButtonColors[i][0] = Util.getInstance().getPressedColor(subButtonColors[i][1]);
-=======
             @Override
             public void onBoomWillHide() { }
 
@@ -282,7 +276,6 @@ public class MainActivity extends Activity {
             return false;
         }else {
             return super.onKeyDown(keyCode, event);
->>>>>>> 4798d255556446de46f99505aa42f6acdec9de35
         }
 
     }

@@ -52,7 +52,7 @@ public class AdapterRecommend extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
+        //if (view == null) {
             if (i%2 == 0) {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_right, null);
                 Log.e("=======", i+"+right" );
@@ -60,7 +60,7 @@ public class AdapterRecommend extends BaseAdapter{
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_left, null);
                 Log.e("=======", i+"+left" );
             }
-        }
+        //}
         ImageView Rec_Image = (ImageView)view.findViewById(R.id.Iv_recommend_image);
         String Url = mData.get(i).getImage();
         /*
