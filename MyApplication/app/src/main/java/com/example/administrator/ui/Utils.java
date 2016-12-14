@@ -12,4 +12,6 @@ public class Utils {
     public static int isTrue = 1;
     //设置用户名
     public static String username = null;
+    //标记推荐页的显示方式
+    public static int flag = 0;
 }

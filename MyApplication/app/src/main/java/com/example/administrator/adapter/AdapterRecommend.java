@@ -68,13 +68,15 @@ public class AdapterRecommend extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
+//        if (view == null) {
             if (i%2 == 0) {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_right, null);
+                Toast.makeText(mContext,i+"",Toast.LENGTH_SHORT).show();
             }else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.listview_item_recommend_left, null);
+                Toast.makeText(mContext,i+"",Toast.LENGTH_SHORT).show();
             }
-        }
+//        }
         ImageView Rec_Image = (ImageView)view.findViewById(R.id.Iv_recommend_image);
         Url = mData.get(i).getImage();
         String string = Url.substring(7, Url.indexOf("/", 7));
