@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -55,6 +56,7 @@ public class MainActivity extends Activity {
         setListener();
         //加载BoomMenu
         initBoomMenu();
+
         //设置默认的页面
         switch (Utils.utils){
             case 1:
@@ -198,23 +200,35 @@ public class MainActivity extends Activity {
         boomMenuButton.setButtonEnum(ButtonEnum.TextOutsideCircle);  //设置文字为外部样式
         boomMenuButton.setPiecePlaceEnum(PiecePlaceEnum.DOT_3_1);    //设置悬浮按钮内部排列样式
         boomMenuButton.setButtonPlaceEnum(ButtonPlaceEnum.SC_3_1);   //设置点击后按钮排列样式
-        boomMenuButton.setShadowColor(Color.parseColor("#66000000"));
+        boomMenuButton.setShadowColor(Color.parseColor("#66000000"));//设置按钮阴影
         int[] iamgeResource = new int[]{
                 R.drawable.icon_name, R.drawable.icon_material, R.drawable.icon_time
         };
         final String [] buttonText = new String[]{
                 "按名称搜索", "按食材搜索", "按时间搜索"
         };
+        //获取屏幕宽度
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
         for(int i = 0; i <boomMenuButton.getPiecePlaceEnum().pieceNumber(); i++) {
             TextOutsideCircleButton.Builder mBuilder = new TextOutsideCircleButton.Builder()
                     .normalImageRes(iamgeResource[i])  //设置按钮图片
                     .normalText(buttonText[i])  //设置文字
                     .textSize(18)  //设置字体大小
-                    .textWidth(150)  //设置字体区域宽度
                     .textHeight(80)  //设置字体区域高度
                     .normalColor(Color.argb(255, 249, 197, 21))  //设置按钮颜色
                     .highlightedColor(Color.argb(255, 255, 112, 85))  //设置按钮点击颜色
                     .unableColor(Color.BLACK); //设置按钮禁止点击颜色
+            /**
+             * 设置字体区域宽度
+             * 如果屏幕宽度小于等于720，则设置宽度为150；否则为200
+             */
+            if(dm.widthPixels <=720 ){
+                mBuilder.textWidth(150);
+            }else {
+                mBuilder.textWidth(200);
+            }
             boomMenuButton.addBuilder(mBuilder);
         }
         /**
