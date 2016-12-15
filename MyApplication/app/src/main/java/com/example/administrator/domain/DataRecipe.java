@@ -50,6 +50,10 @@ public class DataRecipe {
         Time = time;
     }
 
+    public DataRecipe() {
+
+    }
+
     public int getCollect() {
         return Collect;
     }
