@@ -6,12 +6,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/Iv_search_back"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/icon_back"/>
         <LinearLayout
             android:layout_toRightOf="@id/Iv_search_back"
@@ -23,9 +23,9 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/main_llay_default">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/img_search"
                 android:focusable="true"
                 android:focusableInTouchMode="true"/>
@@ -37,28 +37,35 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/main_et_dafault"
                 android:hint="识食物者为俊杰"
-                android:textColorHint="#e60707"/>
+                android:textColorHint="@color/orange"/>
         </LinearLayout>
     </RelativeLayout>
     <RelativeLayout
-        android:gravity="center_vertical"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.example.administrator.myapplication.ZJBCircleSeekBar
+            android:id="@+id/circleSeekBar"
+            android:layout_width="600px"
+            android:layout_height="600px"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:id="@+id/tv_SearchTime_time"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="240dp"
             android:gravity="center_horizontal"
             android:textSize="60sp"
-            android:textColor="#ffff0000"
-            />
-        <com.example.administrator.myapplication.ZJBCircleSeekBar
-            android:id="@+id/circleSeekBar"
-            android:layout_width="350px"
-            android:layout_height="350px"
-            android:layout_centerHorizontal="true"/>
+            android:textColor="#ffb700"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:layout_below="@+id/tv_SearchTime_time"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@color/orange"
+            android:textSize="18sp"/>
     </RelativeLayout>
 </LinearLayout>

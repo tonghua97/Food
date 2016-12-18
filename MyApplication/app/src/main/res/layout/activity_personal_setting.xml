@@ -136,10 +136,10 @@
             android:hint="未填写"
             android:textSize="15sp"
             android:layout_marginRight="30dp"
-            android:layout_toLeftOf="@+id/Setting_Bt_PhoneEdit"
+            android:layout_toLeftOf="@+id/Setting_Bt_Phone"
             android:layout_centerVertical="true"/>
         <Button
-            android:id="@+id/Setting_Bt_PhoneEdit"
+            android:id="@+id/Setting_Bt_Phone"
             android:layout_width="30dp"
             android:layout_height="25dp"
             android:background="@drawable/setting_btn_background"
@@ -147,7 +147,7 @@
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/setting_Rlay_Emailedit"
+        android:id="@+id/setting_Rlay_Email"
         android:layout_marginTop="1dp"
         android:padding="25dp"
         android:layout_width="match_parent"
@@ -167,10 +167,10 @@
             android:hint="未填写"
             android:textSize="15sp"
             android:layout_marginRight="30dp"
-            android:layout_toLeftOf="@+id/Setting_Bt_EmailEdit"
+            android:layout_toLeftOf="@+id/Setting_Bt_Email"
             android:layout_centerVertical="true"/>
         <Button
-            android:id="@+id/Setting_Bt_EmailEdit"
+            android:id="@+id/Setting_Bt_Email"
             android:layout_width="30dp"
             android:layout_height="25dp"
             android:background="@drawable/setting_btn_background"
