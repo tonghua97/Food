@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+
 /**
  * Created by 梁爽 on 16.11.24.
  * 说明：“设置”页面的编码
@@ -83,7 +84,7 @@ public class SetActivity extends Activity {
         //修改电话号码
         mSetPhone = (RelativeLayout)findViewById(R.id.setting_Rlay_phone);
         //修改邮箱
-        mSetEmail = (RelativeLayout)findViewById(R.id.setting_Rlay_Emailedit);
+        mSetEmail = (RelativeLayout)findViewById(R.id.setting_Rlay_Email);
         //修改密码
         mSetPwd = (RelativeLayout)findViewById(R.id.setting_Rlay_pwdedit);
         //头像显示
@@ -161,13 +162,13 @@ public class SetActivity extends Activity {
                     break;
                 case R.id.setting_Rlay_phone:
                      /*跳转到手机号修改页面*/
-                    //Intent intent3 = new Intent(SetActivity.this,Personal_setting_PhoneActivity.class);
-                    //startActivity(intent3);
+                    Intent intent3 = new Intent(SetActivity.this,Personal_setting_PhoneActivity.class);
+                    startActivity(intent3);
                     break;
-                case R.id.setting_Rlay_Emailedit:
+                case R.id.setting_Rlay_Email:
                      /*跳转到邮箱修改页面*/
-                   // Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailEditActivity.class);
-                   // startActivity(intent4);
+                    Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailActivity.class);
+                    startActivity(intent4);
                     break;
                 case R.id.setting_Rlay_pwdedit:
                      /*跳转到密码修改页面*/
