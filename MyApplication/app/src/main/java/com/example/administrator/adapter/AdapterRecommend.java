@@ -74,6 +74,7 @@ public class AdapterRecommend extends BaseAdapter{
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                .showImageOnFail(R.drawable.img_fail)  //设置图片下载失败时显示的图片
                 .cacheInMemory(true)//设置下载的图片是否缓存在内存中
                 .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
                 .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
