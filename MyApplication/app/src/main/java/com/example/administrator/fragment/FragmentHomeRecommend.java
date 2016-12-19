@@ -58,6 +58,8 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
     private Handler mHandler;
     private int mIndex = 0;
     private int mRefreshIndex = 0;
+    private int totalPage = 1;
+    private int mpage = 1;
 
     @Nullable
     @Override
@@ -79,7 +81,6 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
                 public void run() {
                     super.run();
                     getHttpData();
-
                     Message m = new Message();
                     handler.sendMessage(m);
                 }
@@ -101,8 +102,9 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
     }
 
     public void getHttpData() {
+        str = "";
         try {
-            URI u = new URI(Urls.urlCommend);
+            URI u = new URI(Urls.urlCommend+"?num="+ mpage);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(u);
 
@@ -112,7 +114,7 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
 
             if (httpentity != null) {
                 BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
-                String string = null;
+                String string="";
 
                 while ((string = buffer.readLine()) != null) {
                     str += string;
@@ -140,12 +142,13 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
 
     private void setParse() {
         if (str == "") {
-            return;
+            Toast.makeText(getActivity(),"获取数据失败",Toast.LENGTH_SHORT).show();
         } else {
-            str = str.substring(str.indexOf("["), str.length());
-
             try {
-                JSONArray jsonArray = new JSONArray(str);
+                JSONObject json = new JSONObject(str);
+                totalPage = json.getInt("totalPage");
+
+                JSONArray jsonArray = json.getJSONArray("Recipes");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -192,6 +195,7 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
                     @Override
                     public void run() {
                         super.run();
+                        mpage = 1;
                         getHttpData();
                         Message m1 = new Message();
                         refreshHandler.sendMessage(m1);
@@ -211,13 +215,35 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
      */
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(final BGARefreshLayout refreshLayout) {
+        mpage++;
+        if(mpage > totalPage){
+            mRefreshLayout.endLoadingMore();
+            Toast.makeText(getActivity(),"没有更多数据了",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         refreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        getHttpData();
+                        Message m2 = new Message();
+                        moreDataHandler.sendMessage(m2);
+                    }
+                }.start();
+                recommednAdapter = new AdapterRecommend(getActivity(), ls);
+                lv.setAdapter(recommednAdapter);
+                recommednAdapter.notifyDataSetChanged();
+                int count = lv.getCount() - 1;
+                lv.setSelection(count);
                 Toast.makeText(getActivity(),"加载更多",Toast.LENGTH_SHORT).show();
                 refreshLayout.endLoadingMore();
+
             }
-        }, 1000);
+        }, 2000);
         return true;
     }
     private Handler refreshHandler = new Handler() {
@@ -225,6 +251,14 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             ls.clear();
+            setParse();
+        }
+    };
+
+    private Handler moreDataHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
             setParse();
         }
     };
