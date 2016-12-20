@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,10 +46,16 @@ public class SearchMaterialActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_material);
 
-        getView();
-      setListener();
+        gridView_meat = (GridView)findViewById(R.id.gridview_meat);
+        gridView_vegetable = (GridView)findViewById(R.id.gridview_vegetable);
 
+        textview = (EditText) findViewById(R.id.Et_material_search);
+        btn_back = (Button)findViewById(R.id.Btn_material_back);
+        iv_search = (ImageView) findViewById(R.id.Iv_searchmatrial_search);
+
+        setListener();
         selectedItem = new ArrayList();
+
         initData();
         initCheckBox();
 
@@ -110,48 +118,37 @@ public class SearchMaterialActivity extends Activity {
         });
     }
 
-    /**
-     * 获取控件
-     */
-    private void getView(){
-        gridView_meat = (GridView)findViewById(R.id.gridview_meat);
-        gridView_vegetable = (GridView)findViewById(R.id.gridview_vegetable);
-
-        textview = (EditText) findViewById(R.id.Et_material_search);
-        btn_back = (Button)findViewById(R.id.Btn_material_back);
-        iv_search = (ImageView) findViewById(R.id.Iv_searchmatrial_search);
-    }
-
-    /**
-     * 设置监听
-     */
     private void setListener(){
-        MyListener listener = new MyListener();
         btn_back.setOnClickListener(listener);
         iv_search.setOnClickListener(listener);
     }
-    class MyListener implements View.OnClickListener{
+    View.OnClickListener listener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
             switch (v.getId()){
+                //返回键
                 case R.id.Btn_material_back:
                     finish();
                     break;
 
-//                case R.id.Iv_searchmatrial_search:
-//                    //显示搜索结果
-//                    break;
+                //跳转到搜索结果显示界面
+                case R.id.Iv_searchmatrial_search:
+                    Toast.makeText(SearchMaterialActivity.this,"跳转",Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent();
+//                    intent.putExtra("searchname",textview.getText().toString());
+//                    intent.setClass(SearchMaterialActivity.this,SearchResult.class);
+//                    startActivity(intent);
+                    break;
 
                 default:
                     break;
             }
         }
-    }
-
+    };
 
     private void initCheckBox() {
         map = new HashMap();
-        for (int i = 0; i < list_meat.size(); i++) {
+        for (int i = 0; i < list_meat.size()+list_vegetable.size(); i++) {
             map.put(i, false);
         }
     }
@@ -250,8 +247,6 @@ public class SearchMaterialActivity extends Activity {
             return convertView;
         }
     }
-
-
 
     static final class ViewHolder {
         CheckBox cb;
