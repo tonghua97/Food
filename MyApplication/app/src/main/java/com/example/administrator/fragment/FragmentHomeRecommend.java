@@ -56,11 +56,9 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
     private boolean isFirst = true;
     private TextView Tvname;
     private String str;
-    private Handler mHandler;
-    private int mIndex = 0;
-    private int mRefreshIndex = 0;
     private int totalPage = 1;
-    private int mpage = 1;
+    private int mPage = 1;
+
 
     @Nullable
     @Override
@@ -105,8 +103,8 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
     public void getHttpData() {
         str = "";
         try {
-            URI u = new URI(Urls.urlCommend+"?num="+ mpage);
-            Log.e("getHttpData: ", Urls.urlCommend+"?num="+ mpage);
+            URI u = new URI(Urls.urlCommend+"?num="+ mPage);
+            Log.e("getHttpData: ", Urls.urlCommend+"?num="+ mPage);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(u);
 
@@ -160,7 +158,6 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
                     data.setIntroduction(jsonObject.getString("recipesIntro"));
                     data.setImage(jsonObject.getString("recipesImage"));
                     data.setRecipesId(jsonObject.getString("recipesId"));
-
                     ls.add(data);
                 }
                 str = null;
@@ -197,13 +194,12 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
                     @Override
                     public void run() {
                         super.run();
-                        mpage = 1;
+                        mPage = 1;
                         getHttpData();
                         Message m1 = new Message();
                         refreshHandler.sendMessage(m1);
                     }
                 }.start();
-                refreshLayout.endRefreshing();
             }
         }, 1000);
     }
@@ -215,13 +211,13 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
      */
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(final BGARefreshLayout refreshLayout) {
-        mpage++;
-        if(mpage > totalPage){
+        mPage++;
+        if(mPage > totalPage){
             mRefreshLayout.endLoadingMore();
             Toast.makeText(getActivity(),"没有更多数据了",Toast.LENGTH_SHORT).show();
+            mPage--;
             return false;
         }
-
         refreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -235,9 +231,8 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
                         moreDataHandler.sendMessage(m2);
                     }
                 }.start();
-                refreshLayout.endLoadingMore();
             }
-        }, 1500);
+        }, 1000);
         return true;
     }
     private Handler refreshHandler = new Handler() {
@@ -247,6 +242,7 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
             ls.clear();
             setParse();
             recommednAdapter.notifyDataSetChanged();
+            mRefreshLayout.endRefreshing();
             Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
         }
     };
@@ -262,6 +258,7 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
             recommednAdapter.notifyDataSetChanged();
             //int count = msg.arg1;
             //lv.setSelection(count);
+            mRefreshLayout.endLoadingMore();
             Toast.makeText(getActivity(),"加载成功",Toast.LENGTH_SHORT).show();
         }
     };
