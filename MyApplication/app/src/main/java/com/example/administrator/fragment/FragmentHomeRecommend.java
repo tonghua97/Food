@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,7 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
         str = "";
         try {
             URI u = new URI(Urls.urlCommend+"?num="+ mpage);
+            Log.e("getHttpData: ", Urls.urlCommend+"?num="+ mpage);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(u);
 
@@ -201,8 +203,6 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
                         refreshHandler.sendMessage(m1);
                     }
                 }.start();
-                recommednAdapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
                 refreshLayout.endRefreshing();
             }
         }, 1000);
@@ -231,19 +231,13 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
                         super.run();
                         getHttpData();
                         Message m2 = new Message();
+                        m2.arg1 = lv.getLastVisiblePosition();
                         moreDataHandler.sendMessage(m2);
                     }
                 }.start();
-                recommednAdapter = new AdapterRecommend(getActivity(), ls);
-                lv.setAdapter(recommednAdapter);
-                recommednAdapter.notifyDataSetChanged();
-                int count = lv.getCount() - 1;
-                lv.setSelection(count);
-                Toast.makeText(getActivity(),"加载更多",Toast.LENGTH_SHORT).show();
                 refreshLayout.endLoadingMore();
-
             }
-        }, 2000);
+        }, 1500);
         return true;
     }
     private Handler refreshHandler = new Handler() {
@@ -252,6 +246,8 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
             super.handleMessage(msg);
             ls.clear();
             setParse();
+            recommednAdapter.notifyDataSetChanged();
+            Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -260,6 +256,13 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             setParse();
+            //不重新设置setAdapter，使用notifyDataSetChanged()，可以让页面不跳转
+            //recommednAdapter = new AdapterRecommend(getActivity(), ls);
+            //lv.setAdapter(recommednAdapter);
+            recommednAdapter.notifyDataSetChanged();
+            //int count = msg.arg1;
+            //lv.setSelection(count);
+            Toast.makeText(getActivity(),"加载成功",Toast.LENGTH_SHORT).show();
         }
     };
 
