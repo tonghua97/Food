@@ -18,10 +18,10 @@ import android.widget.Toast;
  * Created by 梁爽 on 16.11.24.
  */
 public class Personal_setting_UnameEditActivity extends Activity {
-    private Button mBtnClear;
-    private Button mBtnBack;
-    private Button mBtnSave;
-    private EditText mEtUname;
+    private Button mBtnClear;   //清空用户名
+    private Button mBtnBack;    //返回键
+    private Button mBtnSave;    //保存用户名的修改
+    private EditText mEtUname;  //修改用户名
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +61,12 @@ public class Personal_setting_UnameEditActivity extends Activity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                //返回键
+                /*返回键效果*/
                 case R.id.UnameEdit_Bt_Back:
                     finish();
                     break;
 
-                //保存用户名的修改
+                /*保存用户名的修改*/
                 case R.id.UnameEdit_Bt_Save:
                     SharedPreferences spf = getSharedPreferences("UNAME_EDIT", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = spf.edit();
@@ -77,7 +77,7 @@ public class Personal_setting_UnameEditActivity extends Activity {
                     startActivity(intent);
                     break;
 
-                //清空用户名EditText
+                /*清空用户名EditText*/
                 case R.id.UnameEdit_btn_clear:
                     mEtUname.setText("");
                     break;

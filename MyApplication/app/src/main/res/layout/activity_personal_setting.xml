@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--作者：韩梁爽-->
-<!--日期：2016年11月22日-->
 <!--说明：设置页面的页面布局-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"

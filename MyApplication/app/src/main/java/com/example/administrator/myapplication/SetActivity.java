@@ -229,15 +229,14 @@ public class SetActivity extends Activity {
                 //拍照
                 case TAKE_PICTURE:
                     if (hasSdcard()){
-                        File tempFile = new File(
-                                Environment.getExternalStorageDirectory(),
-                                IMAGE_FILE_NAME);
+//                        File tempFile = new File(
+//                                Environment.getExternalStorageDirectory(),
+//                                IMAGE_FILE_NAME);
                         startPhotoZoom(tempUri); // 对图片进行裁剪处理
                     }else {
                         Toast.makeText(getApplication(), "没有SDCard!", Toast.LENGTH_SHORT)
                                 .show();
                     }
-//                    startPhotoZoom(tempUri); // 对图片进行裁剪处理
                     break;
 
                 //相册
