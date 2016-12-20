@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
@@ -49,6 +51,8 @@ public class SearchActivity extends Activity {
     private EditText mEt;
     private String array[];
     private String str;
+    private ImageView mSearch;
+
 
     private Handler h = new Handler(){
         @Override
@@ -95,6 +99,24 @@ public class SearchActivity extends Activity {
         adapter2 = new AdapterSearchListView(this,list);
         mListView.setAdapter(adapter2);
 
+        Intent intent = getIntent();
+        String recipesName = intent.getStringExtra("recipesName");
+        if (recipesName != null){
+            mEt.setText(recipesName);
+            mEt.setFocusable(true);
+//            list.clear();
+//            new Thread(){
+//                @Override
+//                public void run() {
+//                    super.run();
+//                    getHttpRecipesName();
+//
+//                    Message m = new Message();
+//                    h.sendMessage(m);
+//                }
+//            }.start();
+        }
+
         mEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -127,6 +149,18 @@ public class SearchActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView Tv = (TextView) view.findViewById(R.id.search_listview_Tv_name);
                 mEt.setText(Tv.getText().toString());
+                Intent intent = new Intent(SearchActivity.this,SearchListActivity.class);
+                intent.putExtra("recipesName",Tv.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this,SearchListActivity.class);
+                intent.putExtra("recipesName",mEt.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -170,6 +204,7 @@ public class SearchActivity extends Activity {
         mListView = (ListView)findViewById(R.id.search_list);
         mGirdView = (GridView)findViewById(R.id.search_Gird);
         mEt = (EditText)findViewById(R.id.search_Et);
+        mSearch = (ImageView)findViewById(R.id.search_sousuo);
     }
 
     public void getData2() {

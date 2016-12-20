@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.myapplication.SearchListActivity">
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="45dp"
@@ -16,28 +19,19 @@
             android:layout_gravity="center"
             android:src="@drawable/sousuo"
             android:focusable="true"
-            android:id="@+id/search_sousuo"
             android:focusableInTouchMode="true"/>
-        <EditText
+        <TextView
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:gravity="center_vertical"
-            android:hint="搜索"
+            android:text="搜索"
             android:background="@null"
-            android:id="@+id/search_Et"/>
+            android:id="@+id/searchlist_Et"/>
     </LinearLayout>
-
-    <GridView
+    <ListView
+        android:id="@+id/Lv_searchfication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numColumns="2"
-        android:id="@+id/search_Gird">
-    </GridView>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:id="@+id/search_list">
+        android:dividerHeight="5dp">
     </ListView>
 </LinearLayout>

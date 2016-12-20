@@ -7,19 +7,24 @@ package com.example.administrator.domain;
 
 public class DataClassificationList {
     private long Id;      //分类列表页id
-    private int Image;    //分类列表图片
+    private String recipesid;    //食谱id
+    private String Image;    //分类列表图片
     private String Name;  //分类列表名称
-    private int Time;     //分类列表用时
+    private String Time;     //分类列表用时
     private int Number;   //分类列表收藏人数
-    private String Material;   //分类列表食材
+    private String Intro;   //分类列表简介
 
-    public DataClassificationList(long id, int image, String material, String name, int number, int time) {
+    public DataClassificationList(long id, String recipesid, String image, String name, String time, int number, String intro) {
         Id = id;
+        this.recipesid = recipesid;
         Image = image;
-        Material = material;
         Name = name;
-        Number = number;
         Time = time;
+        Number = number;
+        Intro = intro;
+    }
+
+    public DataClassificationList() {
     }
 
     public long getId() {
@@ -30,20 +35,20 @@ public class DataClassificationList {
         Id = id;
     }
 
-    public int getImage() {
+    public String getRecipesid() {
+        return recipesid;
+    }
+
+    public void setRecipesid(String recipesid) {
+        this.recipesid = recipesid;
+    }
+
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
-    }
-
-    public String getMaterial() {
-        return Material;
-    }
-
-    public void setMaterial(String material) {
-        Material = material;
     }
 
     public String getName() {
@@ -54,6 +59,14 @@ public class DataClassificationList {
         Name = name;
     }
 
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
+    }
+
     public int getNumber() {
         return Number;
     }
@@ -62,11 +75,11 @@ public class DataClassificationList {
         Number = number;
     }
 
-    public int getTime() {
-        return Time;
+    public String getIntro() {
+        return Intro;
     }
 
-    public void setTime(int time) {
-        Time = time;
+    public void setIntro(String intro) {
+        Intro = intro;
     }
 }
