@@ -17,7 +17,6 @@
             android:layout_gravity="center_horizontal"
             android:paddingTop="10dp"
             android:id="@+id/personal_ll_head"
-
             android:orientation="vertical">
             <com.example.administrator.ui.CircleImageView
                 android:layout_alignParentTop="true"
@@ -26,7 +25,7 @@
                 android:src="@drawable/touxiang"
                 app:border_width="2dp"
                 app:border_color="#FFFFFF"
-                android:layout_marginLeft="130dp"
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/personal_iv_head"/>
         </LinearLayout>
         <RelativeLayout
@@ -37,7 +36,6 @@
             android:gravity="center_horizontal"
             android:id="@+id/personal_rl_middle">
             <Button
-                android:layout_marginLeft="13dp"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:id="@+id/personal_btn_login"
@@ -47,7 +45,6 @@
             <TextView
                 android:layout_width="1dp"
                 android:layout_height="25dp"
-
                 android:layout_toRightOf="@id/personal_btn_login"
                 android:textAlignment="center"
                 android:layout_marginRight="30dp"
@@ -59,7 +56,6 @@
                 android:layout_height="30dp"
                 android:id="@+id/personal_btn_register"
                 android:text="注册"
-                android:layout_marginRight="20dp"
                 android:textColor="@color/yellow"
                 android:background="@drawable/login_shape"
                 android:layout_toRightOf="@id/personal_tv_line" />
@@ -105,13 +101,15 @@
             android:textSize="23dp"
             />
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:id="@+id/personal_ib_collection"
             android:src="@drawable/icon_personal_more"
             android:background="@android:color/transparent"
-            />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -138,12 +136,15 @@
             android:textSize="23dp"
             />
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:id="@+id/personal_ib_setting"
             android:src="@drawable/icon_personal_more"
             android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"
             />
     </RelativeLayout>
     <RelativeLayout
@@ -171,12 +172,15 @@
             android:textSize="23dp"
             />
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:id="@+id/personal_ib_about"
             android:src="@drawable/icon_personal_more"
             android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"
             />
     </RelativeLayout>
     <RelativeLayout
@@ -203,12 +207,15 @@
             android:textSize="23dp"
             />
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:id="@+id/personal_ib_feedback"
             android:src="@drawable/icon_personal_more"
             android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"
             />
     </RelativeLayout>
     <LinearLayout
