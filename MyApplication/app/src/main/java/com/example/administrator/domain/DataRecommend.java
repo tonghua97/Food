@@ -12,6 +12,7 @@ public class DataRecommend {
     private String Name;   //食谱名称
     private String Introduction;   //食谱简介
 
+
     /**
      * 带参构造方法
      * @param id
@@ -28,9 +29,14 @@ public class DataRecommend {
         Introduction = introduction;
     }
 
+    public DataRecommend() {
+    }
+
+
     /**
      * getter,setter 方法
      */
+
     public long getId() {
         return Id;
     }

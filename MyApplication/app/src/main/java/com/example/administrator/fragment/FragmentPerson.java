@@ -19,6 +19,7 @@ import com.example.administrator.myapplication.PersonalAboutActivity;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.RegisterActivity;
 import com.example.administrator.myapplication.SetActivity;
+import com.example.administrator.ui.CircleImageView;
 import com.example.administrator.ui.Utils;
 
 /**
@@ -39,6 +40,7 @@ public class FragmentPerson extends Fragment{
     private LinearLayout mLlayBottom;
     private TextView mLlayname;
     private Button mExitLogin;
+    private CircleImageView head;
 
     @Nullable
     @Override
@@ -78,9 +80,12 @@ public class FragmentPerson extends Fragment{
         mLogin.setOnClickListener(myListener);
         mRegister.setOnClickListener(myListener);
         mExitLogin.setOnClickListener(myListener);
+        head.setOnClickListener(myListener);
     }
 
     public void getViews() {
+        //头像
+        head = (CircleImageView)view.findViewById(R.id.personal_iv_head);
         //收藏
         title1 = (RelativeLayout)view.findViewById(R.id.personal_rl_title1);
         //设置
@@ -111,6 +116,10 @@ public class FragmentPerson extends Fragment{
         @Override
         public void onClick(View view) {
             switch (view.getId()){
+                case R.id.personal_iv_head:
+                    Intent intent = new Intent(getActivity(),SetActivity.class);
+                    startActivity(intent);
+                    break;
                 case R.id.personal_rl_title1:
                     Intent intent1 = new Intent(getActivity(), CollectionActivity.class);
                     startActivity(intent1);

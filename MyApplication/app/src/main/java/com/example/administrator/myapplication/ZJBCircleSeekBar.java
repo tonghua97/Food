@@ -82,7 +82,7 @@ public class ZJBCircleSeekBar extends View {
     private float mAngle;
     private String text;
     private int conversion = 0;
-    private int max = 60;
+    private int max = 120;
     private String color_attr;
     private SweepGradient s;
     private Paint mArcColor;
@@ -176,7 +176,7 @@ public class ZJBCircleSeekBar extends View {
 
     private void initAttributes(TypedArray a) {
 
-        max = a.getInteger(R.styleable.HoloCircleSeekBar_max, 60);
+        max = a.getInteger(R.styleable.HoloCircleSeekBar_max, 120);
 
         color_attr = a.getString(R.styleable.HoloCircleSeekBar_color1);
         wheel_color_attr = a

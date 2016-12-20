@@ -2,15 +2,28 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.administrator.adapter.AdapterRecipeStep;
 import com.example.administrator.domain.DataRecipe;
 import com.example.administrator.domain.DataRecipeStep;
+import com.example.administrator.ui.Urls;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +47,17 @@ public class RecipeShowActivity extends Activity {
     private TextView mCollect;   //收藏数量
     private TextView mEffect;  //功效
     private ListView mStep;  //步骤
+    private ScrollView mSv; //滑动
 
     private boolean mIscollect = false; //是否收藏
     private List<DataRecipeStep> mStepData = new ArrayList<DataRecipeStep>();
     private AdapterRecipeStep stepAdapter;
-    private DataRecipe mRecipe;
+    private DataRecipe mRecipe = new DataRecipe();
     private String title;
+    private String mRecipesById;
+    private String TasteId;
+    private String RecipeStep;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +66,19 @@ public class RecipeShowActivity extends Activity {
 
         Intent intent = getIntent();
         title = intent.getStringExtra("NAME");
-
-        //获取数据
-        getData();
+        mRecipesById = intent.getStringExtra("Id");
         //获取控件
         getView();
+        //设置ScrollView滚动至最顶端
+        mSv.smoothScrollTo(0, 0);
+        //获取数据
+        getHttpData();
+        //getData();
+        //stepString2ArrayList(RecipeStep);
         //绑定控件
         setListener();
         //添加数据
-        setView();
+        //setViews();
     }
 
     public void getView(){
@@ -74,6 +96,7 @@ public class RecipeShowActivity extends Activity {
         mCollect = (TextView)findViewById(R.id.Tv_recipeshow_like);
         mEffect = (TextView)findViewById(R.id.Tv_recipeshow_effect);
         mStep = (ListView)findViewById(R.id.Lv_recipeshow_step);
+        mSv = (ScrollView)findViewById(R.id.SV_recipeshow);
     }
 
     private void setListener() {
@@ -108,24 +131,26 @@ public class RecipeShowActivity extends Activity {
     };
 
     private void getData(){
-        mRecipe = new DataRecipe(0L,"URL","茶泡饭","简介简介简介简介简介简介简介简介",
-                "简单","咸鲜","10分钟",
-                "主料、主料、主料",
-                "辅料、辅料、辅料、辅料",
-                103,false,
-                "功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效功");
-        mRecipe.setName(title);
-        mStepData.add(new DataRecipeStep(0,"1、","第一步"));
-        mStepData.add(new DataRecipeStep(1,"2、","第二步"));
-        mStepData.add(new DataRecipeStep(2,"3、","第三步"));
-        mStepData.add(new DataRecipeStep(3,"4、","第四步"));
-        mStepData.add(new DataRecipeStep(4,"5、","第五步"));
-
+        //mRecipe.setIscollect(mIscollect);
     }
 
     private void setView(){
         mTitle.setText(mRecipe.getName());
-        mImage.setImageResource(R.drawable.img_loading);
+
+        String Url = mRecipe.getImage();
+        //截取url中ip地址
+        String string = Url.substring(7, Url.indexOf("/", 7));
+        //替换ip
+        Url = Url.replaceAll(string, Urls.mIp);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
+                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
+                .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
+                .build();//构建完成
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
+        imageLoader.displayImage(Url,mImage,options);
+
         mName.setText(mRecipe.getName());
         mIntroduction.setText(mRecipe.getIntroduction());
         mLevel.setText(mRecipe.getLevel());
@@ -141,5 +166,85 @@ public class RecipeShowActivity extends Activity {
 
         stepAdapter = new AdapterRecipeStep(this,mStepData);
         mStep.setAdapter(stepAdapter);
+    }
+
+    public void getHttpData() {
+        //1、创建网络访问的类的对象
+        AsyncHttpClient client = new AsyncHttpClient();
+        String recipesUrl = Urls.urlRecipesById + "?recipesId=" + mRecipesById;
+        //2、发送请求
+        client.get(getApplicationContext(), recipesUrl, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    JSONObject data = response.getJSONObject(0);
+                    mRecipe.setName(data.getString("recipesName"));
+                    mRecipe.setImage(data.getString("recipesImage"));
+                    mRecipe.setIntroduction(data.getString("recipesIntro"));
+                    mRecipe.setLevel(data.getString("recipesLevel"));
+                    mRecipe.setTaste(data.getString("classifyName"));
+                    mRecipe.setTime(data.getString("recipesTime"));
+                    mRecipe.setMajor(data.getString("recipesMfood"));
+                    mRecipe.setMinor(data.getString("recipesFood"));
+                    mRecipe.setCollect(Integer.parseInt(data.getString("recipesCollect")));
+                    mRecipe.setEffect(data.getString("recipesEffect"));
+                    RecipeStep = data.getString("recipesStep");
+                    stepString2ArrayList(RecipeStep);
+                    setView();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
+//        //创建网络访问的类的对象
+//        AsyncHttpClient Client = new AsyncHttpClient();
+//        String recipesUrl = Urls.urlRecipesById + "?recipesId=" + mRecipesById;
+//        Log.e("============",recipesUrl);
+//        //发送请求获取食谱详情
+//        Client.get(getApplicationContext(), recipesUrl, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                super.onSuccess(statusCode, headers, response);
+//                try {
+//                    JSONObject data = response.getJSONObject(0);
+//                    String name = data.getString("recipesName");
+//                    String image = data.getString("recipesImage");
+//                    String introduction = data.getString("recipesIntro");
+//                    String level = data.getString("recipesLevel");
+//                    String taste = data.getString("classifyName");
+//                    String time = data.getString("recipesTime");
+//                    String major = data.getString("recipesMfood");
+//                    String minor = data.getString("recipesFood");
+//                    int collect = Integer.parseInt(data.getString("recipesCollect"));
+//                    String effect = data.getString("recipesEffect");
+//                    mRecipe = new DataRecipe(Integer.parseInt(mRecipesById), image, name, introduction,
+//                            level, taste, time, major, minor, collect, false, effect);
+//                    RecipeStep = data.getString("recipesStep");
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Log.e("========", "begin");
+//                }
+//
+//            }
+//        });
+    }
+    public void stepString2ArrayList(String RecipeStep){
+        if (RecipeStep == null){
+            return;
+        }
+        String [] stringArr= RecipeStep.split("\r\n");
+        for(int i = 0; i < stringArr.length;i++){
+            String No = stringArr[i].substring(0,stringArr[i].indexOf("."));
+            //个位数前面加"0"
+            if(No.length() < 2 ){
+                No = "0"+No;
+            }
+            String step = stringArr[i].substring(stringArr[i].indexOf(".")+1);
+            mStepData.add(new DataRecipeStep(i, No +"、", step));
+        }
     }
 }

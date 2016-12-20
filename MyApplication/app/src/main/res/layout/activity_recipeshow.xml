@@ -8,8 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
-        android:padding="10dp">
+        android:background="@color/white">
         <TextView
             android:id="@+id/Tv_recipeshow_title"
             android:layout_width="wrap_content"
@@ -23,9 +22,17 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/icon_back"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/line"/>
     </RelativeLayout>
     <ScrollView
+        android:id="@+id/SV_recipeshow"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
@@ -322,12 +329,12 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"/>
                 </RelativeLayout>
-                <ListView
+                <com.example.administrator.ui.ListView4ScrollView
                     android:id="@+id/Lv_recipeshow_step"
                     android:layout_width="match_parent"
                     android:divider="@null"
-                    android:layout_height="200dp">
-                </ListView>
+                    android:layout_height="wrap_content">
+                </com.example.administrator.ui.ListView4ScrollView>
                 <ImageView
                     android:id="@+id/Iv_recipeshow_like"
                     android:layout_width="40dp"

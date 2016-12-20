@@ -7,18 +7,6 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/personal_Llay_top"
-        android:gravity="center"
-        android:background="@drawable/main_rlay_top">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="23dp"
-            android:text="个人中心"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:gravity="center_horizontal"
@@ -34,17 +22,10 @@
             app:border_color="#FFFFFF"
             android:id="@+id/personal_iv_head"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:id="@+id/personal_ll_blank1"
-        android:orientation="horizontal">
-    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:id="@+id/personal_rl_middle">
         <TextView
@@ -86,14 +67,6 @@
             android:id="@+id/personal_Llay_Tv_username"
             android:text="用户名"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/personal_ll_blank2"
-        android:orientation="horizontal"></LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

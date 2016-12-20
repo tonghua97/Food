@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--推荐item布局-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,44 +14,56 @@
             android:layout_weight="2"
             android:padding="10dp">
             <RelativeLayout
+                android:id="@+id/Rly_recipes_name_border"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_pickfun"
                 android:paddingTop="10dp"
-                android:paddingBottom="20dp"
-                android:paddingLeft="4dp">
+                android:paddingBottom="10dp"
+                android:paddingLeft="2dp">
                 <TextView
                     android:id="@+id/Tv_recommend_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="1"
+                    android:layout_marginLeft="3dp"
+                    android:layout_centerHorizontal="true"
                     android:textColor="@color/black"
                     android:text="茶泡饭"
                     android:textSize="18sp"/>
                 <View
                     android:background="@drawable/shape_line"
                     android:layout_width="18dp"
-                    android:layout_height="4.0px"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@id/Tv_recommend_name"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_height="6.0px"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_alignParentBottom="true" />
             </RelativeLayout>
 
             <com.example.administrator.ui.VerticalTextView
                 android:id="@+id/Tv_recommend_introduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/Rly_recipes_name_border"
+                android:layout_marginLeft="10dp"
                 android:textSize="12dp"
                 android:textColor="@color/black"
                 android:maxLines="3"
                 android:text="茶泡饭是指用热茶水来泡冷饭。通常以盐、梅干、海笞等配料，和饭一起泡。制作方便，取材简单。"/>
         </RelativeLayout>
-        <ImageView
-            android:id="@+id/Iv_recommend_image"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="5"
-            android:src="@drawable/img_loading"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/img_loading">
+            <ImageView
+                android:id="@+id/Iv_recommend_image"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_loading"/>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

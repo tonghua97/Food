@@ -53,6 +53,7 @@
         android:layout_weight="0.6"
         android:layout_marginTop="10dp"
         android:id="@+id/login_verify_Et_password"
+        android:inputType="textPassword"
         android:layout_gravity="center"
         android:hint="请输入密码"
         android:background="@drawable/main_llay_default"/>

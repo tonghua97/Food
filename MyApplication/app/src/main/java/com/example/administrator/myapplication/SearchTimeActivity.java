@@ -11,7 +11,7 @@ import android.widget.TextView;
 /**
  * Created by lijing on 16/11/29.
  */
-public class SearchTimeActivity extends AppCompatActivity implements ZJBCircleSeekBar.OnCircleSeekBarChangeListener {
+public class SearchTimeActivity extends Activity implements ZJBCircleSeekBar.OnCircleSeekBarChangeListener {
     private ZJBCircleSeekBar circleSeekBar;
     TextView mTextView;
     private ImageView back;
@@ -28,7 +28,9 @@ public class SearchTimeActivity extends AppCompatActivity implements ZJBCircleSe
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent i = new Intent(SearchTimeActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
     }

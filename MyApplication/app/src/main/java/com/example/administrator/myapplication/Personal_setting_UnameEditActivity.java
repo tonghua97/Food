@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.Replaceable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,8 @@ public class Personal_setting_UnameEditActivity extends Activity {
                     editor.putString("UNAME",mEtUname.getText().toString());
                     editor.commit();
                     Toast.makeText(Personal_setting_UnameEditActivity.this,"用户名修改并保存成功！",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Personal_setting_UnameEditActivity.this,SetActivity.class);
+                    startActivity(intent);
                     break;
 
                 /*清空用户名EditText*/

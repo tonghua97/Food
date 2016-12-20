@@ -15,6 +15,11 @@ public class DataCuisine {
         this.mCuisine_Name = mCuisine_Name;
     }
 
+//    public DataCuisine(int id, int url) {
+//        this.id = id;
+//        this.url = url;
+//    }
+
     public int getId() {
         return id;
     }

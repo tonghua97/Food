@@ -22,8 +22,7 @@ public class SearchNameActivity extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SearchNameActivity.this,MainActivity.class);
-                startActivity(i);
+                finish();
             }
         });
     }
