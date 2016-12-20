@@ -154,10 +154,6 @@ public class SetActivity extends Activity {
                     /*修改头像*/
                     //显示修改头像的对话框
                     showChoosePicDialog();
-<<<<<<< HEAD
-
-=======
->>>>>>> 75460606f7e1c4dfac0b723f3e227db80feaf8c4
                     break;
                 case R.id.setting_Rlay_unameedit:
                      /*跳转到用户名修改页面*/
