@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:orientation="vertical"
-        android:background="@drawable/beijing">
+        android:background="@drawable/beijing3">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -224,7 +224,7 @@
             android:text="退出登录"
             android:textColor="#FFFFFF"
             android:id="@+id/personal_Btn_exitLogin"
-            android:background="@drawable/login_background"
+            android:background="@color/yellow"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
