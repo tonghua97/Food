@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-
+    android:background="@drawable/beijing"
     android:orientation="vertical"
     tools:context="com.example.administrator.myapplication.RegisterActivity">
 
@@ -108,40 +108,7 @@
             android:hint="请输入昵称"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/register_sex"/>
-        <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:hint="请输入用户名"
-            android:background="@drawable/main_llay_default"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/register_email"/>
-        <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:hint="请输入手机号"
-            android:background="@drawable/main_llay_default"/>
-    </LinearLayout>
+
     <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
@@ -156,9 +123,10 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:hint="请输入邮箱"
+            android:hint="请输入手机号"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:gravity="center"
