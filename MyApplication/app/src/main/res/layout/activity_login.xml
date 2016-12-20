@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="5"
         android:gravity="center_horizontal"
         android:paddingTop="10dp"
         android:orientation="horizontal"
@@ -34,13 +34,6 @@
             app:border_color="#FFFFFF"
             android:id="@+id/login_iv_head"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:id="@+id/login_ll_blank1"
-        android:orientation="horizontal"></LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -73,7 +66,7 @@
         android:id="@+id/login_rl_title1"
         android:background="@drawable/border_login">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="35dp"
             android:layout_height="match_parent"
             android:id="@+id/login_iv_collection"
             android:layout_alignParentLeft="true"
@@ -95,7 +88,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:id="@+id/login_ib_collection"
-            android:src="@drawable/icon_more"
+            android:src="@drawable/icon_personal_more"
             android:background="@android:color/transparent"
             />
     </RelativeLayout>
@@ -106,7 +99,7 @@
         android:id="@+id/login_rl_title2"
         android:background="@drawable/border_login">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="35dp"
             android:layout_height="match_parent"
             android:id="@+id/login_iv_setting"
             android:layout_alignParentLeft="true"
@@ -139,7 +132,7 @@
         android:id="@+id/login_rl_title3"
         android:background="@drawable/border_login">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="35dp"
             android:layout_height="match_parent"
             android:id="@+id/login_iv_about"
             android:layout_alignParentLeft="true"
@@ -172,7 +165,7 @@
         android:id="@+id/login_rl_title4"
         android:background="@drawable/border_login">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="35dp"
             android:layout_height="match_parent"
             android:id="@+id/login_iv_feedback"
             android:layout_alignParentLeft="true"
