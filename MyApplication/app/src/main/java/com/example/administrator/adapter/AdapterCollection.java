@@ -43,7 +43,7 @@ public class AdapterCollection extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         if(null == view){
-            view = LayoutInflater.from(context).inflate(R.layout.listview_item_collection,null);
+            view = LayoutInflater.from(context).inflate(R.layout.listview_item_collection_shipu,null);
         }
         TextView Tv_collection_name = (TextView)view.findViewById(R.id.Tv_collection_name);
         Tv_collection_name.setText(ldc.get(position).getName());

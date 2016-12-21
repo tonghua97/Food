@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/11/22.
- * 首页fragment
+ * Created by 刘博园 on 2016/12/21.
+ * 收藏页fragment
  */
-public class FragmentHome extends Fragment{
+public class FragmentCollectionHome extends Fragment{
     private ViewPager viewPager;
     private PageFragmentAdapter adapter;
     private List<Fragment> fragmentList;
