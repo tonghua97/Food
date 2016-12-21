@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.adapter.AdapterClassificationList;
 import com.example.administrator.domain.DataClassificationList;
@@ -46,9 +48,12 @@ public class SearchListActivity extends Activity {
     private AdapterClassificationList adapter_classification;
     private TextView mSearchEt;
     private Button BtBack;
-    private String recipesName;
+    private String title;
     private String recipesId;
     private String str;
+    private String Url;
+    private String flag;
+    private ImageView mBack;
 
     private Handler handler = new Handler(){
         @Override
@@ -99,8 +104,12 @@ public class SearchListActivity extends Activity {
         getViews();
         //获取点击事件的美食类型名字
         Intent intent = getIntent();
-        recipesName = intent.getStringExtra("recipesName");
-        mSearchEt.setText(recipesName);
+        title = intent.getStringExtra("title");
+        mSearchEt.setText(title);
+        Url = intent.getStringExtra("Url");
+        flag = intent.getStringExtra("flag");
+        Toast.makeText(getApplicationContext(),flag,Toast.LENGTH_SHORT).show();
+
         final Thread thread = new Thread(){
             @Override
             public void run() {
@@ -132,24 +141,46 @@ public class SearchListActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getViews() {
         lv_classification = (ListView)findViewById(R.id.Lv_searchfication);
 //        mSearchEt = (EditText)findViewById(R.id.searchlist_Et);
         mSearchEt = (TextView)findViewById(R.id.searchlist_Et);
+        mBack = (ImageView)findViewById(R.id.Iv_searchList_back);
     }
 
     public void getHttpData() {
         try {
             str = "";
-            URI u = new URI(Urls.urlSearchShow);
+            URI u = new URI(Url);
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(u);
+            NameValuePair pair;
+            List<NameValuePair> pairs = null;
 
-            NameValuePair pair = new BasicNameValuePair("recipesName",recipesName);
-            List<NameValuePair> pairs = new ArrayList<>();
-            pairs.add(pair);
+            if (flag.equals("1")){
+                pair = new BasicNameValuePair("recipesName",title);
+                pairs = new ArrayList<>();
+                pairs.add(pair);
+            }else if (flag.equals("2")){
+                pair = new BasicNameValuePair("recipesTime",title);
+                pairs = new ArrayList<>();
+                pairs.add(pair);
+            }else if (flag.equals("3")){
+                pair = new BasicNameValuePair("recipesMfood",title);
+                pairs = new ArrayList<>();
+                pairs.add(pair);
+            }else {
+                return;
+            }
 
             HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
             httpPost.setEntity(entity);

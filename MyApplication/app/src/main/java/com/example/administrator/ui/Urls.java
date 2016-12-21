@@ -32,4 +32,10 @@ public class Urls {
     public static String urlRecipesCollect = "http://" + mIp + "/http/recipesCollect";
     //取消收藏
     public static String urlRecipesCollectDelete = "http://" + mIp + "/http/recipesCollectDelete";
+    //获得用户昵称
+    public static String urlUserName = "http://" + mIp + "/http/getUserName";
+    //获得用户信息
+    public static String urlUser = "http://" + mIp + "/http/getUser";
+    //食材查询
+    public static String urlSearchFood = "http://" + mIp + "/http/searchByRecipesMfood";
 }

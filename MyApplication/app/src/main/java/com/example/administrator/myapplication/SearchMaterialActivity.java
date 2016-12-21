@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.ui.Urls;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -73,11 +75,11 @@ public class SearchMaterialActivity extends Activity {
                 if (holder.cb.isChecked() == true) {
                     System.out.println("选中" + position);
                     //添加到集合中；
-                    selectedItem.add(list_meat.get(position));
+                    selectedItem.add(list_meat.get(position) + "、");
                 } else {
                     System.out.println("取消选中" + position);
                     //从集合中移除元素。
-                    selectedItem.remove(list_meat.get(position));
+                    selectedItem.remove(list_meat.get(position) + "、");
                 }
                 //最后遍历集合显示在textview;
                 for (int i = 0; i < selectedItem.size(); i++) {
@@ -99,11 +101,11 @@ public class SearchMaterialActivity extends Activity {
                 if (holder.cb.isChecked() == true) {
                     System.out.println("选中" + position);
                     //添加到集合中；
-                    selectedItem.add(list_vegetable.get(position));
+                    selectedItem.add(list_vegetable.get(position) + "、");
                 } else {
                     System.out.println("取消选中" + position);
                     //从集合中移除元素。
-                    selectedItem.remove(list_vegetable.get(position));
+                    selectedItem.remove(list_vegetable.get(position) + "、");
                 }
                 //最后遍历集合显示在textview;
                 for (int i = 0; i < selectedItem.size(); i++) {
@@ -146,9 +148,10 @@ public class SearchMaterialActivity extends Activity {
                     search = textview.getText().toString();
                     //显示搜索结果
                     if(search != null){
-                        Intent intent = new Intent();
-                        intent.putExtra("NAME",search);
-                        intent.setClass(SearchMaterialActivity.this,ClassificationListActivity.class);
+                        Intent intent = new Intent(SearchMaterialActivity.this,SearchListActivity.class);
+                        intent.putExtra("title",search);
+                        intent.putExtra("Url", Urls.urlSearchFood);
+                        intent.putExtra("flag","3");
                         startActivity(intent);
                     }else{
                         Toast.makeText(SearchMaterialActivity.this,"请选择食材",Toast.LENGTH_SHORT).show();

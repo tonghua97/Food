@@ -14,6 +14,13 @@
         android:paddingLeft="10dp"
         android:background="@drawable/main_llay_default">
         <ImageView
+            android:id="@+id/Iv_searchList_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/icon_back"/>
+        <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"

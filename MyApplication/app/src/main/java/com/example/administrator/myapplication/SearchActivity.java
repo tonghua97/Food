@@ -150,7 +150,9 @@ public class SearchActivity extends Activity {
                 TextView Tv = (TextView) view.findViewById(R.id.search_listview_Tv_name);
                 mEt.setText(Tv.getText().toString());
                 Intent intent = new Intent(SearchActivity.this,SearchListActivity.class);
-                intent.putExtra("recipesName",Tv.getText().toString());
+                intent.putExtra("title",Tv.getText().toString());
+                intent.putExtra("Url",Urls.urlSearchShow);
+                intent.putExtra("flag","1");
                 startActivity(intent);
             }
         });

@@ -68,7 +68,7 @@ public class LoginVerifyActivity extends Activity {
                 SharedPreferences.Editor editor = spf.edit();
                 editor.putString("userId",userId);
                 editor.commit();
-//                Utils.username = mUseraccount.getText().toString();
+                Utils.username = userName;
                 Utils.utils = 3;
                 Utils.isTrue = 2;
                 Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
