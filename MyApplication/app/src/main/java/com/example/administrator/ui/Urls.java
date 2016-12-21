@@ -28,3 +28,4 @@ public class Urls {
     public static String urlRanklist = "http://" + mIp + "/http/getRanklist";
 	//登录URL
     public static String urlIsLogin = "http://" + mIp + "/http/isLogin";
+}
