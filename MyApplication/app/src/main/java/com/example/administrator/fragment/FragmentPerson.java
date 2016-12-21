@@ -146,6 +146,10 @@ public class FragmentPerson extends Fragment{
                     startActivity(intent4);
                     break;
                 case R.id.personal_Btn_exitLogin:
+                    SharedPreferences spf = getActivity().getSharedPreferences("MYAPP",getActivity().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = spf.edit();
+                    editor.clear();
+                    editor.commit();
                     Utils.username = null;
                     Utils.isTrue = 1;
                     Intent intent5 = new Intent(getActivity(), MainActivity.class);

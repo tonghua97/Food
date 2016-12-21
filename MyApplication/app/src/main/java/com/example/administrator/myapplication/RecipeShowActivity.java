@@ -2,13 +2,17 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.adapter.AdapterRecipeStep;
 import com.example.administrator.domain.DataRecipe;
@@ -21,10 +25,25 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +77,42 @@ public class RecipeShowActivity extends Activity {
     private String TasteId;
     private String RecipeStep;
     public ImageLoader imageLoader = ImageLoader.getInstance();
+    private String str;
+    private String userId;
+
+    private Handler h = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (msg.what == 1){
+                if (str.equals("0")){
+                    Toast.makeText(getApplicationContext(),"该食谱已收藏",Toast.LENGTH_SHORT).show();
+                }else if (str.equals("1")){
+                    Toast.makeText(getApplicationContext(),"收藏成功",Toast.LENGTH_SHORT).show();
+                    mLike.setImageResource(R.drawable.icon_like_down);
+                    mRecipe.setCollect(mRecipe.getCollect() + 1);
+                    mCollect.setText(mRecipe.getCollect()+"人收藏");
+                    mRecipe.setIscollect(true);
+                }else {
+                    Toast.makeText(getApplicationContext(),"收藏失败",Toast.LENGTH_SHORT).show();
+                }
+            }else if (msg.what == 2){
+                if (str.equals("0")){
+                    Toast.makeText(getApplicationContext(),"该食谱没有收藏",Toast.LENGTH_SHORT).show();
+                }else if (str.equals("1")){
+                    Toast.makeText(getApplicationContext(),"取消收藏成功",Toast.LENGTH_SHORT).show();
+                    mLike.setImageResource(R.drawable.icon_like_normal);
+                    mRecipe.setCollect(mRecipe.getCollect() -1);
+                    mCollect.setText(mRecipe.getCollect()+"人收藏");
+                    mRecipe.setIscollect(false);
+                }else {
+                    Toast.makeText(getApplicationContext(),"取消收藏失败",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +159,7 @@ public class RecipeShowActivity extends Activity {
         mLike.setOnClickListener(myListener);
 
     }
+
     View.OnClickListener myListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -113,15 +169,42 @@ public class RecipeShowActivity extends Activity {
                     break;
                 case R.id.Iv_recipeshow_like:
                     if(!mRecipe.iscollect()){
-                        mLike.setImageResource(R.drawable.icon_like_down);
-                        mRecipe.setCollect(mRecipe.getCollect() + 1);
-                        mCollect.setText(mRecipe.getCollect()+"人收藏");
-                        mRecipe.setIscollect(true);
+                        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+                        userId = spf.getString("userId","");
+                        if (userId == ""){
+                            Toast.makeText(getApplicationContext(),"请先登录",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RecipeShowActivity.this,LoginVerifyActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Thread thread = new Thread(){
+                                @Override
+                                public void run() {
+                                    super.run();
+                                    getHttpCollect();
+
+                                    Message m = new Message();
+                                    h.sendEmptyMessage(1);
+                                }
+                            };
+                            thread.start();
+                        }
+
                     }else {
-                        mLike.setImageResource(R.drawable.icon_like_normal);
-                        mRecipe.setCollect(mRecipe.getCollect() -1);
-                        mCollect.setText(mRecipe.getCollect()+"人收藏");
-                        mRecipe.setIscollect(false);
+                        Thread thread = new Thread(){
+                            @Override
+                            public void run() {
+                                super.run();
+                                getHttpCollectDelete();
+
+                                Message m = new Message();
+                                h.sendEmptyMessage(2);
+                            }
+                        };
+                        thread.start();
+//                        mLike.setImageResource(R.drawable.icon_like_normal);
+//                        mRecipe.setCollect(mRecipe.getCollect() -1);
+//                        mCollect.setText(mRecipe.getCollect()+"人收藏");
+//                        mRecipe.setIscollect(false);
                     }
                     break;
                 default:
@@ -245,6 +328,82 @@ public class RecipeShowActivity extends Activity {
             }
             String step = stringArr[i].substring(stringArr[i].indexOf(".")+1);
             mStepData.add(new DataRecipeStep(i, No +"、", step));
+        }
+    }
+
+    public void getHttpCollect() {
+        str = "";
+        try {
+            URI u = new URI(Urls.urlRecipesCollect);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair1 = new BasicNameValuePair("FKcollectUser",userId);
+            NameValuePair pair2 = new BasicNameValuePair("FKrecipesId",mRecipesById);
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair1);
+            pairs.add(pair2);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = "";
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getHttpCollectDelete() {
+        str = "";
+        try {
+            URI u = new URI(Urls.urlRecipesCollectDelete);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair1 = new BasicNameValuePair("FKcollectUser",userId);
+            NameValuePair pair2 = new BasicNameValuePair("FKrecipesId",mRecipesById);
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair1);
+            pairs.add(pair2);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = "";
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
