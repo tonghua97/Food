@@ -4,20 +4,22 @@ package com.example.administrator.domain;
  * Created by Sophia on 2016/11/24.
  */
 public class DataRanklist {
-    private long Id;            //推荐表id
-    private String RecipesId;   //食谱id
+    private long Id;            //食谱id
     private String Image;       //食谱图片URL Iv_ranklist_recipeimg
     private String Name;        //食谱名称 Tv_ranklist_recipename
     private int num;            //食谱收藏数 Tv_ranklist_collect
     private int rank;           //食谱排行 Tv_rank_id
 
-    public DataRanklist(long id, int rank, int num, String image, String name, String recipesId) {
+    public DataRanklist(long id, int rank, int num, String image, String name) {
         Id = id;
         this.rank = rank;
         this.num = num;
         Image = image;
         Name = name;
-        RecipesId = recipesId;
+    }
+
+    public DataRanklist(){
+
     }
 
     public long getId() {
@@ -26,14 +28,6 @@ public class DataRanklist {
 
     public void setId(long id) {
         Id = id;
-    }
-
-    public String getRecipesId() {
-        return RecipesId;
-    }
-
-    public void setRecipesId(String recipesId) {
-        RecipesId = recipesId;
     }
 
     public String getImage() {

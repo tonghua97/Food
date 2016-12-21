@@ -1,15 +1,20 @@
 package com.example.administrator.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.domain.DataPickfun;
 import com.example.administrator.myapplication.R;
+import com.example.administrator.ui.Urls;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +26,9 @@ import java.util.List;
 public class AdapterPickfun extends BaseAdapter {
     private Context context;
     private List<DataPickfun> ldp = new ArrayList<>();
+    private String Url;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
+
     public AdapterPickfun(List<DataPickfun> ld, Context context){
         ldp = ld;
         this.context = context;
@@ -47,8 +55,32 @@ public class AdapterPickfun extends BaseAdapter {
         }
         TextView Tv_pickfun_title = (TextView) view.findViewById(R.id.Tv_pickfun_title);
         Tv_pickfun_title.setText(ldp.get(position).getmPickfun_Name());
-        RelativeLayout Rl_pickfun = (RelativeLayout) view.findViewById(R.id.Rl_pickfun);
-        Rl_pickfun.setBackgroundResource(ldp.get(position).getUrl());
+        /**
+         * 依据字符串长度修改字体大小
+         */
+        if ((ldp.get(position).getmPickfun_Name()).length() > 8) {
+            Tv_pickfun_title.setTextSize(16);
+        }else if((ldp.get(position).getmPickfun_Name()).length() > 7){
+            Tv_pickfun_title.setTextSize(18);
+        }else if((ldp.get(position).getmPickfun_Name()).length() > 6){
+            Tv_pickfun_title.setTextSize(20);
+        }
+
+        ImageView Iv_pickfun = (ImageView) view.findViewById(R.id.Iv_pickfun_image);
+        Url = ldp.get(position).getUrl();
+        String string = Url.substring(7, Url.indexOf("/", 7));
+        Url = Url.replaceAll(string, Urls.mIp);
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                .showImageOnFail(R.drawable.img_fail)  //设置图片下载失败时显示的图片
+                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
+                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
+                .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
+                .build();//构建完成
+        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.displayImage(Url,Iv_pickfun,options);
+
         return view;
     }
 }

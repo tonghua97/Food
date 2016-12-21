@@ -6,10 +6,13 @@ package com.example.administrator.domain;
 
 public class DataPickfun {
     private int id;
-    private int url;
+    private String url;
     private String mPickfun_Name;
 
-    public DataPickfun(int id, int url, String mPickfun_Name) {
+    public DataPickfun(){
+
+    }
+    public DataPickfun(int id, String url, String mPickfun_Name) {
         this.id = id;
         this.url = url;
         this.mPickfun_Name = mPickfun_Name;
@@ -23,11 +26,11 @@ public class DataPickfun {
         this.mPickfun_Name = mPickfun_Name;
     }
 
-    public int getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(int url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 

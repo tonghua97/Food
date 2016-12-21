@@ -74,6 +74,7 @@ public class FragmentHome extends Fragment{
         adapter=new PageFragmentAdapter(getChildFragmentManager(),fragmentList);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
+        viewPager.setOffscreenPageLimit(3);
         Tv1.setTextColor(getResources().getColor(R.color.yellow));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
