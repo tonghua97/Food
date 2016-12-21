@@ -256,7 +256,7 @@ public class MainActivity extends Activity {
             public void onClicked(int index, BoomButton boomButton) {
                 switch (index){
                     case 0:
-                        Intent i = new Intent(MainActivity.this,SearchNameActivity.class);
+                        Intent i = new Intent(MainActivity.this,SearchActivity.class);
                         startActivity(i);
                         break;
                     case 1:

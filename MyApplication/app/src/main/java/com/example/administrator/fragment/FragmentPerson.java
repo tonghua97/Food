@@ -2,6 +2,7 @@ package com.example.administrator.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -55,12 +56,14 @@ public class FragmentPerson extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         getViews();
+        Intent intent = getActivity().getIntent();
+        String userName = intent.getStringExtra("userName");
         if (Utils.isTrue == 2){
             mRlaymiddle.setVisibility(View.GONE);
             mUsername.setVisibility(View.VISIBLE);
             mLlaylogin.setVisibility(View.VISIBLE);
             mLlayBottom.setVisibility(View.GONE);
-            mLlayname.setText(Utils.username);
+            mLlayname.setText(userName);
         }else {
             mRlaymiddle.setVisibility(View.VISIBLE);
             mUsername.setVisibility(View.GONE);

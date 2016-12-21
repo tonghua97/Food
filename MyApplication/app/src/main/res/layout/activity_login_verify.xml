@@ -6,9 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/beijing"
+    android:background="@drawable/beijing3"
     tools:context="com.example.administrator.myapplication.LoginVerifyActivity">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -18,84 +17,118 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:text="返回" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="0dp"
-        android:layout_weight="1.5">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="65dp"
-            android:id="@+id/login_verify_Tv_name"
-            android:src="@drawable/about_logo"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/login_verify_Tv_name"
-            android:text="随时-有趣"
-            android:textColor="#aaaaaa"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
-
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:layout_gravity="center"
-        android:id="@+id/login_verify_Et_username"
-        android:hint="请输入用户名"
-        android:background="@drawable/main_llay_default"/>
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:layout_marginTop="10dp"
-        android:id="@+id/login_verify_Et_password"
-        android:inputType="textPassword"
-        android:layout_gravity="center"
-        android:hint="请输入密码"
-        android:background="@drawable/main_llay_default"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:id="@+id/login_verify_Btn_login"
-            android:text="登录"
-            android:textColor="#ffffff"
-            android:background="@drawable/login_background"/>
-    </LinearLayout>
+        android:layout_weight="7"
+        android:orientation="vertical">
 
-    <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:id="@+id/login_verify_Tv_name"
+                android:src="@drawable/icon_foodfun"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/login_verify_Tv_name"
+                android:text="随时-有趣"
+                android:textColor="#aaaaaa"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/login_name"
+                android:src="@drawable/register_name"/>
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:id="@+id/login_verify_Et_username"
+                android:layout_toRightOf="@id/login_name"
+                android:hint="请输入用户名"
+                android:background="@drawable/main_llay_default"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="39dp"
+                android:id="@+id/login_password"
+                android:src="@drawable/register_password1"/>
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/login_password"
+                android:id="@+id/login_verify_Et_password"
+                android:inputType="textPassword"
+                android:layout_gravity="center"
+                android:hint="请输入密码"
+                android:background="@drawable/main_llay_default"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+                android:layout_marginLeft="10dp"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:id="@+id/login_verify_Btn_login"
+                android:text="登录"
+                android:textColor="#ffffff"
+                android:background="@color/yellow"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_verify_Tv_register"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:text="快速注册"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="忘记密码？"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:gravity="center"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/login_verify_Tv_register"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:text="快速注册"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:text="忘记密码？"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
         android:gravity="center"
         android:orientation="horizontal">
         <TextView
@@ -107,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="或"/>
+            android:text="第三方授权登录"/>
         <TextView
             android:layout_width="200dp"
             android:layout_height="1dp"
