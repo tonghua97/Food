@@ -1,8 +1,12 @@
 package com.example.administrator.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +24,25 @@ import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.RegisterActivity;
 import com.example.administrator.myapplication.SetActivity;
 import com.example.administrator.ui.CircleImageView;
+import com.example.administrator.ui.Urls;
 import com.example.administrator.ui.Utils;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/11/22.
@@ -41,6 +63,8 @@ public class FragmentPerson extends Fragment{
     private TextView mLlayname;
     private Button mExitLogin;
     private CircleImageView head;
+    private String str;
+    private String userId;
 
     @Nullable
     @Override
@@ -55,6 +79,10 @@ public class FragmentPerson extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         getViews();
+        Intent intent = getActivity().getIntent();
+        String userName = intent.getStringExtra("userName");
+//        Utils.username = intent.getStringExtra("userName");
+
         if (Utils.isTrue == 2){
             mRlaymiddle.setVisibility(View.GONE);
             mUsername.setVisibility(View.VISIBLE);
@@ -143,6 +171,10 @@ public class FragmentPerson extends Fragment{
                     startActivity(intent4);
                     break;
                 case R.id.personal_Btn_exitLogin:
+                    SharedPreferences spf = getActivity().getSharedPreferences("MYAPP",getActivity().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = spf.edit();
+                    editor.clear();
+                    editor.commit();
                     Utils.username = null;
                     Utils.isTrue = 1;
                     Intent intent5 = new Intent(getActivity(), MainActivity.class);
@@ -151,4 +183,5 @@ public class FragmentPerson extends Fragment{
             }
         }
     };
+
 }

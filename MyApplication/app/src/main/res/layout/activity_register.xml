@@ -52,6 +52,7 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
+            android:id="@+id/register_userAccount"
             android:hint="请输入账号"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
@@ -70,6 +71,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:inputType="textPassword"
+            android:id="@+id/register_userPassword"
             android:hint="请输入密码"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
@@ -88,6 +90,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:inputType="textPassword"
+            android:id="@+id/register_userCpassword"
             android:hint="请确认密码"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
@@ -105,6 +108,7 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
+            android:id="@+id/register_userName"
             android:hint="请输入昵称"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
@@ -123,6 +127,7 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
+            android:id="@+id/register_userNum"
             android:hint="请输入手机号"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>

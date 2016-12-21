@@ -28,6 +28,7 @@
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/img_search"
                 android:focusable="true"
+                android:id="@+id/search_foodtime_Iv"
                 android:focusableInTouchMode="true"/>
             <EditText
                 android:id="@+id/Et_search_time"
@@ -65,6 +66,7 @@
             android:layout_below="@+id/tv_SearchTime_time"
             android:layout_alignParentRight="true"
             android:layout_margin="10dp"
+            android:id="@+id/search_time_btn"
             android:background="@color/orange"
             android:textSize="18sp"/>
     </RelativeLayout>
