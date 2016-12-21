@@ -141,7 +141,7 @@ public class FragmentHome extends Fragment{
         @Override
         public void onClick(View view) {
             //1、获取一个fragmentManager的对象
-            FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getChildFragmentManager();
             //2、获取fragmentTransaction对象
             FragmentTransaction transaction = fm.beginTransaction();
 

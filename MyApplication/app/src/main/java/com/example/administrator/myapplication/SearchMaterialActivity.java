@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +22,9 @@ import java.util.HashMap;
  * Created by 姜佳妮 on 2016/11/28.
  */
 public class SearchMaterialActivity extends Activity {
-    private Button btn_back;
-    private ImageView iv_search;
+    private Button btn_back;        //返回按钮
+    private ImageButton ib_search;    //搜索按钮
+    private String search;          //显示选中的食材
 
     private GridView gridView_meat;
     private GridView gridView_vegetable;
@@ -46,14 +47,9 @@ public class SearchMaterialActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_material);
 
-        gridView_meat = (GridView)findViewById(R.id.gridview_meat);
-        gridView_vegetable = (GridView)findViewById(R.id.gridview_vegetable);
-
-        textview = (EditText) findViewById(R.id.Et_material_search);
-        btn_back = (Button)findViewById(R.id.Btn_material_back);
-        iv_search = (ImageView) findViewById(R.id.Iv_searchmatrial_search);
-
+        getView();
         setListener();
+
         selectedItem = new ArrayList();
 
         initData();
@@ -118,33 +114,53 @@ public class SearchMaterialActivity extends Activity {
         });
     }
 
-    private void setListener(){
-        btn_back.setOnClickListener(listener);
-        iv_search.setOnClickListener(listener);
+    /**
+     * 获取控件
+     */
+    private void getView(){
+        gridView_meat = (GridView)findViewById(R.id.gridview_meat);
+        gridView_vegetable = (GridView)findViewById(R.id.gridview_vegetable);
+
+        textview = (EditText) findViewById(R.id.Et_material_search);
+        btn_back = (Button)findViewById(R.id.Btn_material_back);
+        ib_search = (ImageButton) findViewById(R.id.Ib_searchmatrial_search);
     }
-    View.OnClickListener listener = new View.OnClickListener(){
+
+    /**
+     * 设置监听
+     */
+    private void setListener(){
+        MyListener listener = new MyListener();
+        btn_back.setOnClickListener(listener);
+        ib_search.setOnClickListener(listener);
+    }
+    class MyListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                //返回键
                 case R.id.Btn_material_back:
                     finish();
                     break;
 
-                //跳转到搜索结果显示界面
-                case R.id.Iv_searchmatrial_search:
-                    Toast.makeText(SearchMaterialActivity.this,"跳转",Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent();
-//                    intent.putExtra("searchname",textview.getText().toString());
-//                    intent.setClass(SearchMaterialActivity.this,SearchResult.class);
-//                    startActivity(intent);
+                case R.id.Ib_searchmatrial_search:
+                    search = textview.getText().toString();
+                    //显示搜索结果
+                    if(search != null){
+                        Intent intent = new Intent();
+                        intent.putExtra("NAME",search);
+                        intent.setClass(SearchMaterialActivity.this,ClassificationListActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(SearchMaterialActivity.this,"请选择食材",Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 default:
                     break;
             }
         }
-    };
+    }
+
 
     private void initCheckBox() {
         map = new HashMap();
@@ -161,6 +177,9 @@ public class SearchMaterialActivity extends Activity {
         list_meat.add("鸡肉");
         list_meat.add("鸭肉");
         list_meat.add("鱼肉");
+        list_meat.add("虾");
+        list_meat.add("贝类");
+        list_meat.add("蟹");
 
         list_vegetable = new ArrayList();
         list_vegetable.add("白菜");
@@ -169,9 +188,19 @@ public class SearchMaterialActivity extends Activity {
         list_vegetable.add("胡萝卜");
         list_vegetable.add("黄瓜");
         list_vegetable.add("西红柿");
-        list_vegetable.add("葱");
-        list_vegetable.add("蒜");
-        list_vegetable.add("姜");
+        list_vegetable.add("辣椒");
+        list_vegetable.add("甜椒");
+        list_vegetable.add("茼蒿");
+        list_vegetable.add("蒲菜");
+        list_vegetable.add("豆角");
+        list_vegetable.add("荠菜");
+        list_vegetable.add("黄瓜");
+        list_vegetable.add("香菇");
+        list_vegetable.add("红薯");
+        list_vegetable.add("土豆");
+        list_vegetable.add("芹菜");
+        list_vegetable.add("西兰花");
+
     }
 
     class MyAdapter_meat extends BaseAdapter {
@@ -247,6 +276,8 @@ public class SearchMaterialActivity extends Activity {
             return convertView;
         }
     }
+
+
 
     static final class ViewHolder {
         CheckBox cb;
