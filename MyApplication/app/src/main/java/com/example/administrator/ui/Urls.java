@@ -22,6 +22,9 @@ public class Urls {
     public static String urlIsUserAccount = "http://" + mIp + "/http/isUserAccount";
     //注册接口的URL
     public static String urlRegister = "http://" + mIp + "/http/register";
-    //登录URL
+    //获取食趣
+    public static String urlPickfun = "http://" + mIp + "/http/getFunTitle";
+    //获取排行榜
+    public static String urlRanklist = "http://" + mIp + "/http/getRanklist";
+	//登录URL
     public static String urlIsLogin = "http://" + mIp + "/http/isLogin";
-}

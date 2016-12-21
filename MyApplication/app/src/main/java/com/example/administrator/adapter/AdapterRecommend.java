@@ -88,7 +88,7 @@ public class AdapterRecommend extends BaseAdapter{
          * 依据字符串长度修改字体大小
          */
         if ((mData.get(i).getName()).length() > 6) {
-            Rec_Name.setTextSize(12);
+            Rec_Name.setTextSize(13);
         }else if((mData.get(i).getName()).length() > 5){
             Rec_Name.setTextSize(14);
         }

@@ -5,48 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants">
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/PartRight"
         android:layout_width="wrap_content"
         android:layout_height="200dp">
         <ImageView
             android:id="@+id/Iv_ranklist_recipeimg"
             android:src="@drawable/img_loading"
-            android:scaleType="fitXY"
-            android:layout_width="320dp"
+            android:scaleType="centerCrop"
+            android:layout_width="300dp"
             android:layout_height="200dp" />
         <ImageView
             android:id="@+id/IvCover"
             android:src="@drawable/img_ranklistcover"
             android:scaleType="fitXY"
-            android:layout_width="320dp"
+            android:layout_width="300dp"
             android:layout_height="200dp" />
-        <LinearLayout
-            android:paddingTop="10dp"
+        <TextView
+            android:id="@+id/Tv_rank_id"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="No.00"
+            android:textSize="35sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/yellow"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_weight="1"
-                android:text=" NO."
-                android:textStyle="bold"
-                android:textSize="40dp"
-                android:textColor="@color/yellow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:singleLine="true"/>
-            <TextView
-                android:id="@+id/Tv_rank_id"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="0"
-                android:textSize="40dp"
-                android:textColor="@color/yellow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </FrameLayout>
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_toRightOf="@+id/PartRight"
@@ -55,7 +41,7 @@
         android:layout_height="200dp"
         android:gravity="center"
         android:singleLine="true">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_pickfun"
@@ -63,10 +49,12 @@
             android:orientation="vertical"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+            android:layout_marginTop="10dp"
             android:paddingLeft="4dp">
             <TextView
                 android:id="@+id/Tv_ranklist_recipename"
                 android:text="老北京炸酱面"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
@@ -75,32 +63,21 @@
                 android:textIsSelectable="false" />
             <View
                 android:background="@drawable/shape_line"
-                android:layout_width="18dp"
-                android:layout_height="4.0px"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_weight="1"
-                android:textSize="15dp"
-                android:id="@+id/Tv_ranklist_collect"
-                android:textAlignment="textEnd"
-                android:text="000"
-                android:textColor="#B03008"
-                android:layout_width="60dp"
-                android:layout_height="30dp" />
-            <TextView
-                android:layout_weight="1"
-                android:textSize="15dp"
-                android:textAlignment="textStart"
-                android:textColor="#B03008"
-                android:text="收藏"
-                android:layout_width="60dp"
-                android:layout_height="30dp" />
-        </LinearLayout>
+                android:layout_width="14dp"
+                android:layout_height="6.0px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/Tv_ranklist_recipename"
+                android:layout_marginTop="10dp" />
+        </RelativeLayout>
+        <TextView
+            android:gravity="bottom|center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:id="@+id/Tv_ranklist_collect"
+            android:text="000收藏"
+            android:textColor="#B03008"
+            android:layout_width="60dp"
+            android:layout_height="30dp" />
     </LinearLayout>
 </RelativeLayout>
