@@ -5,7 +5,8 @@ package com.example.administrator.ui;
  */
 public class Urls {
     //    public static String mIp = "www.nabyss.cn/foodfun";
-    public static String mIp = "10.7.88.96";
+//    public static String mIp = "10.7.88.96";
+    public static String mIp = "192.168.1.107";
     //按名称搜索URL
     public static String urlSearch = "http://" + mIp + "/http/searchByRecipesName";
     //获取推荐的名称和简介及美食id,图片的URL
@@ -38,4 +39,12 @@ public class Urls {
     public static String urlUser = "http://" + mIp + "/http/getUser";
     //食材查询
     public static String urlSearchFood = "http://" + mIp + "/http/searchByRecipesMfood";
+    //拾趣收藏
+    public static String urlFunCollect = "http://" + mIp + "/http/funCollect";
+    //取消拾趣收藏
+    public static String urlFunCollectDelete = "http://" + mIp + "/http/funCollectDelete";
+    //根据拾趣id获得拾趣集合的URL
+    public static String urlFun = "http://" + mIp + "/http/getFunById";
+    //获得食谱id
+    public static String urlRecipesId = "http://" + mIp + "/http/getRecipesIdByName";
 }

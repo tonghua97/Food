@@ -91,9 +91,8 @@ public class FragmentHomeRank extends Fragment implements BGARefreshLayout.BGARe
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //美食名称
                 Tvname = (TextView)view.findViewById(R.id.Tv_ranklist_recipename);
-
                 Intent intent = new Intent(getActivity(), RecipeShowActivity.class);
-                intent.putExtra("NAME",Tvname.getText().toString());
+                intent.putExtra("Id",lrl.get(i).getRecipesId());
                 startActivity(intent);
             }
         });
@@ -154,6 +153,7 @@ public class FragmentHomeRank extends Fragment implements BGARefreshLayout.BGARe
                     data.setName(jsonObject.getString("recipesName"));
                     data.setImage(jsonObject.getString("recipesImage"));
                     data.setNum(jsonObject.getInt("recipesCollect"));
+                    data.setRecipesId(jsonObject.getString("recipesId"));
                     data.setRank(i+1);
 
                     lrl.add(data);

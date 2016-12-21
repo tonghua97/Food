@@ -109,6 +109,14 @@ public class RecipeShowActivity extends Activity {
                 }else {
                     Toast.makeText(getApplicationContext(),"取消收藏失败",Toast.LENGTH_SHORT).show();
                 }
+            }else if (msg.what == 3){
+                if (str.equals("0")){
+                    mLike.setImageResource(R.drawable.icon_like_down);
+                    mRecipe.setIscollect(true);
+                }else {
+                    mLike.setImageResource(R.drawable.icon_like_normal);
+                    mRecipe.setIscollect(false);
+                }
             }
 
         }
@@ -128,6 +136,25 @@ public class RecipeShowActivity extends Activity {
         mSv.smoothScrollTo(0, 0);
         //获取数据
         getHttpData();
+        //是否收藏的判断
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
+
+        if (userId == ""){
+
+        }else {
+            Thread thread = new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    getHttpCollect();
+
+                    Message message = new Message();
+                    h.sendEmptyMessage(3);
+                }
+            };
+            thread.start();
+        }
         //getData();
         //stepString2ArrayList(RecipeStep);
         //绑定控件
