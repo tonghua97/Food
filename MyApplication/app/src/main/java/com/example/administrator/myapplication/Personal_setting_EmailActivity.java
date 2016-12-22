@@ -17,13 +17,19 @@ public class Personal_setting_EmailActivity extends Activity {
     private Button mBtnBack;
     private Button mBtnSave;
     private EditText mEtEmail;
+    private String mEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting_mail);
+
         //获取控件
         getViews();
+
+        Intent intent = getIntent();
+        mEmail = intent.getStringExtra("setting_email");
+        mEtEmail.setText(mEmail);
         //设置监听
         setListener();
         //保存邮箱的修改

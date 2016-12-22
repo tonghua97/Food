@@ -362,6 +362,7 @@ public class SetActivity extends Activity {
                 case R.id.setting_Rlay_Email:
                      /*跳转到邮箱修改页面*/
                     Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailActivity.class);
+                    intent4.putExtra("setting_email",mEmail.getText().toString());
                     startActivity(intent4);
                     break;
                 case R.id.setting_Rlay_pwdedit:
