@@ -51,7 +51,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".SearchListActivity" />
-        <activity android:name=".SearchListTimeActivity"></activity>
     </application>
 
 </manifest>
