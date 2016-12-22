@@ -2,25 +2,17 @@ package com.example.administrator.myapplication;
 
 
 import android.app.Activity;
-import android.app.Instrumentation;
-import android.content.Intent;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.administrator.adapter.AdapterCollection;
-import com.example.administrator.domain.DataCollection;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.administrator.fragment.FragmentCollectionPickfun;
+import com.example.administrator.fragment.FragmentCollectionRecipe;
 
 /**
  * Created by lijing on 2016/11/23.
@@ -28,71 +20,144 @@ import java.util.List;
  */
 
 public class CollectionActivity extends Activity{
-    private ArrayAdapter<String> adapter;
-    private List<DataCollection> ld = new ArrayList<>();
-    private ListView lv_collection;
-    private AdapterCollection adapter_collection;
-    private Button BtBack;
-    private TextView Tvname;
+    private View view;
+    private TextView Tv1;
+    private TextView Tv2;
+    private FragmentCollectionPickfun mCpickfun;
+    private FragmentCollectionRecipe mCrecipe;
+    private LinearLayout Llay;
+    private FragmentCollectionPickfun fragmentCollectionPickfun;
+    private FragmentCollectionRecipe fragmentCollectionRecipe;
+    private int currentIndex;
+    private Button bt_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
-
         //获取控件
         getViews();
-        //获取数据
-        getData();
-        //设置adapter
-        adapter_collection = new AdapterCollection(ld,this);
-        lv_collection.setAdapter(adapter_collection);
 
-        //设置监听
+        //注册事件监听器
         setListener();
+//
+//        initView();
+
+//        设置默认的页面(fragment页面)
+        setDefaultPage();
+    }
+
+//    private void initView() {
+//        FragmentCollectionPickfun fragmentCollectionPickfun = new FragmentCollectionPickfun();
+//        FragmentCollectionRecipe fragmentCollectionRecipe = new FragmentCollectionRecipe();
+//        fragmentList=new ArrayList<Fragment>();
+//        fragmentList.add(fragmentHomeRecommend);
+//        fragmentList.add(fragmentHomePickfun);
+//        fragmentList.add(fragmentHomeRank);
+
+//        adapter=new PageFragmentAdapter(getChildFragmentManager(),fragmentList);
+//        viewPager.setAdapter(adapter);
+//        viewPager.setCurrentItem(0);
+//        viewPager.setOffscreenPageLimit(3);
+//        Tv1.setTextColor(getResources().getColor(R.color.yellow));
+
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float offset, int offsetPixels) {
+//            }
+////            @Override
+//            public void onPageSelected(int position) {
+//                resetTextView();
+//                switch (position) {
+//                    case 0:
+//                        Tv1.setTextColor(getResources().getColor(R.color.yellow));
+//                        break;
+//                    case 1:
+//                        Tv2.setTextColor(getResources().getColor(R.color.yellow));
+//                        break;
+//                    case 2:
+//                        Tv3.setTextColor(getResources().getColor(R.color.yellow));
+//                        break;
+//                }
+//                currentIndex = position;
+//            }
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+//    }
+
+//    private void resetTextView() {
+//        Tv1.setTextColor(Color.BLACK);
+//        Tv2.setTextColor(Color.BLACK);
+//  }
+
+    private void setDefaultPage() {
+        //1、获取一个fragmentManager的对象
+        FragmentManager fm = getFragmentManager();
+        //2、获取fragmentTransaction对象
+        FragmentTransaction transaction = fm.beginTransaction();
+        mCrecipe = new FragmentCollectionRecipe();
+        //3、设置页面
+        transaction.replace(R.id.collection_fragment_flay,mCrecipe);
+        Tv2.setTextColor(getResources().getColor(R.color.yellow));
+        //4、执行更改
+        transaction.commit();
     }
 
     private void setListener() {
-        BtBack.setOnClickListener(myListener);
-
-        lv_collection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Tvname = (TextView)view.findViewById(R.id.Tv_collection_name);
-
-                Intent intent = new Intent(CollectionActivity.this,RecipeShowActivity.class);
-                intent.putExtra("NAME",Tvname.getText().toString());
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void getData() {
-        ld.add((new DataCollection(0L,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(1L,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(2L,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(3L,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(0L,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(1L,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(2L,R.drawable.img_loading,"食趣","食趣")));
-        ld.add((new DataCollection(3L,R.drawable.img_loading,"食趣","食趣")));
-
+        bt_back.setOnClickListener(myListener);
+        Tv1.setOnClickListener(myListener);
+        Tv2.setOnClickListener(myListener);
     }
 
     public void getViews() {
-        lv_collection = (ListView)findViewById(R.id.Lv_collection);
-        BtBack = (Button)findViewById(R.id.collection_Bt_Back);
+        bt_back = (Button)findViewById(R.id.collection_Bt_Back);
+        Tv1 = (TextView)findViewById(R.id.fragment_collection_pickfun_Tv);
+        Tv2 = (TextView)findViewById(R.id.fragment_collection_recipe_Tv);
+        Llay = (LinearLayout)findViewById(R.id.fragment_collection_Llay);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Tv1.setTextColor(Color.BLACK);
+            Tv2.setTextColor(Color.BLACK);
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+
             switch (view.getId()){
                 case R.id.collection_Bt_Back:
                     finish();
                     break;
+
+                case R.id.fragment_collection_pickfun_Tv:
+                    if (mCpickfun == null){
+                        mCpickfun = new FragmentCollectionPickfun();
+                    }
+                    //3、设置页面
+                    transaction.replace(R.id.collection_fragment_flay,mCpickfun);
+                    Tv1.setTextColor(getResources().getColor(R.color.yellow));
+
+                    break;
+                case R.id.fragment_collection_recipe_Tv:
+                    if (mCrecipe== null){
+                        mCrecipe = new FragmentCollectionRecipe();
+                    }
+
+                    //3、设置页面
+                    transaction.replace(R.id.collection_fragment_flay,mCrecipe);
+                    Tv2.setTextColor(getResources().getColor(R.color.yellow));
+
+                    break;
             }
+
+            //4、执行更改
+            transaction.commit();
+            //页面刷新
+            Llay.invalidate();
         }
     };
-
 }
+

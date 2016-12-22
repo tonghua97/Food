@@ -4,7 +4,7 @@ package com.example.administrator.ui;
  * Created by Administrator on 2016/12/13.
  */
 public class Urls {
-//    public static String mIp = "www.nabyss.cn/foodfun";
+    //    public static String mIp = "www.nabyss.cn/foodfun";
     public static String mIp = "10.7.88.96";
     //按名称搜索URL
     public static String urlSearch = "http://" + mIp + "/http/searchByRecipesName";
@@ -26,5 +26,6 @@ public class Urls {
     public static String urlPickfun = "http://" + mIp + "/http/getFunTitle";
     //获取排行榜
     public static String urlRanklist = "http://" + mIp + "/http/getRanklist";
-	//登录URL
+    //登录URL
     public static String urlIsLogin = "http://" + mIp + "/http/isLogin";
+}
