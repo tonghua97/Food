@@ -51,4 +51,5 @@ public class Urls {
     public static String urlSetUserName = "http://" + mIp + "/http/setUserName";
     //修改性别
     public static String urlSetUserSex = "http://" + mIp + "/http/setUserSex";
-}
+    //修改食谱收藏
+    public static String urlSetRecipesCollect = "http://" + mIp + "/http/setRecipesCollect";}
