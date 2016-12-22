@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends Activity {
-    public static final String TAG = "search";
+
     private ListView mListView;
     private GridView mGirdView;
     private List<String> list = new ArrayList<>();

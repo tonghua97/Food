@@ -2,17 +2,23 @@ package com.example.administrator.myapplication;
 
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.administrator.adapter.PageFragmentAdapter;
 import com.example.administrator.fragment.FragmentCollectionPickfun;
 import com.example.administrator.fragment.FragmentCollectionRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lijing on 2016/11/23.
@@ -20,6 +26,9 @@ import com.example.administrator.fragment.FragmentCollectionRecipe;
  */
 
 public class CollectionActivity extends Activity{
+    private ViewPager viewPager;
+    private PageFragmentAdapter adapter;
+    private List<Fragment> fragmentList;
     private View view;
     private TextView Tv1;
     private TextView Tv2;
@@ -41,70 +50,67 @@ public class CollectionActivity extends Activity{
         //注册事件监听器
         setListener();
 //
-//        initView();
+        initView();
 
 //        设置默认的页面(fragment页面)
-        setDefaultPage();
+//        setDefaultPage();
     }
 
-//    private void initView() {
-//        FragmentCollectionPickfun fragmentCollectionPickfun = new FragmentCollectionPickfun();
-//        FragmentCollectionRecipe fragmentCollectionRecipe = new FragmentCollectionRecipe();
-//        fragmentList=new ArrayList<Fragment>();
-//        fragmentList.add(fragmentHomeRecommend);
-//        fragmentList.add(fragmentHomePickfun);
-//        fragmentList.add(fragmentHomeRank);
+    private void initView() {
+        FragmentCollectionPickfun fragmentCollectionPickfun = new FragmentCollectionPickfun();
+        FragmentCollectionRecipe fragmentCollectionRecipe = new FragmentCollectionRecipe();
+        fragmentList=new ArrayList<Fragment>();
+        fragmentList.add(fragmentCollectionRecipe);
+        fragmentList.add(fragmentCollectionPickfun);
 
-//        adapter=new PageFragmentAdapter(getChildFragmentManager(),fragmentList);
-//        viewPager.setAdapter(adapter);
-//        viewPager.setCurrentItem(0);
-//        viewPager.setOffscreenPageLimit(3);
-//        Tv1.setTextColor(getResources().getColor(R.color.yellow));
-
-//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float offset, int offsetPixels) {
-//            }
-////            @Override
-//            public void onPageSelected(int position) {
-//                resetTextView();
-//                switch (position) {
-//                    case 0:
-//                        Tv1.setTextColor(getResources().getColor(R.color.yellow));
-//                        break;
-//                    case 1:
-//                        Tv2.setTextColor(getResources().getColor(R.color.yellow));
-//                        break;
-//                    case 2:
-//                        Tv3.setTextColor(getResources().getColor(R.color.yellow));
-//                        break;
-//                }
-//                currentIndex = position;
-//            }
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
-//    }
-
-//    private void resetTextView() {
-//        Tv1.setTextColor(Color.BLACK);
-//        Tv2.setTextColor(Color.BLACK);
-//  }
-
-    private void setDefaultPage() {
-        //1、获取一个fragmentManager的对象
-        FragmentManager fm = getFragmentManager();
-        //2、获取fragmentTransaction对象
-        FragmentTransaction transaction = fm.beginTransaction();
-        mCrecipe = new FragmentCollectionRecipe();
-        //3、设置页面
-        transaction.replace(R.id.collection_fragment_flay,mCrecipe);
+        adapter=new PageFragmentAdapter(getFragmentManager(),fragmentList);
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(0);
+        viewPager.setOffscreenPageLimit(3);
         Tv2.setTextColor(getResources().getColor(R.color.yellow));
-        //4、执行更改
-        transaction.commit();
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float offset, int offsetPixels) {
+            }
+//            @Override
+            public void onPageSelected(int position) {
+                resetTextView();
+                switch (position) {
+                    case 0:
+                        Tv2.setTextColor(getResources().getColor(R.color.yellow));
+                        break;
+                    case 1:
+                        Tv1.setTextColor(getResources().getColor(R.color.yellow));
+                        break;
+
+                }
+                currentIndex = position;
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
+    private void resetTextView() {
+        Tv1.setTextColor(Color.BLACK);
+        Tv2.setTextColor(Color.BLACK);
+  }
+
+//    private void setDefaultPage() {
+//        //1、获取一个fragmentManager的对象
+//        FragmentManager fm = getFragmentManager();
+//        //2、获取fragmentTransaction对象
+//        FragmentTransaction transaction = fm.beginTransaction();
+//        mCrecipe = new FragmentCollectionRecipe();
+//        //3、设置页面
+//        transaction.replace(R.id.collection_fragment_flay,mCrecipe);
+//        Tv2.setTextColor(getResources().getColor(R.color.yellow));
+//        //4、执行更改
+//        transaction.commit();
+//    }
 
     private void setListener() {
         bt_back.setOnClickListener(myListener);
@@ -117,6 +123,7 @@ public class CollectionActivity extends Activity{
         Tv1 = (TextView)findViewById(R.id.fragment_collection_pickfun_Tv);
         Tv2 = (TextView)findViewById(R.id.fragment_collection_recipe_Tv);
         Llay = (LinearLayout)findViewById(R.id.fragment_collection_Llay);
+        viewPager = (ViewPager)findViewById(R.id.collection_fragment_flay);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -131,25 +138,13 @@ public class CollectionActivity extends Activity{
                 case R.id.collection_Bt_Back:
                     finish();
                     break;
-
-                case R.id.fragment_collection_pickfun_Tv:
-                    if (mCpickfun == null){
-                        mCpickfun = new FragmentCollectionPickfun();
-                    }
-                    //3、设置页面
-                    transaction.replace(R.id.collection_fragment_flay,mCpickfun);
-                    Tv1.setTextColor(getResources().getColor(R.color.yellow));
-
-                    break;
                 case R.id.fragment_collection_recipe_Tv:
-                    if (mCrecipe== null){
-                        mCrecipe = new FragmentCollectionRecipe();
-                    }
-
-                    //3、设置页面
-                    transaction.replace(R.id.collection_fragment_flay,mCrecipe);
+                    viewPager.setCurrentItem(0);
                     Tv2.setTextColor(getResources().getColor(R.color.yellow));
-
+                    break;
+                case R.id.fragment_collection_pickfun_Tv:
+                    viewPager.setCurrentItem(1);
+                    Tv1.setTextColor(getResources().getColor(R.color.yellow));
                     break;
             }
 
