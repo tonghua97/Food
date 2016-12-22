@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -27,13 +28,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,7 +65,6 @@ public class RecipeShowActivity extends Activity {
     private ListView mStep;  //步骤
     private ScrollView mSv; //滑动
 
-    private boolean mIscollect = false; //是否收藏
     private List<DataRecipeStep> mStepData = new ArrayList<DataRecipeStep>();
     private AdapterRecipeStep stepAdapter;
     private DataRecipe mRecipe = new DataRecipe();
@@ -84,41 +80,26 @@ public class RecipeShowActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-
+            /**
+             * @msg.what   1表示来自于添加过程； 2表示来自于删除过程
+             * @msg.arg1   1表示成功； 2表示失败
+             */
             if (msg.what == 1){
-                if (str.equals("0")){
-                    Toast.makeText(getApplicationContext(),"该食谱已收藏",Toast.LENGTH_SHORT).show();
-                }else if (str.equals("1")){
+                if(msg.arg1 ==1){
                     Toast.makeText(getApplicationContext(),"收藏成功",Toast.LENGTH_SHORT).show();
                     mLike.setImageResource(R.drawable.icon_like_down);
-                    mRecipe.setCollect(mRecipe.getCollect() + 1);
-                    mCollect.setText(mRecipe.getCollect()+"人收藏");
                     mRecipe.setIscollect(true);
                 }else {
-                    Toast.makeText(getApplicationContext(),"收藏失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"该食谱已收藏",Toast.LENGTH_SHORT).show();
                 }
-            }else if (msg.what == 2){
-                if (str.equals("0")){
-                    Toast.makeText(getApplicationContext(),"该食谱没有收藏",Toast.LENGTH_SHORT).show();
-                }else if (str.equals("1")){
-                    Toast.makeText(getApplicationContext(),"取消收藏成功",Toast.LENGTH_SHORT).show();
-                    mLike.setImageResource(R.drawable.icon_like_normal);
-                    mRecipe.setCollect(mRecipe.getCollect() -1);
-                    mCollect.setText(mRecipe.getCollect()+"人收藏");
-                    mRecipe.setIscollect(false);
-                }else {
-                    Toast.makeText(getApplicationContext(),"取消收藏失败",Toast.LENGTH_SHORT).show();
-                }
-            }else if (msg.what == 3){
-                if (str.equals("0")){
-                    mLike.setImageResource(R.drawable.icon_like_down);
-                    mRecipe.setIscollect(true);
-                }else {
+            }else if(msg.what ==2){
+                if(msg.arg1 ==1){
+                    Toast.makeText(getApplicationContext(),"取消成功",Toast.LENGTH_SHORT).show();
                     mLike.setImageResource(R.drawable.icon_like_normal);
                     mRecipe.setIscollect(false);
                 }
             }
-
+            mCollect.setText(mRecipe.getCollect()+"人收藏");
         }
     };
 
@@ -136,27 +117,9 @@ public class RecipeShowActivity extends Activity {
         mSv.smoothScrollTo(0, 0);
         //获取数据
         getHttpData();
-        //是否收藏的判断
+        //获取用户名
         SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
         userId = spf.getString("userId","");
-
-        if (userId == ""){
-
-        }else {
-            Thread thread = new Thread(){
-                @Override
-                public void run() {
-                    super.run();
-                    getHttpCollect();
-
-                    Message message = new Message();
-                    h.sendEmptyMessage(3);
-                }
-            };
-            thread.start();
-        }
-        //getData();
-        //stepString2ArrayList(RecipeStep);
         //绑定控件
         setListener();
         //添加数据
@@ -207,10 +170,15 @@ public class RecipeShowActivity extends Activity {
                                 @Override
                                 public void run() {
                                     super.run();
-                                    getHttpCollect();
-
+                                    String result = setCollect("add");
                                     Message m = new Message();
-                                    h.sendEmptyMessage(1);
+                                    m.what = 1;
+                                    if(result.equals("success")) {
+                                        m.arg1 = 1;
+                                    }else {
+                                        m.arg1 = 2;
+                                    }
+                                    h.sendMessage(m);
                                 }
                             };
                             thread.start();
@@ -221,17 +189,18 @@ public class RecipeShowActivity extends Activity {
                             @Override
                             public void run() {
                                 super.run();
-                                getHttpCollectDelete();
-
+                                String result = setCollect("delete");
                                 Message m = new Message();
-                                h.sendEmptyMessage(2);
+                                m.what = 2;
+                                if(result.equals("success")) {
+                                    m.arg1 = 1;
+                                }else {
+                                    m.arg1 = 2;
+                                }
+                                h.sendMessage(m);
                             }
                         };
                         thread.start();
-//                        mLike.setImageResource(R.drawable.icon_like_normal);
-//                        mRecipe.setCollect(mRecipe.getCollect() -1);
-//                        mCollect.setText(mRecipe.getCollect()+"人收藏");
-//                        mRecipe.setIscollect(false);
                     }
                     break;
                 default:
@@ -239,10 +208,6 @@ public class RecipeShowActivity extends Activity {
             }
         }
     };
-
-    private void getData(){
-        //mRecipe.setIscollect(mIscollect);
-    }
 
     private void setView(){
         mTitle.setText(mRecipe.getName());
@@ -270,6 +235,8 @@ public class RecipeShowActivity extends Activity {
         mMinor.setText(mRecipe.getMinor());
         if(mRecipe.iscollect()) {
             mLike.setImageResource(R.drawable.icon_like_down);
+        }else {
+            mLike.setImageResource(R.drawable.icon_like_normal);
         }
         mCollect.setText(mRecipe.getCollect()+"人收藏");
         mEffect.setText(mRecipe.getEffect());
@@ -281,14 +248,18 @@ public class RecipeShowActivity extends Activity {
     public void getHttpData() {
         //1、创建网络访问的类的对象
         AsyncHttpClient client = new AsyncHttpClient();
-        String recipesUrl = Urls.urlRecipesById + "?recipesId=" + mRecipesById;
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
+        String recipesUrl = Urls.urlRecipesById + "?recipesId=" + mRecipesById +"&userId=" + userId;
         //2、发送请求
         client.get(getApplicationContext(), recipesUrl, new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    JSONObject data = response.getJSONObject(0);
+                    String isCollect = response.getString("IsCollect");
+                    JSONArray recipes = response.getJSONArray("Recipes");
+                    JSONObject data = recipes.getJSONObject(0);
                     mRecipe.setName(data.getString("recipesName"));
                     mRecipe.setImage(data.getString("recipesImage"));
                     mRecipe.setIntroduction(data.getString("recipesIntro"));
@@ -297,6 +268,11 @@ public class RecipeShowActivity extends Activity {
                     mRecipe.setTime(data.getString("recipesTime"));
                     mRecipe.setMajor(data.getString("recipesMfood"));
                     mRecipe.setMinor(data.getString("recipesFood"));
+                    if(isCollect.equals("true")){
+                        mRecipe.setIscollect(true);
+                    }else {
+                        mRecipe.setIscollect(false);
+                    }
                     mRecipe.setCollect(Integer.parseInt(data.getString("recipesCollect")));
                     mRecipe.setEffect(data.getString("recipesEffect"));
                     RecipeStep = data.getString("recipesStep");
@@ -305,42 +281,8 @@ public class RecipeShowActivity extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-
-
-//        //创建网络访问的类的对象
-//        AsyncHttpClient Client = new AsyncHttpClient();
-//        String recipesUrl = Urls.urlRecipesById + "?recipesId=" + mRecipesById;
-//        Log.e("============",recipesUrl);
-//        //发送请求获取食谱详情
-//        Client.get(getApplicationContext(), recipesUrl, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                super.onSuccess(statusCode, headers, response);
-//                try {
-//                    JSONObject data = response.getJSONObject(0);
-//                    String name = data.getString("recipesName");
-//                    String image = data.getString("recipesImage");
-//                    String introduction = data.getString("recipesIntro");
-//                    String level = data.getString("recipesLevel");
-//                    String taste = data.getString("classifyName");
-//                    String time = data.getString("recipesTime");
-//                    String major = data.getString("recipesMfood");
-//                    String minor = data.getString("recipesFood");
-//                    int collect = Integer.parseInt(data.getString("recipesCollect"));
-//                    String effect = data.getString("recipesEffect");
-//                    mRecipe = new DataRecipe(Integer.parseInt(mRecipesById), image, name, introduction,
-//                            level, taste, time, major, minor, collect, false, effect);
-//                    RecipeStep = data.getString("recipesStep");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Log.e("========", "begin");
-//                }
-//
-//            }
-//        });
     }
     public void stepString2ArrayList(String RecipeStep){
         if (RecipeStep == null){
@@ -358,79 +300,48 @@ public class RecipeShowActivity extends Activity {
         }
     }
 
-    public void getHttpCollect() {
+    public String setCollect(String Operate){
+        String result = "";
         str = "";
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
         try {
-            URI u = new URI(Urls.urlRecipesCollect);
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(u);
+            String recipesUrl = Urls.urlSetRecipesCollect + "?recipesId=" + mRecipesById +"&userId=" + userId
+                    +"&operate=" + Operate;
+            URI u = new URI(recipesUrl);
 
-            NameValuePair pair1 = new BasicNameValuePair("FKcollectUser",userId);
-            NameValuePair pair2 = new BasicNameValuePair("FKrecipesId",mRecipesById);
-            List<NameValuePair> pairs = new ArrayList<>();
-            pairs.add(pair1);
-            pairs.add(pair2);
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(u);
 
-            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
-            httpPost.setEntity(entity);
-            HttpResponse response = httpClient.execute(httpPost);
+            HttpResponse response = httpclient.execute(httppost);
 
             HttpEntity httpentity = response.getEntity();
 
             if (httpentity != null) {
                 BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
-                String string = "";
+                String string="";
 
                 while ((string = buffer.readLine()) != null) {
                     str += string;
                 }
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getHttpCollectDelete() {
-        str = "";
-        try {
-            URI u = new URI(Urls.urlRecipesCollectDelete);
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(u);
-
-            NameValuePair pair1 = new BasicNameValuePair("FKcollectUser",userId);
-            NameValuePair pair2 = new BasicNameValuePair("FKrecipesId",mRecipesById);
-            List<NameValuePair> pairs = new ArrayList<>();
-            pairs.add(pair1);
-            pairs.add(pair2);
-
-            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
-            httpPost.setEntity(entity);
-            HttpResponse response = httpClient.execute(httpPost);
-
-            HttpEntity httpentity = response.getEntity();
-
-            if (httpentity != null) {
-                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
-                String string = "";
-
-                while ((string = buffer.readLine()) != null) {
-                    str += string;
-                }
+            JSONObject json = new JSONObject(str);
+            result = json.getString("msg");
+            Log.e("setCollect: ", result);
+            int collect = json.getInt("num");
+            if(result.equals("success")){
+                mRecipe.setCollect(collect);
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
+        return result;
     }
 }
