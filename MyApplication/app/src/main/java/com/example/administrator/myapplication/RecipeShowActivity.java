@@ -28,9 +28,12 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -306,15 +309,23 @@ public class RecipeShowActivity extends Activity {
         SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
         userId = spf.getString("userId","");
         try {
-            String recipesUrl = Urls.urlSetRecipesCollect + "?recipesId=" + mRecipesById +"&userId=" + userId
-                    +"&operate=" + Operate;
+            String recipesUrl = Urls.urlSetRecipesCollect;
             URI u = new URI(recipesUrl);
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(u);
+            HttpPost httpPost = new HttpPost(u);
 
-            HttpResponse response = httpclient.execute(httppost);
+            NameValuePair pair1 = new BasicNameValuePair("recipesId",mRecipesById);
+            NameValuePair pair2 = new BasicNameValuePair("userId",userId);
+            NameValuePair pair3 = new BasicNameValuePair("operate",Operate);
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair1);
+            pairs.add(pair2);
+            pairs.add(pair3);
 
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpclient.execute(httpPost);
             HttpEntity httpentity = response.getEntity();
 
             if (httpentity != null) {
@@ -343,5 +354,11 @@ public class RecipeShowActivity extends Activity {
         }
 
         return result;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getHttpData();
     }
 }
