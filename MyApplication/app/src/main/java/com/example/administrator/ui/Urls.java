@@ -52,4 +52,7 @@ public class Urls {
     //修改性别
     public static String urlSetUserSex = "http://" + mIp + "/http/setUserSex";
     //修改食谱收藏
-    public static String urlSetRecipesCollect = "http://" + mIp + "/http/setRecipesCollect";}
+    public static String urlSetRecipesCollect = "http://" + mIp + "/http/setRecipesCollect";
+    //修改食趣收藏
+    public static String urlSetFunCollect = "http://" + mIp + "/http/setFunCollect";
+}

@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:gravity="fill_vertical">
         <ImageView
-            android:id="@+id/Iv_collection"
+            android:id="@+id/Iv_collection_recipe"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/img_loading"
@@ -18,21 +18,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/Iv_collection">
+            android:layout_toRightOf="@id/Iv_collection_recipe">
             <TextView
                 android:layout_marginTop="10dp"
-                android:id="@+id/Tv_collection_name"
+                android:id="@+id/Tv_collection_name1"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:text="食趣食趣"
+                android:text="食谱名字"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_marginTop="10dp"
-                android:id="@+id/Tv_collection_introduction"
+                android:id="@+id/Tv_collection_introduction1"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣食趣"/>
+                android:text="食谱简介食谱简介食谱简介食谱简介食谱简介食谱简介"/>
         </LinearLayout>
 
         <ImageView

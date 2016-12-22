@@ -5,13 +5,13 @@ package com.example.administrator.domain;
  * Created by lijing on 2016/11/23.
  */
 
-public class DataCollection {
+public class DataCollectionPickfun {
     private long Id;    //收藏页id
     private int Image;   //收藏图片
     private String Name;   //收藏名称
     private String Introduction;   //收藏简介
 
-    public DataCollection(long id, int image, String introduction, String name) {
+    public DataCollectionPickfun(long id, int image, String introduction, String name) {
         Id = id;
         Image = image;
         Introduction = introduction;

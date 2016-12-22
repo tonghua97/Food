@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.domain.DataPickfun;
-import com.example.administrator.fragment.FragmentHomePickfun;
 import com.example.administrator.ui.Urls;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -51,7 +50,7 @@ public class PickfundetailActivity extends Activity {
     private TextView tvtitle,tvcontent;         //拾趣文章标题,文章内容
     private Button btnback;                  //返回按钮
     private ImageView Imgrecipe,collect;    //文章图片、收藏
-    private boolean isSelected = true;
+    private boolean isCollect = true;
     private String userId;
     private String str;
     private String funId;
@@ -64,44 +63,24 @@ public class PickfundetailActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            if (msg.what == 1){
+            if (msg.what == 0){
                 setParse();
                 setViews();
-            }else if (msg.what == 2){
-                if (str.equals("0")){
-                    Toast.makeText(getApplicationContext(),"该拾趣已收藏",Toast.LENGTH_SHORT).show();
-                }else if (str.equals("1")){
-                    Toast.makeText(getApplicationContext(),"该拾趣收藏成功",Toast.LENGTH_SHORT).show();
+            }else if (msg.what == 1){
+                if(msg.arg1 == 1){
+                    Toast.makeText(getApplicationContext(),"收藏成功",Toast.LENGTH_SHORT).show();
                     collect.setImageResource(R.drawable.img_collect);
-                    isSelected = false;
-                }else if (str.equals("2")){
-                    Toast.makeText(getApplicationContext(),"收藏失败",Toast.LENGTH_SHORT).show();
+                    isCollect = true;
+                }else {
+                    Toast.makeText(getApplicationContext(),"已收藏",Toast.LENGTH_SHORT).show();
                 }
-            }else if (msg.what == 3) {
-                if (str.equals("0")) {
-                    Toast.makeText(getApplicationContext(), "该拾趣没有收藏", Toast.LENGTH_SHORT).show();
-                } else if (str.equals("1")) {
-                    Toast.makeText(getApplicationContext(), "该拾趣取消收藏成功", Toast.LENGTH_SHORT).show();
+            }else if (msg.what == 2) {
+                if(msg.arg1 ==1){
+                    Toast.makeText(getApplicationContext(),"取消成功",Toast.LENGTH_SHORT).show();
                     collect.setImageResource(R.drawable.img_collect_unclick);
-                    isSelected = true;
-                } else if (str.equals("2")) {
-                    Toast.makeText(getApplicationContext(), "取消收藏失败", Toast.LENGTH_SHORT).show();
+                    isCollect = false;
                 }
-            }else {
-//                Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(PickfundetailActivity.this,RecipeShowActivity.class);
-                i.putExtra("Id",str);
-                startActivity(i);
             }
-//            }else if (msg.what == 4){
-//                if (str.equals("0")){
-//                    collect.setImageResource(R.drawable.img_collect);
-//                    isSelected = false;
-//                }else {
-//                    collect.setImageResource(R.drawable.img_collect_unclick);
-//                    isSelected = true;
-//                }
-//            }
         }
     };
 
@@ -109,10 +88,11 @@ public class PickfundetailActivity extends Activity {
         if (str == ""){
             return;
         }else{
-            str = str.substring(str.indexOf("["), str.length());
 
             try {
-                JSONArray jsonArray = new JSONArray(str);
+                JSONObject json = new JSONObject(str);
+                String IsCollect = json.getString("IsCollect");
+                JSONArray jsonArray = json.getJSONArray("Fun");
 
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 data = new DataPickfun();
@@ -120,6 +100,12 @@ public class PickfundetailActivity extends Activity {
                 data.setmPickfun_Name(jsonObject.getString("funTitle"));
                 data.setId(jsonObject.getInt("funId"));
                 data.setTvcontent(jsonObject.getString("funContent"));
+                if (IsCollect.equals("true")){
+                    isCollect = true;
+                }else {
+                    isCollect = false;
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -144,22 +130,10 @@ public class PickfundetailActivity extends Activity {
                 getHttpData();
 
                 Message m = new Message();
-                h.sendEmptyMessage(1);
+                h.sendEmptyMessage(0);
             }
         };
         thread.start();
-        //判断是否收藏
-//        Thread th = new Thread(){
-//            @Override
-//            public void run() {
-//                super.run();
-//                getHttpFunCollect();
-//
-//                Message m = new Message();
-//                h.sendEmptyMessage(4);
-//            }
-//        };
-//        th.start();
         //设置监听
         setListener();
     }
@@ -171,7 +145,6 @@ public class PickfundetailActivity extends Activity {
         urlImage = data.getUrl();
         String string = urlImage.substring(7, urlImage.indexOf("/", 7));
         urlImage = urlImage.replaceAll(string, Urls.mIp);
-        Log.e(urlImage,"String");
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
@@ -181,6 +154,11 @@ public class PickfundetailActivity extends Activity {
                 .build();//构建完成
         imageLoader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
         imageLoader.displayImage(urlImage,Imgrecipe,options);
+        if(isCollect){
+            collect.setImageResource(R.drawable.img_collect);
+        }else {
+            collect.setImageResource(R.drawable.img_collect_unclick);
+        }
     }
 
     private void setListener() {
@@ -205,7 +183,7 @@ public class PickfundetailActivity extends Activity {
                     finish();
                     break;
                 case R.id.Iv_pickfundetail_collect:
-                    if (isSelected){
+                    if (!isCollect){
                         SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
                         userId = spf.getString("userId","");
                         if (userId == ""){
@@ -217,98 +195,57 @@ public class PickfundetailActivity extends Activity {
                                 @Override
                                 public void run() {
                                     super.run();
-                                    getHttpFunCollect();
-
+                                    String result = setFunCollect("add");
                                     Message m = new Message();
-                                    h.sendEmptyMessage(2);
+                                    m.what = 1;
+                                    if(result.equals("success")) {
+                                        m.arg1 = 1;
+                                    }else {
+                                        m.arg1 = 2;
+                                    }
+                                    h.sendMessage(m);
                                 }
                             };
                             thread.start();
                         }
-//                        collect.setImageResource(R.drawable.img_collect);
-//                        isSelected = false;
+
                     }else {
                         Thread thread = new Thread(){
                             @Override
                             public void run() {
                                 super.run();
-                                getHttpFunCollectDelete();
-
+                                String result = setFunCollect("delete");
                                 Message m = new Message();
-                                h.sendEmptyMessage(3);
+                                m.what = 2;
+                                if(result.equals("success")) {
+                                    m.arg1 = 1;
+                                }else {
+                                    m.arg1 = 2;
+                                }
+                                h.sendMessage(m);
                             }
                         };
                         thread.start();
-//                        collect.setImageResource(R.drawable.img_collect_unclick);
-//                        isSelected = true;
                     }
-                    break;
-                case R.id.Iv_pickfundetail_recipeimg:
-                    Thread t = new Thread(){
-                        @Override
-                        public void run() {
-                            super.run();
-                            getRecipesId();
-
-                            Message m = new Message();
-                            h.sendEmptyMessage(4);
-                        }
-                    };
-                    t.start();
                     break;
             }
         }
     };
 
-    public void getHttpFunCollect() {
-        str = "";
-        try {
-            URI u = new URI(Urls.urlFunCollect);
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(u);
-
-            NameValuePair pair1 = new BasicNameValuePair("funcollectUser",userId);
-            NameValuePair pair2 = new BasicNameValuePair("FKfunId",funId);
-            List<NameValuePair> pairs = new ArrayList<>();
-            pairs.add(pair1);
-            pairs.add(pair2);
-
-            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
-            httpPost.setEntity(entity);
-            HttpResponse response = httpClient.execute(httpPost);
-
-            HttpEntity httpentity = response.getEntity();
-
-            if (httpentity != null) {
-                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
-                String string = "";
-
-                while ((string = buffer.readLine()) != null) {
-                    str += string;
-                }
-            }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void getHttpData() {
         str = "";
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
         try {
             URI u = new URI(Urls.urlFun);
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(u);
 
-            NameValuePair pair = new BasicNameValuePair("funId",funId);
+            NameValuePair pair1 = new BasicNameValuePair("funId",funId);
+            NameValuePair pair2 = new BasicNameValuePair("userId",userId);
             List<NameValuePair> pairs = new ArrayList<>();
-            pairs.add(pair);
-
+            pairs.add(pair1);
+            pairs.add(pair2);
             HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
             httpPost.setEntity(entity);
             HttpResponse response = httpClient.execute(httpPost);
@@ -334,18 +271,21 @@ public class PickfundetailActivity extends Activity {
         }
     }
 
-    public void getHttpFunCollectDelete() {
+    public String setFunCollect(String Operate) {
+        String result = "";
         str = "";
         try {
-            URI u = new URI(Urls.urlFunCollectDelete);
+            URI u = new URI(Urls.urlSetFunCollect);
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(u);
 
-            NameValuePair pair1 = new BasicNameValuePair("funcollectUser",userId);
-            NameValuePair pair2 = new BasicNameValuePair("FKfunId",funId);
+            NameValuePair pair1 = new BasicNameValuePair("userId",userId);
+            NameValuePair pair2 = new BasicNameValuePair("funId",funId);
+            NameValuePair pair3 = new BasicNameValuePair("operate",Operate);
             List<NameValuePair> pairs = new ArrayList<>();
             pairs.add(pair1);
             pairs.add(pair2);
+            pairs.add(pair3);
 
             HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
             httpPost.setEntity(entity);
@@ -361,6 +301,8 @@ public class PickfundetailActivity extends Activity {
                     str += string;
                 }
             }
+            JSONObject json = new JSONObject(str);
+            result = json.getString("msg");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -369,43 +311,26 @@ public class PickfundetailActivity extends Activity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return result;
     }
 
-    public void getRecipesId() {
-        str = "";
-        try {
-            URI u = new URI(Urls.urlRecipesId);
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(u);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                getHttpData();
 
-            NameValuePair pair1 = new BasicNameValuePair("recipesName",data.getmPickfun_Name());
-            List<NameValuePair> pairs = new ArrayList<>();
-            pairs.add(pair1);
-
-            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
-            httpPost.setEntity(entity);
-            HttpResponse response = httpClient.execute(httpPost);
-
-            HttpEntity httpentity = response.getEntity();
-
-            if (httpentity != null) {
-                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
-                String string = "";
-
-                while ((string = buffer.readLine()) != null) {
-                    str += string;
-                }
+                Message m = new Message();
+                h.sendEmptyMessage(0);
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        };
+        thread.start();
     }
 }
 

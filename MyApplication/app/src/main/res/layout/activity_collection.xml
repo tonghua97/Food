@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -25,10 +26,44 @@
             android:text="我的收藏"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
-    <ListView
-        android:id="@+id/Lv_collection"
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/fragment_collection_Llay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="5dp">
-    </ListView>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/fragment_collection_recipe_Tv"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="食谱"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/fragment_collection_pickfun_Tv"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="拾趣"/>
+        </LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/collection_fragment_flay"
+            android:layout_width="match_parent"
+            android:layout_height="0.0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="5">
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
 </LinearLayout>
