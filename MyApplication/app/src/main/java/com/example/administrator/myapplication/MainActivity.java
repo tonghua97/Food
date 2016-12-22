@@ -57,6 +57,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Utils.utils = 1;
         //获取界面的控件
         getViews();
         //注册事件监听器
@@ -172,14 +173,17 @@ public class MainActivity extends Activity {
 
             switch (view.getId()){
                 case R.id.main_Llay_home:
+                    Utils.utils = 1;
                     setMenuItemColor();
                     setDefaultPage1();
                     break;
                 case R.id.main_Llay_classify:
+                    Utils.utils = 2;
                     setMenuItemColor();
                     setDefaultPage2();
                     break;
                 case R.id.main_Llay_person:
+                    Utils.utils = 3;
                     setMenuItemColor();
                     setDefaultPage3();
                     break;

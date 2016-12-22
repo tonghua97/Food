@@ -17,6 +17,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +31,33 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.domain.DataUser;
+import com.example.administrator.ui.Urls;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 梁爽 on 16.11.24.
@@ -54,20 +82,184 @@ public class SetActivity extends Activity {
     protected static Uri tempUri;
     private ImageView iv_personal_icon;
     private static final String IMAGE_FILE_NAME = "image.jpg";// 头像文件
+
+    private String userId;
+    private String str;
+    private DataUser data;
+    private String urlImage;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
+    private String sex;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (msg.what == 1){
+                if (str.equals("0")){
+                    Toast.makeText(getApplicationContext(),"错误",Toast.LENGTH_SHORT).show();
+                }else{
+                    setParse();
+//                Toast.makeText(getApplication(),data.getUserName(),Toast.LENGTH_SHORT).show();
+                    setViews();
+                }
+            }else if (msg.what == 2){
+                if (str.equals("0")){
+                    Toast.makeText(getApplicationContext(),"用户不存在",Toast.LENGTH_SHORT).show();
+                }else if (str.equals("1")){
+                    Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
+                }else if (str.equals("2")){
+                    Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }
+    };
+
+    private void setViews() {
+        mUname.setText(data.getUserName());
+        mPhone.setText(data.getUserNum());
+        mEmail.setText(data.getUserPost());
+        if (data.getUserSex().equals("男")){
+            mSpGender.setSelection(0,true);
+        }else{
+            mSpGender.setSelection(1,true);
+        }
+
+
+        urlImage = data.getUserImage();
+        String string = urlImage.substring(7, urlImage.indexOf("/", 7));
+        urlImage = urlImage.replaceAll(string, Urls.mIp);
+        Log.e(urlImage,"String");
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
+                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
+                .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
+                .build();//构建完成
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
+        imageLoader.displayImage(urlImage,iv_personal_icon,options);
+    }
+
+    private void setParse() {
+        if (str == ""){
+            return;
+        }else{
+
+            try {
+                JSONObject json = new JSONObject(str);
+                data = new DataUser();
+                data.setUserName(json.getString("userName"));
+                data.setUserImage(json.getString("userImage"));
+                data.setUserAccount(json.getString("userAccount"));
+                data.setUserNum(json.getString("userNum"));
+                data.setUserPost(json.getString("userPost"));
+                data.setUserSex(json.getString("userSex"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting);
+
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
         //获取控件
         getViews();
-        //获取用户名、手机号、邮箱
-        getUname();
-        getPhone();
-        getEmail();
+
+        if (userId != "") {
+            Thread thread = new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    getHttpUser();
+
+                    Message m = new Message();
+                    handler.sendEmptyMessage(1);
+                }
+            };
+            thread.start();
+
+        }
+
+//        //获取控件
+//        getViews();
+//        //获取用户名、手机号、邮箱
+//        getUname();
+//        getPhone();
+//        getEmail();
         //设置监听
         setListener();
         //设置下拉列表--用户性别选择
-        setSpinner();
+//        setSpinner();
+
+        mSpGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String[] array = getResources().getStringArray(R.array.setting_gender);
+                sex = array[i];
+                Thread thread = new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+
+                        UpdateUserSex();
+                        Message m = new Message();
+                        handler.sendEmptyMessage(2);
+                    }
+                };
+                thread.start();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void UpdateUserSex() {
+        try {
+            str = "";
+            URI u = new URI(Urls.urlSetUserSex);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair1 = new BasicNameValuePair("userId",userId);
+            NameValuePair pair2 = new BasicNameValuePair("userSex",sex);
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair1);
+            pairs.add(pair2);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = "";
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -156,9 +348,11 @@ public class SetActivity extends Activity {
                     showChoosePicDialog();
                     break;
                 case R.id.setting_Rlay_unameedit:
-                     /*跳转到用户名修改页面*/
+                     /*跳转到昵称修改页面*/
                     Intent intent1 = new Intent(SetActivity.this,Personal_setting_UnameEditActivity.class);
+                    intent1.putExtra("setting_userName",mUname.getText().toString());
                     startActivity(intent1);
+                    finish();
                     break;
                 case R.id.setting_Rlay_phone:
                      /*跳转到手机号修改页面*/
@@ -178,6 +372,42 @@ public class SetActivity extends Activity {
                 default:
                     break;
             }
+        }
+    }
+
+    public void getHttpUser() {
+        try {
+            str = "";
+            URI u = new URI(Urls.urlUser);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair = new BasicNameValuePair("userId",userId);
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = null;
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

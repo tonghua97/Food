@@ -93,7 +93,7 @@ public class FragmentHomePickfun extends Fragment implements BGARefreshLayout.BG
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TvTile = (TextView)view.findViewById(R.id.Tv_pickfun_title);
                 Intent intent = new Intent(getActivity(), PickfundetailActivity.class);
-                intent.putExtra("TITLE",TvTile.getText().toString());
+                intent.putExtra("FUNID",ldp.get(i).getId()+"");
                 startActivity(intent);
             }
         });

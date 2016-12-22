@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.ui.Urls;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -73,11 +75,11 @@ public class SearchMaterialActivity extends Activity {
                 if (holder.cb.isChecked() == true) {
                     System.out.println("选中" + position);
                     //添加到集合中；
-                    selectedItem.add(list_meat.get(position));
+                    selectedItem.add(list_meat.get(position) + "、");
                 } else {
                     System.out.println("取消选中" + position);
                     //从集合中移除元素。
-                    selectedItem.remove(list_meat.get(position));
+                    selectedItem.remove(list_meat.get(position) + "、");
                 }
                 //最后遍历集合显示在textview;
                 for (int i = 0; i < selectedItem.size(); i++) {
@@ -99,11 +101,11 @@ public class SearchMaterialActivity extends Activity {
                 if (holder.cb.isChecked() == true) {
                     System.out.println("选中" + position);
                     //添加到集合中；
-                    selectedItem.add(list_vegetable.get(position));
+                    selectedItem.add(list_vegetable.get(position) + "、");
                 } else {
                     System.out.println("取消选中" + position);
                     //从集合中移除元素。
-                    selectedItem.remove(list_vegetable.get(position));
+                    selectedItem.remove(list_vegetable.get(position) + "、");
                 }
                 //最后遍历集合显示在textview;
                 for (int i = 0; i < selectedItem.size(); i++) {
@@ -146,9 +148,10 @@ public class SearchMaterialActivity extends Activity {
                     search = textview.getText().toString();
                     //显示搜索结果
                     if(search != null){
-                        Intent intent = new Intent();
-                        intent.putExtra("NAME",search);
-                        intent.setClass(SearchMaterialActivity.this,ClassificationListActivity.class);
+                        Intent intent = new Intent(SearchMaterialActivity.this,SearchListActivity.class);
+                        intent.putExtra("title",search);
+                        intent.putExtra("Url", Urls.urlSearchFood);
+                        intent.putExtra("flag","3");
                         startActivity(intent);
                     }else{
                         Toast.makeText(SearchMaterialActivity.this,"请选择食材",Toast.LENGTH_SHORT).show();
@@ -171,35 +174,57 @@ public class SearchMaterialActivity extends Activity {
 
     private void initData(){
         list_meat = new ArrayList();
-        list_meat.add("猪肉");
-        list_meat.add("牛肉");
-        list_meat.add("羊肉");
-        list_meat.add("鸡肉");
-        list_meat.add("鸭肉");
-        list_meat.add("鱼肉");
-        list_meat.add("虾");
-        list_meat.add("贝类");
-        list_meat.add("蟹");
+        list_meat.add("猪肉 ");
+        list_meat.add("牛肉 ");
+        list_meat.add("羊肉 ");
+        list_meat.add("鸡肉 ");
+        list_meat.add("鸭肉 ");
+        list_meat.add("鱼肉 ");
+        list_meat.add("虾 ");
+        list_meat.add("贝类 ");
+        list_meat.add("蟹 ");
 
         list_vegetable = new ArrayList();
         list_vegetable.add("白菜");
-        list_vegetable.add("菠菜");
-        list_vegetable.add("油菜");
-        list_vegetable.add("胡萝卜");
-        list_vegetable.add("黄瓜");
-        list_vegetable.add("西红柿");
-        list_vegetable.add("辣椒");
-        list_vegetable.add("甜椒");
-        list_vegetable.add("茼蒿");
-        list_vegetable.add("蒲菜");
-        list_vegetable.add("豆角");
-        list_vegetable.add("荠菜");
-        list_vegetable.add("黄瓜");
-        list_vegetable.add("香菇");
-        list_vegetable.add("红薯");
-        list_vegetable.add("土豆");
-        list_vegetable.add("芹菜");
-        list_vegetable.add("西兰花");
+        list_vegetable.add("百合");
+        list_vegetable.add("包心菜 ");
+        list_vegetable.add("北瓜 ");
+        list_vegetable.add("冬瓜 ");
+        list_vegetable.add("豆角 ");
+        list_vegetable.add("海带 ");
+        list_vegetable.add("黑豆 ");
+        list_vegetable.add("红薯 ");
+        list_vegetable.add("胡萝卜 ");
+        list_vegetable.add("黄豆 ");
+        list_vegetable.add("黄瓜 ");
+        list_vegetable.add("茴香 ");
+        list_vegetable.add("豇豆 ");
+        list_vegetable.add("金针菇 ");
+        list_vegetable.add("韭菜 ");
+        list_vegetable.add("空心菜 ");
+        list_vegetable.add("辣椒 ");
+        list_vegetable.add("莲子 ");
+        list_vegetable.add("凉瓜 ");
+        list_vegetable.add("木耳 ");
+        list_vegetable.add("南瓜 ");
+        list_vegetable.add("蒲菜 ");
+        list_vegetable.add("荠菜 ");
+        list_vegetable.add("青椒 ");
+        list_vegetable.add("秋葵 ");
+        list_vegetable.add("丝瓜 ");
+        list_vegetable.add("甜椒 ");
+        list_vegetable.add("茼蒿 ");
+        list_vegetable.add("土豆 ");
+        list_vegetable.add("豌豆 ");
+        list_vegetable.add("西红柿 ");
+        list_vegetable.add("西兰花 ");
+        list_vegetable.add("香菇 ");
+        list_vegetable.add("小米椒 ");
+        list_vegetable.add("杏鲍菇 ");
+        list_vegetable.add("薏米 ");
+        list_vegetable.add("银耳 ");
+        list_vegetable.add("油菜 ");
+        list_vegetable.add("紫菜 ");
 
     }
 

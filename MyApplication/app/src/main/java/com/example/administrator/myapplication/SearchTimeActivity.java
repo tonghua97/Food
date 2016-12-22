@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.ui.Urls;
+
 /**
  * Created by lijing on 16/11/29.
  */
@@ -44,8 +46,11 @@ public class SearchTimeActivity extends Activity implements ZJBCircleSeekBar.OnC
                     mEtSearch.setText(mTextView.getText().toString() + "分钟");
                     break;
                 case R.id.search_foodtime_Iv:
-                    Intent intent = new Intent(SearchTimeActivity.this,SearchListTimeActivity.class);
-                    intent.putExtra("time",mEtSearch.getText().toString());
+//                    Intent intent = new Intent(SearchTimeActivity.this,SearchListTimeActivity.class);
+                    Intent intent = new Intent(SearchTimeActivity.this,SearchListActivity.class);
+                    intent.putExtra("title",mEtSearch.getText().toString());
+                    intent.putExtra("Url", Urls.urlSearchTime);
+                    intent.putExtra("flag","2");
                     startActivity(intent);
                     break;
                 case R.id.Iv_search_back:
