@@ -83,7 +83,7 @@
         android:id="@+id/personal_rl_title1"
         android:background="@drawable/border_personal">
         <ImageView
-            android:layout_width="35dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:id="@+id/personal_iv_collection"
             android:layout_alignParentLeft="true"
@@ -118,7 +118,7 @@
         android:id="@+id/personal_rl_title2"
         android:background="@drawable/border_personal">
         <ImageView
-            android:layout_width="35dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:id="@+id/personal_iv_setting"
             android:layout_alignParentLeft="true"
@@ -154,7 +154,7 @@
         android:id="@+id/personal_rl_title3"
         android:background="@drawable/border_personal">
         <ImageView
-            android:layout_width="35dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:id="@+id/personal_iv_about"
             android:layout_alignParentLeft="true"
@@ -190,7 +190,7 @@
         android:id="@+id/personal_rl_title4"
         android:background="@drawable/border_personal">
         <ImageView
-            android:layout_width="35dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:id="@+id/personal_iv_feedback"
             android:layout_alignParentLeft="true"

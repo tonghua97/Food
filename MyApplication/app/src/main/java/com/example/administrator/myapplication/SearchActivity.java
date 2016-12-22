@@ -2,9 +2,9 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 import com.example.administrator.adapter.AdapterSearchGirdView;
@@ -42,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends Activity {
+    public static final String TAG = "search";
     private ListView mListView;
     private GridView mGirdView;
     private List<String> list = new ArrayList<>();

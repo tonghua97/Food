@@ -18,7 +18,7 @@
             android:focusable="true"
             android:id="@+id/search_sousuo"
             android:focusableInTouchMode="true"/>
-        <EditText
+        <com.example.administrator.ui.BiuEditText
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:gravity="center_vertical"
