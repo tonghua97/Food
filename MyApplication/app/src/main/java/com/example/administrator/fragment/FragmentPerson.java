@@ -65,6 +65,8 @@ public class FragmentPerson extends Fragment{
     private CircleImageView head;
     private String str;
     private String userId;
+    private String Id;
+    private String userName;
 
     @Nullable
     @Override
@@ -79,16 +81,23 @@ public class FragmentPerson extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         getViews();
-        Intent intent = getActivity().getIntent();
-        String userName = intent.getStringExtra("userName");
+//        Intent intent = getActivity().getIntent();
+//        String userName = intent.getStringExtra("userName");
 //        Utils.username = intent.getStringExtra("userName");
+        SharedPreferences spf = getActivity().getSharedPreferences("MYAPP",Context.MODE_PRIVATE);
+        Id = spf.getString("userId","");
+        userName = spf.getString("userName","");
+
+        if (Id != ""){
+            Utils.isTrue = 2;
+        }
 
         if (Utils.isTrue == 2){
             mRlaymiddle.setVisibility(View.GONE);
             mUsername.setVisibility(View.VISIBLE);
             mLlaylogin.setVisibility(View.VISIBLE);
             mLlayBottom.setVisibility(View.GONE);
-            mLlayname.setText(Utils.username);
+            mLlayname.setText(userName);
         }else {
             mRlaymiddle.setVisibility(View.VISIBLE);
             mUsername.setVisibility(View.GONE);
@@ -175,10 +184,11 @@ public class FragmentPerson extends Fragment{
                     SharedPreferences.Editor editor = spf.edit();
                     editor.clear();
                     editor.commit();
-                    Utils.username = null;
+//                    Utils.username = null;
                     Utils.isTrue = 1;
                     Intent intent5 = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent5);
+//                    getActivity().finish();
                     break;
             }
         }

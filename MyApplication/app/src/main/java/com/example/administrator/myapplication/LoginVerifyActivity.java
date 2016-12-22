@@ -67,13 +67,27 @@ public class LoginVerifyActivity extends Activity {
                 SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
                 SharedPreferences.Editor editor = spf.edit();
                 editor.putString("userId",userId);
+                editor.putString("userName",userName);
                 editor.commit();
-                Utils.username = userName;
-                Utils.utils = 3;
-                Utils.isTrue = 2;
-                Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
-                intent.putExtra("userName",userName);
-                startActivity(intent);
+//                Utils.username = userName;
+
+                if (Utils.utils == 3){
+                    Utils.utils = 3;
+                    Utils.isTrue = 2;
+                    Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
+//                    intent.putExtra("userName",userName);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Utils.isTrue = 2;
+                    finish();
+                }
+
+//                Utils.utils = 3;
+//                Utils.isTrue = 2;
+//                Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
+//                intent.putExtra("userName",userName);
+//                startActivity(intent);
             }
         }
     };

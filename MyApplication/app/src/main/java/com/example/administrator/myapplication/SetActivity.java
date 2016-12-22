@@ -88,18 +88,29 @@ public class SetActivity extends Activity {
     private DataUser data;
     private String urlImage;
     public ImageLoader imageLoader = ImageLoader.getInstance();
+    private String sex;
 
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            if (str.equals("0")){
-                Toast.makeText(getApplicationContext(),"错误",Toast.LENGTH_SHORT).show();
-            }else{
-                setParse();
+            if (msg.what == 1){
+                if (str.equals("0")){
+                    Toast.makeText(getApplicationContext(),"错误",Toast.LENGTH_SHORT).show();
+                }else{
+                    setParse();
 //                Toast.makeText(getApplication(),data.getUserName(),Toast.LENGTH_SHORT).show();
-                setViews();
+                    setViews();
+                }
+            }else if (msg.what == 2){
+                if (str.equals("0")){
+                    Toast.makeText(getApplicationContext(),"用户不存在",Toast.LENGTH_SHORT).show();
+                }else if (str.equals("1")){
+                    Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
+                }else if (str.equals("2")){
+                    Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();
+                }
             }
 
         }
@@ -170,7 +181,7 @@ public class SetActivity extends Activity {
                     getHttpUser();
 
                     Message m = new Message();
-                    handler.sendMessage(m);
+                    handler.sendEmptyMessage(1);
                 }
             };
             thread.start();
@@ -187,6 +198,68 @@ public class SetActivity extends Activity {
         setListener();
         //设置下拉列表--用户性别选择
 //        setSpinner();
+
+        mSpGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String[] array = getResources().getStringArray(R.array.setting_gender);
+                sex = array[i];
+                Thread thread = new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+
+                        UpdateUserSex();
+                        Message m = new Message();
+                        handler.sendEmptyMessage(2);
+                    }
+                };
+                thread.start();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void UpdateUserSex() {
+        try {
+            str = "";
+            URI u = new URI(Urls.urlSetUserSex);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair1 = new BasicNameValuePair("userId",userId);
+            NameValuePair pair2 = new BasicNameValuePair("userSex",sex);
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair1);
+            pairs.add(pair2);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = "";
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -275,9 +348,11 @@ public class SetActivity extends Activity {
                     showChoosePicDialog();
                     break;
                 case R.id.setting_Rlay_unameedit:
-                     /*跳转到用户名修改页面*/
+                     /*跳转到昵称修改页面*/
                     Intent intent1 = new Intent(SetActivity.this,Personal_setting_UnameEditActivity.class);
+                    intent1.putExtra("setting_userName",mUname.getText().toString());
                     startActivity(intent1);
+                    finish();
                     break;
                 case R.id.setting_Rlay_phone:
                      /*跳转到手机号修改页面*/
