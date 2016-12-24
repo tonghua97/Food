@@ -97,6 +97,7 @@ public class SetActivity extends Activity {
     private String urlImage;
     public ImageLoader imageLoader = ImageLoader.getInstance();
     private String sex;
+    public  boolean isFirstSetSex = true;
 
     private Handler handler = new Handler(){
         @Override
@@ -112,12 +113,16 @@ public class SetActivity extends Activity {
                     setViews();
                 }
             }else if (msg.what == 2){
-                if (str.equals("0")){
-                    Toast.makeText(getApplicationContext(),"用户不存在",Toast.LENGTH_SHORT).show();
-                }else if (str.equals("1")){
-                    Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
-                }else if (str.equals("2")){
-                    Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();
+                if(!isFirstSetSex) {
+                    if (str.equals("0")) {
+                        Toast.makeText(getApplicationContext(), "用户不存在", Toast.LENGTH_SHORT).show();
+                    } else if (str.equals("1")) {
+                        Toast.makeText(getApplicationContext(), "修改成功", Toast.LENGTH_SHORT).show();
+                    } else if (str.equals("2")) {
+                        Toast.makeText(getApplicationContext(), "修改失败", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    isFirstSetSex = false;
                 }
             }
 
@@ -139,7 +144,6 @@ public class SetActivity extends Activity {
         if (urlImage.contains("http://")){
             String string = urlImage.substring(7, urlImage.indexOf("/", 7));
             urlImage = urlImage.replaceAll(string, Urls.mIp);
-            Log.e(urlImage,"String");
 
             DisplayImageOptions options = new DisplayImageOptions.Builder()
                     .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
@@ -201,12 +205,6 @@ public class SetActivity extends Activity {
 
         }
 
-//        //获取控件
-//        getViews();
-//        //获取用户名、手机号、邮箱
-//        getUname();
-//        getPhone();
-//        getEmail();
         //设置监听
         setListener();
         //设置下拉列表--用户性别选择
@@ -221,7 +219,6 @@ public class SetActivity extends Activity {
                     @Override
                     public void run() {
                         super.run();
-
                         UpdateUserSex();
                         Message m = new Message();
                         handler.sendEmptyMessage(2);
@@ -391,6 +388,7 @@ public class SetActivity extends Activity {
     }
 
     public void getHttpUser() {
+        isFirstSetSex = true;
         try {
             str = "";
             URI u = new URI(Urls.urlUser);
@@ -536,43 +534,6 @@ public class SetActivity extends Activity {
             photo = toRoundBitmap(photo);//将头像设置成圆形
             Drawable drawable = new BitmapDrawable(photo);
             iv_personal_icon.setImageDrawable(drawable);
-
-//            //  saveImage();
-//            try {
-//                SharedPreferences mySharedPreferences=getSharedPreferences("base64", Activity.MODE_PRIVATE);
-//                SharedPreferences.Editor editor1=mySharedPreferences.edit();
-//                ByteArrayOutputStream baos=new ByteArrayOutputStream();
-//                //读取和压缩qq.png，并将其压缩结果保存在ByteArrayOutputStream对象中
-//
-//                BitmapFactory.decodeResource(getResources(),/*图片.jpg*/).compress(Bitmap.CompressFormat.JPEG, 50, baos);
-//                //对压缩后的字节进行base64编码
-//                String imageBase64=new String(Base64.encode(baos.toByteArray(),Base64.DEFAULT));
-//                // String imageBase64=new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
-//                //保存转换后的Base64格式字符串
-//                editor1.putString("image", imageBase64);
-//                editor1.commit();
-//                baos.close();
-//
-//            } catch (Exception e) {
-//                // TODO: handle exception
-//            }
-//
-//
-//            //getImage
-//                //下面代码从base64.xml文件中读取以保存的图像，并将其显示在ImageView控件中
-//                try {
-//                    SharedPreferences mySharedPreference=getSharedPreferences("base64", Activity.MODE_PRIVATE);
-//                    //读取Base64格式的图像数据
-//                    String image=mySharedPreference.getString("image", "");
-//                    //对Base64格式的字符串进行解码，还原成字节数组
-//                    byte[] imageBytes=Base64.decode(image.getBytes(), Base64.DEFAULT);
-//                    ByteArrayInputStream bais=new ByteArrayInputStream(imageBytes);
-//                    ImageView imageView=(ImageView)findViewById(R.id.Setting_Iv_avatar);
-//                    imageView.setImageDrawable(Drawable.createFromStream(bais, "image"));
-//                    bais.close();
-//                } catch (Exception e) {
-//                    // TODO: handle exception
-//                }
             //上传至服务器
             uploadPic(cropImagePath);
         }
@@ -649,6 +610,10 @@ public class SetActivity extends Activity {
         }
     }
 
+    /**
+     * 上传头像
+     * @param cropImagePath  文件路径
+     */
     private void uploadPic(String cropImagePath ) {
         if (cropImagePath == null) {
            Toast.makeText(SetActivity.this,"文件不存在",Toast.LENGTH_SHORT).show();
@@ -659,11 +624,8 @@ public class SetActivity extends Activity {
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
             try {
-//                params.put("userId", "4");
-                Toast.makeText(getApplicationContext(),userId,Toast.LENGTH_SHORT).show();
                 params.put("userId", userId);
                 params.put("img", file);
-                Toast.makeText(getApplicationContext(),params.toString(),Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -673,173 +635,21 @@ public class SetActivity extends Activity {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
                     String result = new String(bytes);
-                    Log.e("bytes", result);
-                    if (result.contains("http://")) {
-//						Toast.makeText(context, "更新成功", Toast.LENGTH_LONG).show();
-                    } else if (result.equals("changeimgfail")) {
-//						Toast.makeText(context, "更新失败", Toast.LENGTH_LONG).show();
+                    if (result.equals("1")) {
+						Toast.makeText(getApplicationContext(), "更新成功", Toast.LENGTH_LONG).show();
+                    } else {
+						Toast.makeText(getApplicationContext(), "更新失败", Toast.LENGTH_LONG).show();
                     }
 
                 }
 
                 @Override
                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-//					Toast.makeText(context, "更新失败", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "更新失败", Toast.LENGTH_LONG).show();
                 }
             });
         } else {
-//			Toast.makeText(context, "图片不支持", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "图片不支持", Toast.LENGTH_LONG).show();
         }
-
-
-
-//        // 上传至服务器
-//        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
-//        // 注意这里得到的图片已经是圆形图片了
-//        // bitmap是没有做个圆形处理的，但已经被裁剪了
-//       String imagePath = Utils.savePhoto(bitmap, Environment
-//                .getExternalStorageDirectory().getAbsolutePath(), String
-//                .valueOf(System.currentTimeMillis()));
-//        Log.e("imagePath", imagePath + "");
-//        if (imagePath != null) {
-//            // 拿着imagePath上传了
-//            // ...
-//            Thread thread = new Thread(runnable);
-//            thread.start();
-//        }
   }
-//
-//    /* 上传文件至Server的方法 */
-//    private void uploadFile() {
-//        String end = "\r\n";
-//        String twoHyphens = "--";
-//        String boundary = "*****";
-//        try {
-//
-//            URL url = new URL(actionUrl);//服务器地址
-//            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//            /* 允许Input、Output，不使用Cache */
-//            con.setDoInput(true);
-//            con.setDoOutput(true);
-//            con.setUseCaches(false);
-//            /* 设置传送的method=POST */
-//            con.setRequestMethod("POST");
-//
-//            /* setRequestProperty *///设置请求属性
-//            con.setRequestProperty("Connection", "Keep-Alive");
-//            con.setRequestProperty("Charset", "UTF-8");
-//            con.setRequestProperty("Content-Type",
-//                    "multipart/form-data;boundary=" + boundary);
-//            /* 设置DataOutputStream *///数据输出流
-//            //heading为服务器接收的键
-//            DataOutputStream ds = new DataOutputStream(con.getOutputStream());
-//            ds.writeBytes(twoHyphens + boundary + end);
-//            ds.writeBytes("Content-Disposition: form-data; "
-//                    + "name=\"headimg\";filename=\"" + newName + "\"" + end);
-//            ds.writeBytes(end);
-//            /* 取得文件的FileInputStream */ //文件输入流
-//            fStream = new FileInputStream(imagePath);//要上传的图片路径，
-//            /* 设置每次写入1024bytes */
-//            int bufferSize = 1024;
-//            byte[] buffer = new byte[bufferSize];
-//            int length = -1;
-//            /* 从文件读取数据至缓冲区 */
-//            while ((length = fStream.read(buffer)) != -1) {
-//                /* 将资料写入DataOutputStream中 */
-//                ds.write(buffer, 0, length);
-//            }
-//            ds.writeBytes(end);
-//            ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
-//            /* close streams */
-//            fStream.close();
-//            ds.flush();
-//            /* 取得Response内容 */
-//            InputStream is = con.getInputStream();
-//            int ch;
-//            StringBuffer b = new StringBuffer();
-//            while ((ch = is.read()) != -1) {
-//                b.append((char) ch);
-//            }
-//            /* 将Response显示于Dialog */
-//            showDialog("上传结果" + b.toString().trim());
-//            Log.e("文件传输结果", b.toString().trim());
-//            /* 关闭DataOutputStream */
-//            ds.close();
-//        } catch (Exception e) {
-//            showDialog("上传失败" + e);
-//            Log.i("败", "错误原因：" + e);
-//        }
-//    }
-//    Runnable runnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            // TODO Auto-generated method stub
-//            Looper.prepare();// 创建消息循环
-//
-//            uploadFile();
-//            Message msg = new Message();
-////          data.putString("image",  fStream);
-//            handler.sendMessage(msg);
-//            Looper.loop();// 从消息队列取消
-//        }
-//    };
-//    Handler handler = new Handler() {
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//
-//        };
-//    };
-
-
-    /**
-     * 下拉列表的设置
-     */
-    private void setSpinner(){
-        // 建立数据源
-        String[] mItems = getResources().getStringArray(R.array.setting_gender);
-        // 建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, mItems);
-        //设置下拉列表的风格
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //绑定 Adapter到控件
-        mSpGender .setAdapter(adapter);
-
-        //保存下列列表的选择
-        commitSpinnerSelection();
-
-        //读取存在SharedPreferences里的gender值
-        getSpinnerSelection();
-    }
-    /**
-     * 保存下列列表的选择
-     */
-    private void commitSpinnerSelection(){
-        SharedPreferences spf = getSharedPreferences("GENDER_SETTING",Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = spf.edit();
-        //添加事件Spinner事件监听
-        mSpGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editor.putInt("SelectedPosition",position);
-                //  editor.putString("SelectedGender",parent.getItemAtPosition(position).toString());
-                editor.commit();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                //Do Nothing
-            }
-        });
-    }
-    /**
-     * 读取存在SharedPreferences里的gender值
-     */
-    private void getSpinnerSelection(){
-        SharedPreferences spf_gender = getSharedPreferences("GENDER_SETTING",Context.MODE_PRIVATE);
-        //String gender = spf_gender.getString("SelectedGender","");
-        int position = spf_gender.getInt("SelectedPosition", 0 );
-
-        //设置spinner的值，让其当前选择项是与以前的一样
-        mSpGender.setSelection(position);
-    }
 }

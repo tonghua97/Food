@@ -104,8 +104,7 @@ public class FragmentPerson extends Fragment{
         if (urlImage.contains("http://")){
             String string = urlImage.substring(7, urlImage.indexOf("/", 7));
             urlImage = urlImage.replaceAll(string, Urls.mIp);
-            Log.e(urlImage,"String");
-
+            
             DisplayImageOptions options = new DisplayImageOptions.Builder()
                     .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
                     .cacheInMemory(true)//设置下载的图片是否缓存在内存中
@@ -320,6 +319,11 @@ public class FragmentPerson extends Fragment{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        setdata();
     }
 
 }
