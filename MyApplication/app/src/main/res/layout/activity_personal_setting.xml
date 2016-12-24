@@ -41,7 +41,7 @@
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:layout_centerVertical="true"/>
-        <ImageView
+        <com.example.administrator.ui.CircleImageView
             android:id="@+id/Setting_Iv_avatar"
             android:layout_toLeftOf="@+id/Setting_Bt_avatarEdit"
             android:layout_width="50dp"

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -52,12 +53,16 @@ public class MainActivity extends Activity {
     private LinearLayout mLayTop;
     private LinearLayout mLaySearch;
     private TextView mTvPerson;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Utils.utils = 1;
+
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
+//        Utils.utils = 1;
         //获取界面的控件
         getViews();
         //注册事件监听器
@@ -93,8 +98,14 @@ public class MainActivity extends Activity {
         //4、设置按钮选中状态
         mLlayHomeIv.setImageResource(R.drawable.icon_home_down);
         mLlayHomeTv.setTextColor(getResources().getColor(R.color.yellow));
-        mLaySearch.setVisibility(View.VISIBLE);
-        mTvPerson.setVisibility(View.GONE);
+
+        if (userId != ""){
+
+        }else {
+            mLaySearch.setVisibility(View.VISIBLE);
+            mTvPerson.setVisibility(View.GONE);
+        }
+
         //5、执行更改
         transaction.commit();
     }
@@ -133,6 +144,7 @@ public class MainActivity extends Activity {
         //4、设置按钮选中状态
         mLlayPersonIv.setImageResource(R.drawable.icon_person_down);
         mLlayPersonTv.setTextColor(getResources().getColor(R.color.yellow));
+
         mLaySearch.setVisibility(View.GONE);
         mTvPerson.setVisibility(View.VISIBLE);
         //5、执行更改
@@ -313,5 +325,11 @@ public class MainActivity extends Activity {
             return super.onKeyDown(keyCode, event);
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Utils.utils = 1;
     }
 }

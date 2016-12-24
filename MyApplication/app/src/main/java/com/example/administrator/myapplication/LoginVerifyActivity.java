@@ -69,25 +69,17 @@ public class LoginVerifyActivity extends Activity {
                 editor.putString("userId",userId);
                 editor.putString("userName",userName);
                 editor.commit();
-//                Utils.username = userName;
 
                 if (Utils.utils == 3){
                     Utils.utils = 3;
                     Utils.isTrue = 2;
                     Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
-//                    intent.putExtra("userName",userName);
                     startActivity(intent);
-                    finish();
+//                    finish();
                 }else {
                     Utils.isTrue = 2;
                     finish();
                 }
-
-//                Utils.utils = 3;
-//                Utils.isTrue = 2;
-//                Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
-//                intent.putExtra("userName",userName);
-//                startActivity(intent);
             }
         }
     };

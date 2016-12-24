@@ -154,9 +154,6 @@ public class FragmentPerson extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         getViews();
-//        Intent intent = getActivity().getIntent();
-//        String userName = intent.getStringExtra("userName");
-//        Utils.username = intent.getStringExtra("userName");
         SharedPreferences spf = getActivity().getSharedPreferences("MYAPP",Context.MODE_PRIVATE);
         Id = spf.getString("userId","");
         userName = spf.getString("userName","");
@@ -260,6 +257,7 @@ public class FragmentPerson extends Fragment{
                     editor.commit();
 //                    Utils.username = null;
                     Utils.isTrue = 1;
+                    Utils.utils = 3;
                     Intent intent5 = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent5);
 //                    getActivity().finish();
@@ -269,10 +267,6 @@ public class FragmentPerson extends Fragment{
     };
 
     private void setdata() {
-//        SharedPreferences spf = getActivity().getSharedPreferences("MYAPP",getActivity().MODE_PRIVATE);
-//        userId = spf.getString("userId","");
-//        mUsername.setText(name);
-
         Thread thread = new Thread(){
             @Override
             public void run() {

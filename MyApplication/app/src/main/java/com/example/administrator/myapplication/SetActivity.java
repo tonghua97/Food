@@ -34,7 +34,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.domain.DataUser;
+import com.example.administrator.ui.CircleImageView;
 import com.example.administrator.ui.Urls;
+import com.example.administrator.ui.Utils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -88,7 +90,7 @@ public class SetActivity extends Activity {
     protected static final int TAKE_PICTURE = 1;//拍照
     private static final int CROP_SMALL_PICTURE = 2;
     protected static Uri tempUri;
-    private ImageView iv_personal_icon;
+    private CircleImageView iv_personal_icon;
     private static final String IMAGE_FILE_NAME = "image.jpg";// 头像文件
 
     private String userId;
@@ -108,15 +110,12 @@ public class SetActivity extends Activity {
                     Toast.makeText(getApplicationContext(),"错误",Toast.LENGTH_SHORT).show();
                 }else{
                     setParse();
-//                Toast.makeText(getApplication(),data.getUserName(),Toast.LENGTH_SHORT).show();
                     setViews();
                 }
             }else if (msg.what == 2){
-                if (str.equals("0")){
-                    Toast.makeText(getApplicationContext(),"用户不存在",Toast.LENGTH_SHORT).show();
-                }else if (str.equals("1")){
+                if (str.equals("1")){
                     Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
-                }else if (str.equals("2")){
+                }else {
                     Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -293,7 +292,7 @@ public class SetActivity extends Activity {
         //修改密码
         mSetPwd = (RelativeLayout)findViewById(R.id.setting_Rlay_pwdedit);
         //头像显示
-        iv_personal_icon = (ImageView)findViewById(R.id.Setting_Iv_avatar);
+        iv_personal_icon = (CircleImageView)findViewById(R.id.Setting_Iv_avatar);
         //用户名
         mUname = (TextView)findViewById(R.id.setting_Tv_username);
         //电话号码
@@ -302,30 +301,6 @@ public class SetActivity extends Activity {
         mEmail = (TextView)findViewById(R.id.setting_Tv_Email);
         //性别下拉列表
         mSpGender = (Spinner)findViewById(R.id.Setting_Sp_Gender);
-    }
-    /**
-     * 获取用户名
-     */
-    private void getUname(){
-        SharedPreferences name = getSharedPreferences("UNAME_EDIT", Context.MODE_PRIVATE);
-        String Uname = name.getString("UNAME","");
-        mUname.setText(Uname);
-    }
-    /**
-     * 获取手机号
-     */
-    private void getPhone(){
-        SharedPreferences phone = getSharedPreferences("PHONE_EDIT", Context.MODE_PRIVATE);
-        String Phone = phone.getString("PHONE","");
-        mPhone.setText(Phone);
-    }
-    /**
-     * 获取邮箱
-     */
-    private void getEmail(){
-        SharedPreferences mail = getSharedPreferences("EMAIL_EDIT", Context.MODE_PRIVATE);
-        String Email = mail.getString("EMAIL","");
-        mEmail.setText(Email);
     }
 
     /**
@@ -658,10 +633,11 @@ public class SetActivity extends Activity {
         if (file.exists() && file.length() > 0) {
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
+            params.put("userId", userId);
             try {
 //                params.put("userId", "4");
                 Toast.makeText(getApplicationContext(),userId,Toast.LENGTH_SHORT).show();
-                params.put("userId", userId);
+//                params.put("userId", userId);
                 params.put("img", file);
                 Toast.makeText(getApplicationContext(),params.toString(),Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
@@ -674,10 +650,17 @@ public class SetActivity extends Activity {
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
                     String result = new String(bytes);
                     Log.e("bytes", result);
-                    if (result.contains("http://")) {
-//						Toast.makeText(context, "更新成功", Toast.LENGTH_LONG).show();
-                    } else if (result.equals("changeimgfail")) {
-//						Toast.makeText(context, "更新失败", Toast.LENGTH_LONG).show();
+                    if (result.equals("0")){
+                        Toast.makeText(getApplicationContext(), "用户不存在", Toast.LENGTH_LONG).show();
+                    }else if (str.equals("1")){
+                        Toast.makeText(getApplicationContext(), "头像更新成功", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SetActivity.this,MainActivity.class);
+                        Utils.utils = 3;
+                        Utils.isTrue = 2;
+                        startActivity(intent);
+                        finish();
+                    }else if (str.equals("2")){
+                        Toast.makeText(getApplicationContext(), "头像更新失败", Toast.LENGTH_LONG).show();
                     }
 
                 }
