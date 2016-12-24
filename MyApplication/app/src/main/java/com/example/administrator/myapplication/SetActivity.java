@@ -2,10 +2,12 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -33,10 +35,14 @@ import android.widget.Toast;
 
 import com.example.administrator.domain.DataUser;
 import com.example.administrator.ui.Urls;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -51,6 +57,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -75,8 +82,9 @@ public class SetActivity extends Activity {
     private TextView mEmail;
     private Spinner mSpGender;         //性别选择下拉列表
     private ArrayAdapter adapter = null;
-    /*请求识别码*/
+
     protected static final int CHOOSE_PICTURE = 0;//从相册中选择图片
+    private String cropImagePath;
     protected static final int TAKE_PICTURE = 1;//拍照
     private static final int CROP_SMALL_PICTURE = 2;
     protected static Uri tempUri;
@@ -128,18 +136,23 @@ public class SetActivity extends Activity {
 
 
         urlImage = data.getUserImage();
-        String string = urlImage.substring(7, urlImage.indexOf("/", 7));
-        urlImage = urlImage.replaceAll(string, Urls.mIp);
-        Log.e(urlImage,"String");
+        if (urlImage.contains("http://")){
+            String string = urlImage.substring(7, urlImage.indexOf("/", 7));
+            urlImage = urlImage.replaceAll(string, Urls.mIp);
+            Log.e(urlImage,"String");
 
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
-                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
-                .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
-                .build();//构建完成
-        imageLoader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
-        imageLoader.displayImage(urlImage,iv_personal_icon,options);
+            DisplayImageOptions options = new DisplayImageOptions.Builder()
+                    .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                    .cacheInMemory(true)//设置下载的图片是否缓存在内存中
+                    .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
+                    .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
+                    .build();//构建完成
+            imageLoader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
+            imageLoader.displayImage(urlImage,iv_personal_icon,options);
+        }else{
+            iv_personal_icon.setImageResource(R.drawable.head);
+        }
+
     }
 
     private void setParse() {
@@ -328,7 +341,7 @@ public class SetActivity extends Activity {
         mSetName.setOnClickListener(listener);
         //手机号
         mSetPhone.setOnClickListener(listener);
-        //邮箱
+        //邮箱/**
         mSetEmail.setOnClickListener(listener);
         //头像修改
         mSetAvatar.setOnClickListener(listener);
@@ -369,6 +382,7 @@ public class SetActivity extends Activity {
                      /*跳转到密码修改页面*/
                     Intent intent2 = new Intent(SetActivity.this,Personal_setting_PwdEditActivity.class);
                     startActivity(intent2);
+                    finish();
                     break;
                 default:
                     break;
@@ -489,6 +503,7 @@ public class SetActivity extends Activity {
      * @param uri
      */
     protected void startPhotoZoom(Uri uri) {
+        cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
         if (uri == null) {
             Log.i("tag", "The uri is not exist.");
         }
@@ -559,9 +574,34 @@ public class SetActivity extends Activity {
 //                    // TODO: handle exception
 //                }
             //上传至服务器
-            //  uploadPic(photo);
+            uploadPic(cropImagePath);
         }
     }
+
+
+    public static String getRealFilePathFromUri(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null)
+            data = uri.getPath();
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+
 
     /**
      * 把bitmap转成圆形
@@ -609,7 +649,50 @@ public class SetActivity extends Activity {
         }
     }
 
-    //    private void uploadPic(Bitmap bitmap) {
+    private void uploadPic(String cropImagePath ) {
+        if (cropImagePath == null) {
+           Toast.makeText(SetActivity.this,"文件不存在",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        File file = new File(cropImagePath);
+        if (file.exists() && file.length() > 0) {
+            AsyncHttpClient client = new AsyncHttpClient();
+            RequestParams params = new RequestParams();
+            try {
+//                params.put("userId", "4");
+                Toast.makeText(getApplicationContext(),userId,Toast.LENGTH_SHORT).show();
+                params.put("userId", userId);
+                params.put("img", file);
+                Toast.makeText(getApplicationContext(),params.toString(),Toast.LENGTH_SHORT).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            String url = "http://" + Urls.mIp + "/http/userHeadSculpture";
+            client.post(url, params, new AsyncHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    String result = new String(bytes);
+                    Log.e("bytes", result);
+                    if (result.contains("http://")) {
+//						Toast.makeText(context, "更新成功", Toast.LENGTH_LONG).show();
+                    } else if (result.equals("changeimgfail")) {
+//						Toast.makeText(context, "更新失败", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+//					Toast.makeText(context, "更新失败", Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+//			Toast.makeText(context, "图片不支持", Toast.LENGTH_LONG).show();
+        }
+
+
+
 //        // 上传至服务器
 //        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
 //        // 注意这里得到的图片已经是圆形图片了
@@ -624,7 +707,7 @@ public class SetActivity extends Activity {
 //            Thread thread = new Thread(runnable);
 //            thread.start();
 //        }
-//    }
+  }
 //
 //    /* 上传文件至Server的方法 */
 //    private void uploadFile() {

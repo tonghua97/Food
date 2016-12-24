@@ -1,6 +1,8 @@
 package com.example.administrator.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,10 @@ import android.widget.TextView;
 
 import com.example.administrator.domain.DataCollectionPickfun;
 import com.example.administrator.myapplication.R;
+import com.example.administrator.ui.Urls;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +27,8 @@ import java.util.List;
 public class AdapterCollectionPickfun extends BaseAdapter {
     private Context context;
     private List<DataCollectionPickfun> ldcp = new ArrayList<>();
+    private String urlImage;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
 //    private String Url;
 //    public ImageLoader imageLoader = ImageLoader.getInstance();
 
@@ -40,7 +48,7 @@ public class AdapterCollectionPickfun extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return ldcp.get(position).getId();
+        return 0;
     }
 
     @Override
@@ -76,7 +84,20 @@ public class AdapterCollectionPickfun extends BaseAdapter {
 //        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 //        imageLoader.displayImage(Url,Iv_pickfun,options);
         ImageView Iv_Cpickfun = (ImageView)view.findViewById(R.id.Iv_collection_pickfun);
-        Iv_Cpickfun.setImageResource(ldcp.get(position).getImage());
+        urlImage = ldcp.get(position).getImage();
+        String string = urlImage.substring(7, urlImage.indexOf("/", 7));
+        urlImage = urlImage.replaceAll(string, Urls.mIp);
+        Log.e(urlImage,"String");
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
+                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
+                .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
+                .build();//构建完成
+        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+        imageLoader.displayImage(urlImage,Iv_Cpickfun,options);
+
         TextView Tv_Cpname = (TextView)view.findViewById(R.id.Tv_collection_name);
         Tv_Cpname.setText(ldcp.get(position).getName());
         TextView Tv_Cpintroduction = (TextView)view.findViewById(R.id.Tv_collection_introduction);

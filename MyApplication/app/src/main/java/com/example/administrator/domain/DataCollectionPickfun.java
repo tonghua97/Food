@@ -6,31 +6,34 @@ package com.example.administrator.domain;
  */
 
 public class DataCollectionPickfun {
-    private long Id;    //收藏页id
-    private int Image;   //收藏图片
+    private String Id;    //收藏页id
+    private String Image;   //收藏图片
     private String Name;   //收藏名称
     private String Introduction;   //收藏简介
 
-    public DataCollectionPickfun(long id, int image, String introduction, String name) {
+    public DataCollectionPickfun() {
+    }
+
+    public DataCollectionPickfun(String id, String image, String introduction, String name) {
         Id = id;
         Image = image;
         Introduction = introduction;
         Name = name;
     }
 
-    public long getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         Id = id;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 

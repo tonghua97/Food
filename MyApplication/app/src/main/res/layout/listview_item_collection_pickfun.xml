@@ -28,6 +28,8 @@
             <TextView
                 android:layout_marginTop="10dp"
                 android:id="@+id/Tv_collection_introduction"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>

@@ -29,7 +29,9 @@ public class Personal_setting_EmailActivity extends Activity {
 
         Intent intent = getIntent();
         mEmail = intent.getStringExtra("setting_email");
+        Toast.makeText(getApplicationContext(),mEmail,Toast.LENGTH_SHORT).show();
         mEtEmail.setText(mEmail);
+        Toast.makeText(getApplicationContext(),mEtEmail.getText().toString(),Toast.LENGTH_SHORT).show();
         //设置监听
         setListener();
         //保存邮箱的修改

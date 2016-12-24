@@ -4,10 +4,12 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.administrator.domain.DataUser;
 import com.example.administrator.myapplication.CollectionActivity;
 import com.example.administrator.myapplication.LoginVerifyActivity;
 import com.example.administrator.myapplication.MainActivity;
@@ -26,19 +30,26 @@ import com.example.administrator.myapplication.SetActivity;
 import com.example.administrator.ui.CircleImageView;
 import com.example.administrator.ui.Urls;
 import com.example.administrator.ui.Utils;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -65,8 +76,70 @@ public class FragmentPerson extends Fragment{
     private CircleImageView head;
     private String str;
     private String userId;
+    private DataUser data;
     private String Id;
     private String userName;
+    private String urlImage;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (str.equals("0")){
+                Toast.makeText(getActivity(),"错误",Toast.LENGTH_SHORT).show();
+            }else{
+                setParse();
+                setViews();
+            }
+
+        }
+    };
+
+    private void setViews() {
+        mLlayname.setText(data.getUserName());
+
+        urlImage = data.getUserImage();
+        if (urlImage.contains("http://")){
+            String string = urlImage.substring(7, urlImage.indexOf("/", 7));
+            urlImage = urlImage.replaceAll(string, Urls.mIp);
+            Log.e(urlImage,"String");
+
+            DisplayImageOptions options = new DisplayImageOptions.Builder()
+                    .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
+                    .cacheInMemory(true)//设置下载的图片是否缓存在内存中
+                    .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
+                    .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
+                    .build();//构建完成
+            imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
+            imageLoader.displayImage(urlImage,head,options);
+        }else {
+            head.setImageResource(R.drawable.head);
+        }
+
+    }
+
+    private void setParse() {
+        if (str == ""){
+            return;
+        }else{
+
+            try {
+                JSONObject json = new JSONObject(str);
+                data = new DataUser();
+                data.setUserName(json.getString("userName"));
+                data.setUserImage(json.getString("userImage"));
+                data.setUserAccount(json.getString("userAccount"));
+                data.setUserNum(json.getString("userNum"));
+                data.setUserPost(json.getString("userPost"));
+                data.setUserSex(json.getString("userSex"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Nullable
     @Override
@@ -97,7 +170,8 @@ public class FragmentPerson extends Fragment{
             mUsername.setVisibility(View.VISIBLE);
             mLlaylogin.setVisibility(View.VISIBLE);
             mLlayBottom.setVisibility(View.GONE);
-            mLlayname.setText(userName);
+//            mLlayname.setText(userName);
+            setdata();
         }else {
             mRlaymiddle.setVisibility(View.VISIBLE);
             mUsername.setVisibility(View.GONE);
@@ -193,5 +267,59 @@ public class FragmentPerson extends Fragment{
             }
         }
     };
+
+    private void setdata() {
+//        SharedPreferences spf = getActivity().getSharedPreferences("MYAPP",getActivity().MODE_PRIVATE);
+//        userId = spf.getString("userId","");
+//        mUsername.setText(name);
+
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                getHttpUser();
+
+                Message m = new Message();
+                handler.sendMessage(m);
+            }
+        };
+        thread.start();
+    }
+
+    public void getHttpUser() {
+        try {
+            str = "";
+            URI u = new URI(Urls.urlUser);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair = new BasicNameValuePair("userId",Id);
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = null;
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
