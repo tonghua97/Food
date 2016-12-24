@@ -93,9 +93,6 @@ public class SearchActivity extends Activity {
         setContentView(R.layout.activity_search);
 
         getViews();
-        getData2();
-        adapter = new AdapterSearchGirdView(this,listGrid);
-        mGirdView.setAdapter(adapter);
         adapter2 = new AdapterSearchListView(this,list);
         mListView.setAdapter(adapter2);
 
@@ -161,7 +158,9 @@ public class SearchActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SearchActivity.this,SearchListActivity.class);
-                intent.putExtra("recipesName",mEt.getText().toString());
+                intent.putExtra("title",mEt.getText().toString());
+                intent.putExtra("Url",Urls.urlSearchShow);
+                intent.putExtra("flag","1");
                 startActivity(intent);
             }
         });
@@ -204,17 +203,8 @@ public class SearchActivity extends Activity {
 
     public void getViews() {
         mListView = (ListView)findViewById(R.id.search_list);
-        mGirdView = (GridView)findViewById(R.id.search_Gird);
         mEt = (EditText)findViewById(R.id.search_Et);
         mSearch = (ImageView)findViewById(R.id.search_sousuo);
     }
 
-    public void getData2() {
-        listGrid.add("鱼香肉丝");
-        listGrid.add("鱼香肉丝");
-        listGrid.add("鱼香肉丝");
-        listGrid.add("鱼香肉丝");
-        listGrid.add("鱼香肉丝");
-        listGrid.add("鱼香肉丝");
-    }
 }

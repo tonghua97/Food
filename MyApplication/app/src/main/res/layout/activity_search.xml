@@ -32,13 +32,6 @@
                 android:focusableInTouchMode="true"/>
         </LinearLayout>
     </RelativeLayout>
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numColumns="2"
-        android:id="@+id/search_Gird">
-    </GridView>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
