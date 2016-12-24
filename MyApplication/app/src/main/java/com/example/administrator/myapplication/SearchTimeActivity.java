@@ -3,25 +3,24 @@ package com.example.administrator.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.administrator.ui.CircularTimePicker;
 import com.example.administrator.ui.Urls;
 
 /**
  * Created by lijing on 16/11/29.
  */
-public class SearchTimeActivity extends Activity implements ZJBCircleSeekBar.OnCircleSeekBarChangeListener {
-    private ZJBCircleSeekBar circleSeekBar;
-    TextView mTextView;
+public class SearchTimeActivity extends Activity {
     private ImageView back;
     private Button mBtnSearch;
-    private ImageView mIvSearch;
     private TextView mEtSearch;
+    private RelativeLayout rl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +29,11 @@ public class SearchTimeActivity extends Activity implements ZJBCircleSeekBar.OnC
 
         findId();
         setListener();
+        initTimePicker();
     }
 
     private void setListener() {
         back.setOnClickListener(myListener);
-        mIvSearch.setOnClickListener(myListener);
         mBtnSearch.setOnClickListener(myListener);
     }
 
@@ -43,20 +42,15 @@ public class SearchTimeActivity extends Activity implements ZJBCircleSeekBar.OnC
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.search_time_btn:
-                    mEtSearch.setText(mTextView.getText().toString() + "分钟");
-                    break;
-                case R.id.search_foodtime_Iv:
-//                    Intent intent = new Intent(SearchTimeActivity.this,SearchListTimeActivity.class);
-                    Intent intent = new Intent(SearchTimeActivity.this,SearchListActivity.class);
-                    intent.putExtra("title",mEtSearch.getText().toString());
-                    intent.putExtra("Url", Urls.urlSearchTime);
-                    intent.putExtra("flag","2");
-                    startActivity(intent);
+                    String search = mEtSearch.getText().toString();
+                    Intent i = new Intent(SearchTimeActivity.this, SearchListActivity.class);
+                    i.putExtra("title",search);
+                    i.putExtra("Url", Urls.urlSearchTime);
+                    i.putExtra("flag","2");
+                    startActivity(i);
                     break;
                 case R.id.Iv_search_back:
                     finish();
-                    Intent i = new Intent(SearchTimeActivity.this, MainActivity.class);
-                    startActivity(i);
                     break;
             }
         }
@@ -64,17 +58,19 @@ public class SearchTimeActivity extends Activity implements ZJBCircleSeekBar.OnC
     
     private void findId() {
         back = (ImageView) findViewById(R.id.Iv_search_back);
-        circleSeekBar = (ZJBCircleSeekBar) findViewById(R.id.circleSeekBar);
-        mTextView = (TextView) findViewById(R.id.tv_SearchTime_time);
-        circleSeekBar.setOnSeekBarChangeListener(this);
+        rl = (RelativeLayout) findViewById(R.id.RL_time);
         mEtSearch = (EditText) findViewById(R.id.Et_search_time);
-        mIvSearch = (ImageView)findViewById(R.id.search_foodtime_Iv);
         mBtnSearch = (Button)findViewById(R.id.search_time_btn);
     }
-    @Override
-    public void onProgressChanged(ZJBCircleSeekBar seekBar, int progress,
-                                  boolean fromUser) {
-        // TODO Auto-generated method stub
-        mTextView.setText(progress + "");
+    private void initTimePicker(){
+        CircularTimePicker timePicker = new CircularTimePicker(getApplicationContext(),R.drawable.time_point, CircularTimePicker.ViewType.TimePiker);
+        rl.addView(timePicker);
+        timePicker.setSeekChangeListener(new CircularTimePicker.OnSeekChangeListener() {
+            @Override
+            public void onProgressChange(CircularTimePicker view, int newProgress) {
+                mEtSearch.setText(newProgress+"分钟");
+            }
+        });
+        timePicker.setMaxProgress(120);
     }
 }
