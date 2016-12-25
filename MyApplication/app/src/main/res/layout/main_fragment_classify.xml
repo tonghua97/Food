@@ -28,14 +28,16 @@
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 android:lineSpacingExtra="15dp"
+                android:textColor="@color/black"
                 android:ems="1"
                 android:text="菜系"/>
-            <LinearLayout
-                android:layout_width="40dp"
+            <View
+                android:background="@drawable/shape_line"
+                android:layout_width="20dp"
                 android:layout_height="2dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/main_fragment_classify_line">
-            </LinearLayout>
+                android:layout_toRightOf="@id/Tv_recipeshow_name"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,14 +55,16 @@
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 android:lineSpacingExtra="15dp"
+                android:textColor="@color/black"
                 android:ems="1"
                 android:text="功效"/>
-            <LinearLayout
-                android:layout_width="40dp"
+            <View
+                android:background="@drawable/shape_line"
+                android:layout_width="20dp"
                 android:layout_height="2dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/main_fragment_classify_line">
-            </LinearLayout>
+                android:layout_toRightOf="@id/Tv_recipeshow_name"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,14 +82,16 @@
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 android:lineSpacingExtra="15dp"
+                android:textColor="@color/black"
                 android:ems="1"
                 android:text="口味"/>
-            <LinearLayout
-                android:layout_width="40dp"
+            <View
+                android:background="@drawable/shape_line"
+                android:layout_width="20dp"
                 android:layout_height="2dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/main_fragment_classify_line">
-            </LinearLayout>
+                android:layout_toRightOf="@id/Tv_recipeshow_name"
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true" />
         </LinearLayout>
     </LinearLayout>
     <FrameLayout

@@ -27,7 +27,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -110,7 +109,6 @@ public class SetActivity extends Activity {
                 if (str.equals("0")){
                     Toast.makeText(getApplicationContext(),"错误",Toast.LENGTH_SHORT).show();
                 }else{
-                    setParse();
                     setViews();
                 }
             }else if (msg.what == 2){
@@ -162,7 +160,6 @@ public class SetActivity extends Activity {
         if (str == ""){
             return;
         }else{
-
             try {
                 JSONObject json = new JSONObject(str);
                 data = new DataUser();
@@ -188,22 +185,6 @@ public class SetActivity extends Activity {
         userId = spf.getString("userId","");
         //获取控件
         getViews();
-
-        if (userId != "") {
-            Thread thread = new Thread(){
-                @Override
-                public void run() {
-                    super.run();
-                    getHttpUser();
-
-                    Message m = new Message();
-                    handler.sendEmptyMessage(1);
-                }
-            };
-            thread.start();
-
-        }
-
         //设置监听
         setListener();
         //设置下拉列表--用户性别选择
@@ -337,27 +318,23 @@ public class SetActivity extends Activity {
                     Intent intent1 = new Intent(SetActivity.this,Personal_setting_UnameEditActivity.class);
                     intent1.putExtra("setting_userName",mUname.getText().toString());
                     startActivity(intent1);
-                    finish();
                     break;
                 case R.id.setting_Rlay_phone:
                      /*跳转到手机号修改页面*/
                     Intent intent3 = new Intent(SetActivity.this,Personal_setting_PhoneActivity.class);
                     intent3.putExtra("setting_phone",mPhone.getText().toString());
                     startActivity(intent3);
-                    finish();
                     break;
                 case R.id.setting_Rlay_Email:
                      /*跳转到邮箱修改页面*/
                     Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailActivity.class);
                     intent4.putExtra("setting_email",mEmail.getText().toString());
                     startActivity(intent4);
-                    finish();
                     break;
                 case R.id.setting_Rlay_pwdedit:
                      /*跳转到密码修改页面*/
                     Intent intent2 = new Intent(SetActivity.this,Personal_setting_PwdEditActivity.class);
                     startActivity(intent2);
-                    finish();
                     break;
                 default:
                     break;
@@ -391,6 +368,7 @@ public class SetActivity extends Activity {
                     str += string;
                 }
             }
+            setParse();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -634,5 +612,25 @@ public class SetActivity extends Activity {
         } else {
 			Toast.makeText(getApplicationContext(), "图片不支持", Toast.LENGTH_LONG).show();
         }
-  }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
+        if (userId != "") {
+            Thread thread = new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    getHttpUser();
+
+                    Message m = new Message();
+                    handler.sendEmptyMessage(1);
+                }
+            };
+            thread.start();
+        }
+    }
 }

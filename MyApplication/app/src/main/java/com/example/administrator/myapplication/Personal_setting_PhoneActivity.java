@@ -190,8 +190,6 @@ public class Personal_setting_PhoneActivity extends Activity {
 
                 if (str.equals("1")){
                     Toast.makeText(Personal_setting_PhoneActivity.this,"手机号修改并保存成功！",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Personal_setting_PhoneActivity.this,SetActivity.class);
-                    startActivity(intent);
                     finish();
                 }else {
                     Toast.makeText(Personal_setting_PhoneActivity.this,"手机号修改失败！",Toast.LENGTH_SHORT).show();

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -18,31 +18,32 @@
                 android:id="@+id/Btn_pickfundetail_back"
                 android:background="@drawable/icon_back"
                 android:scaleType="center"
-                android:layout_gravity="center_vertical"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
             <TextView
                 android:id="@+id/Tv_pickfundetail_title"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:background="@null"
+                android:layout_centerInParent="true"
                 android:text="拾趣题目"
-                android:textSize="25dp"
-                android:layout_gravity="center_vertical"
+                android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/Iv_pickfundetail_collect"
                 android:background="@drawable/img_collect_unclick"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_width="60dp"
                 android:layout_height="60dp" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/Iv_pickfundetail_recipeimg"
-            android:scaleType="fitXY"
             android:background="@drawable/img_loading"
             android:layout_width="match_parent"
+            android:scaleType="centerCrop"
             android:layout_height="180dp" />
         <ImageView
             android:background="@drawable/img_bar"

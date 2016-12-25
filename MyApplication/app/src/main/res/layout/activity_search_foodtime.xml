@@ -58,5 +58,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
         android:id="@+id/search_time_btn"
+        android:textColor="@color/white"
+        android:background="@drawable/circle_exit"
         android:textSize="18sp"/>
 </RelativeLayout>

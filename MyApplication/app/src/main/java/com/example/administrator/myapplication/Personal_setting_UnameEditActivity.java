@@ -1,19 +1,14 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.text.Replaceable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.ui.Urls;
@@ -58,8 +53,6 @@ public class Personal_setting_UnameEditActivity extends Activity {
                 Toast.makeText(getApplicationContext(),"该用户不存在",Toast.LENGTH_SHORT).show();
             }else if (str.equals("1")){
                 Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Personal_setting_UnameEditActivity.this,SetActivity.class);
-                startActivity(intent);
                 finish();
             }else if (str.equals("2")){
                 Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();

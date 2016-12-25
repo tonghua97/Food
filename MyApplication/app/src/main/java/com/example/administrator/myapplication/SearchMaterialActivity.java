@@ -7,16 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.ui.BiuEditText;
 import com.example.administrator.ui.Urls;
 
 import java.util.ArrayList;
@@ -75,11 +72,9 @@ public class SearchMaterialActivity extends Activity {
                 //在每次获取点击的item时将对于的checkbox状态改变，同时修改map的值。
                 getIsSelected().put(position, holder.cb.isChecked());
                 if (holder.cb.isChecked() == true) {
-                    System.out.println("选中" + position);
                     //添加到集合中；
                     selectedItem.add(list_meat.get(position) + "、");
                 } else {
-                    System.out.println("取消选中" + position);
                     //从集合中移除元素。
                     selectedItem.remove(list_meat.get(position) + "、");
                 }
@@ -101,11 +96,9 @@ public class SearchMaterialActivity extends Activity {
                 //在每次获取点击的item时将对于的checkbox状态改变，同时修改map的值。
                 getIsSelected().put(position, holder.cb.isChecked());
                 if (holder.cb.isChecked() == true) {
-                    System.out.println("选中" + position);
                     //添加到集合中；
                     selectedItem.add(list_vegetable.get(position) + "、");
                 } else {
-                    System.out.println("取消选中" + position);
                     //从集合中移除元素。
                     selectedItem.remove(list_vegetable.get(position) + "、");
                 }

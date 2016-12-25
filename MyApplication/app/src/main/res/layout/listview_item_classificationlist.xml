@@ -12,6 +12,7 @@
             android:layout_width="160dp"
             android:layout_height="110dp"
             android:src="@drawable/img_loading"
+            android:layout_centerVertical="true"
             android:scaleType="centerCrop"/>
         <TextView
             android:layout_marginTop="10dp"

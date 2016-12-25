@@ -315,6 +315,7 @@ public class RecipeShowActivity extends Activity {
         });
     }
     public void stepString2ArrayList(String RecipeStep){
+        mStepData.clear();
         if (RecipeStep == null){
             return;
         }

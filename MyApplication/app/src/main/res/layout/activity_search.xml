@@ -5,8 +5,7 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/main_llay_default">
+        android:layout_height="50dp">
         <ImageView
             android:id="@+id/Iv_search_back"
             android:layout_width="24dp"
@@ -16,14 +15,14 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/icon_back"/>
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:paddingLeft="10dp"
             android:layout_centerInParent="true"
             android:background="@drawable/main_llay_default">
             <com.example.administrator.ui.BiuEditText
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:hint="搜索"
@@ -39,6 +38,12 @@
                 android:id="@+id/search_sousuo"
                 android:focusableInTouchMode="true"/>
         </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="1dp"
+            android:src="@drawable/line"
+            android:scaleType="fitXY"/>
     </RelativeLayout>
     <ListView
         android:layout_width="match_parent"

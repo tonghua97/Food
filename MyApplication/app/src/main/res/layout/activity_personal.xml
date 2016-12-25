@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:orientation="vertical"
-        android:background="@drawable/beijing3">
+        android:background="@drawable/background">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/touxiang"
+                android:src="@drawable/head"
                 app:border_width="2dp"
                 app:border_color="#FFFFFF"
                 android:layout_gravity="center_horizontal"
@@ -98,7 +98,8 @@
             android:layout_toRightOf="@id/personal_iv_collection"
             android:text="收藏"
             android:layout_marginLeft="20dp"
-            android:textSize="23dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             />
         <ImageButton
             android:layout_width="20dp"
@@ -133,7 +134,8 @@
             android:layout_toRightOf="@id/personal_iv_setting"
             android:text="设置"
             android:layout_marginLeft="20dp"
-            android:textSize="23dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             />
         <ImageButton
             android:layout_width="20dp"
@@ -169,7 +171,8 @@
             android:layout_toRightOf="@id/personal_iv_about"
             android:text="关于"
             android:layout_marginLeft="20dp"
-            android:textSize="23dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             />
         <ImageButton
             android:layout_width="20dp"
@@ -204,7 +207,8 @@
             android:layout_toRightOf="@id/personal_iv_feedback"
             android:text="反馈"
             android:layout_marginLeft="20dp"
-            android:textSize="23dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             />
         <ImageButton
             android:layout_width="20dp"
@@ -227,11 +231,11 @@
         android:id="@+id/personal_Llay_login"
         android:layout_weight="5">
         <Button
-            android:layout_width="350dp"
+            android:layout_width="200dp"
             android:text="退出登录"
             android:textColor="#FFFFFF"
             android:id="@+id/personal_Btn_exitLogin"
-            android:background="@color/yellow"
+            android:background="@drawable/circle_exit"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>

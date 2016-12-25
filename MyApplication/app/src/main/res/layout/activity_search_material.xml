@@ -20,12 +20,11 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp" />
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
             android:layout_height="40dp">
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
@@ -34,7 +33,7 @@
                     android:layout_gravity="center"
                     android:background="@null"
                     android:id="@+id/Et_material_search"
-                    android:layout_width="250dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:minLines="1"
                     android:hint="搜索食材"/>
@@ -65,7 +64,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
-                android:background="#FFED66"
+                android:background="@color/yellow"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
             <GridView
@@ -82,7 +81,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
-                android:background="#FFED66"
+                android:background="@color/yellow"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
             <GridView

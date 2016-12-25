@@ -9,15 +9,17 @@
         android:gravity="fill_vertical">
         <ImageView
             android:id="@+id/Iv_collection_recipe"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
             android:src="@drawable/img_loading"
-            android:scaleType="fitXY"/>
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/Iv_collection_recipe">
             <TextView
                 android:layout_marginTop="10dp"
@@ -34,12 +36,5 @@
                 android:textSize="15dp"
                 android:text="食谱简介食谱简介食谱简介食谱简介食谱简介食谱简介"/>
         </LinearLayout>
-
-        <ImageView
-
-            android:layout_width="50dp"
-            android:layout_height="100dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/icon_more"/>
     </RelativeLayout>
 </RelativeLayout>

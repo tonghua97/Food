@@ -1,13 +1,13 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -57,6 +57,7 @@ public class PickfundetailActivity extends Activity {
     public ImageLoader imageLoader = ImageLoader.getInstance();
     private DataPickfun data;
     private String urlImage;
+    private ProgressDialog dialog;
 
     private Handler h = new Handler(){
         @Override
@@ -66,6 +67,7 @@ public class PickfundetailActivity extends Activity {
             if (msg.what == 0){
                 setParse();
                 setViews();
+                dialog.dismiss();
             }else if (msg.what == 1){
                 if(msg.arg1 == 1){
                     Toast.makeText(getApplicationContext(),"收藏成功",Toast.LENGTH_SHORT).show();
@@ -122,18 +124,6 @@ public class PickfundetailActivity extends Activity {
         //获取美食名称
         Intent intent = getIntent();
         funId = intent.getStringExtra("FUNID");
-        //网络请求数据
-        Thread thread = new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                getHttpData();
-
-                Message m = new Message();
-                h.sendEmptyMessage(0);
-            }
-        };
-        thread.start();
         //设置监听
         setListener();
     }
@@ -171,6 +161,7 @@ public class PickfundetailActivity extends Activity {
         Imgrecipe = (ImageView) findViewById(R.id.Iv_pickfundetail_recipeimg);
         tvcontent = (TextView) findViewById(R.id.Tv_pickfundetail_content);
         collect = (ImageView) findViewById(R.id.Iv_pickfundetail_collect);
+        dialog = new ProgressDialog(PickfundetailActivity.this);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -318,12 +309,19 @@ public class PickfundetailActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        Thread thread = new Thread(){
+        dialog.setTitle("提示信息");
+        dialog.setMessage("数据加载中......");
+        dialog.show();
+        final Thread thread = new Thread(){
             @Override
             public void run() {
                 super.run();
                 getHttpData();
-
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Message m = new Message();
                 h.sendEmptyMessage(0);
             }

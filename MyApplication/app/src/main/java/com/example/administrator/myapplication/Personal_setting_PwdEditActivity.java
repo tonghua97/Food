@@ -1,9 +1,6 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,8 +52,6 @@ public class Personal_setting_PwdEditActivity extends Activity {
                 Toast.makeText(getApplicationContext(),"用户不存在",Toast.LENGTH_SHORT).show();
             }else if (str.equals("1")){
                 Toast.makeText(getApplicationContext(),"密码修改成功",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Personal_setting_PwdEditActivity.this,SetActivity.class);
-                startActivity(intent);
                 finish();
             }else if (str.equals("2")){
                 Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();

@@ -282,6 +282,8 @@ public class FragmentPerson extends Fragment{
     }
 
     public void getHttpUser() {
+        SharedPreferences spf = getActivity().getSharedPreferences("MYAPP",Context.MODE_PRIVATE);
+        Id = spf.getString("userId","");
         try {
             str = "";
             URI u = new URI(Urls.urlUser);

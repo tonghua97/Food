@@ -34,12 +34,10 @@
         <activity android:name=".ClassificationListActivity" />
         <activity android:name=".PickfundetailActivity" />
         <activity android:name=".LoginVerifyActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".SetActivity" />
         <activity android:name=".Personal_setting_PwdEditActivity" />
         <activity android:name=".Personal_setting_UnameEditActivity" />
         <activity android:name=".PersonalAboutActivity" />
-        <activity android:name=".SearchNameActivity" />
         <activity android:name=".SearchTimeActivity" />
         <activity android:name=".SearchMaterialActivity" />
         <activity android:name=".SearchActivity" />

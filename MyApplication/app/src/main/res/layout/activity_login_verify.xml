@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/beijing3"
+    android:background="@drawable/background_login"
     tools:context="com.example.administrator.myapplication.LoginVerifyActivity">
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="24dp"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:textSize="20dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon_back"
         android:id="@+id/login_verify_Tv_back"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:text="返回" />
+        android:layout_marginLeft="10dp"
+        android:paddingTop="@dimen/activity_vertical_margin" />
     <LinearLayout
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
@@ -45,7 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/login_verify_Tv_name"
                 android:text="随时-有趣"
-                android:textColor="#aaaaaa"
+                android:textColor="@color/black"
                 android:layout_centerHorizontal="true"/>
         </RelativeLayout>
         <RelativeLayout
@@ -53,39 +52,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:id="@+id/login_verify_Et_username"
+                android:layout_centerInParent="true"
+                android:textSize="16sp"
+                android:hint="请输入用户名"
+                android:background="@drawable/main_llay_default"/>
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/login_name"
+                android:layout_toLeftOf="@id/login_verify_Et_username"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/register_name"/>
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:id="@+id/login_verify_Et_username"
-                android:layout_toRightOf="@id/login_name"
-                android:hint="请输入用户名"
-                android:background="@drawable/main_llay_default"/>
         </RelativeLayout>
         <RelativeLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="39dp"
-                android:id="@+id/login_password"
-                android:src="@drawable/register_password1"/>
+
             <EditText
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:layout_toRightOf="@id/login_password"
+                android:layout_centerInParent="true"
                 android:id="@+id/login_verify_Et_password"
+                android:textSize="16sp"
                 android:inputType="textPassword"
-                android:layout_gravity="center"
                 android:hint="请输入密码"
                 android:background="@drawable/main_llay_default"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/login_password"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/login_verify_Et_password"
+                android:src="@drawable/register_password1"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"

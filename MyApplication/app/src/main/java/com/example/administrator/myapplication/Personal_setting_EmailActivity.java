@@ -1,7 +1,6 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,8 +50,6 @@ public class Personal_setting_EmailActivity extends Activity {
 
             if (str.equals("1")){
                 Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Personal_setting_EmailActivity.this,SetActivity.class);
-                startActivity(intent);
                 finish();
             }else {
                 Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();
@@ -73,9 +70,7 @@ public class Personal_setting_EmailActivity extends Activity {
 
         Intent intent = getIntent();
         mEmail = intent.getStringExtra("setting_email");
-        Toast.makeText(getApplicationContext(),mEmail,Toast.LENGTH_SHORT).show();
         mEtEmail.setText(mEmail);
-        Toast.makeText(getApplicationContext(),mEtEmail.getText().toString(),Toast.LENGTH_SHORT).show();
         //设置监听
         setListener();
     }

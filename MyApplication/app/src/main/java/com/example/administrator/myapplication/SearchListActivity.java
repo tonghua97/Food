@@ -2,10 +2,9 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,11 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.adapter.AdapterClassificationList;
 import com.example.administrator.domain.DataClassificationList;
-import com.example.administrator.ui.Urls;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -108,7 +105,6 @@ public class SearchListActivity extends Activity {
         mSearchEt.setText(title);
         Url = intent.getStringExtra("Url");
         flag = intent.getStringExtra("flag");
-        Toast.makeText(getApplicationContext(),flag,Toast.LENGTH_SHORT).show();
 
         final Thread thread = new Thread(){
             @Override
