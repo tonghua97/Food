@@ -7,19 +7,11 @@
     <ImageView
         android:layout_margin="10dp"
         android:id="@+id/Iv_cuisine"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/icon_home_normal"
         android:layout_centerHorizontal="true">
     </ImageView>
-    <!--<ImageView-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:id="@+id/Iv_cuisine"-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:src="@drawable/icon_home_normal"-->
-        <!--android:layout_centerHorizontal="true">-->
-    <!--</ImageView>-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_below="@+id/Iv_cuisine"

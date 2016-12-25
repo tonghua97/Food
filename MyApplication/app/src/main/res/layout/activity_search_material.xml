@@ -47,14 +47,6 @@
                     android:id="@+id/Ib_searchmatrial_search"
                     android:focusableInTouchMode="true"/>
             </LinearLayout>
-            <!--<ImageButton-->
-                <!--android:id="@+id/Ib_searchmatrial_search"-->
-                <!--android:layout_toRightOf="@+id/Et_material_search"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:scaleType="fitXY"-->
-                <!--android:layout_width="35dp"-->
-                <!--android:layout_height="35dp"-->
-                <!--android:src="@drawable/img_search"/>-->
         </LinearLayout>
     </RelativeLayout>
 
@@ -78,17 +70,10 @@
                 android:layout_height="40dp" />
             <GridView
                 android:id="@+id/gridview_meat"
-                android:layout_height="250dp"
+                android:layout_height="150dp"
                 android:layout_width="match_parent"
                 android:numColumns="3">
             </GridView>
-            <!--<GridView-->
-                <!--android:id="@+id/gridview_meat"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:numColumns="3">-->
-            <!--</GridView>-->
-
             <TextView
                 android:id="@+id/Tv_searchmatrial_vegetabletitle"
                 android:text="菜类"
@@ -106,12 +91,6 @@
                 android:layout_width="match_parent"
                 android:numColumns="3">
             </GridView>
-            <!--<GridView-->
-                <!--android:id="@+id/gridview_vegetable"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:numColumns="3">-->
-            <!--</GridView>-->
         </LinearLayout>
     </ScrollView>
 
