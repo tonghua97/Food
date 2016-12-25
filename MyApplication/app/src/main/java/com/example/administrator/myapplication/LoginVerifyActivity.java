@@ -148,15 +148,7 @@ public class LoginVerifyActivity extends Activity {
                         }
                     };
                     thread.start();
-//                    SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = spf.edit();
-//                    editor.putString("username",mUseraccount.getText().toString());
-//                    editor.commit();
-//                    Utils.username = mUseraccount.getText().toString();
-//                    Utils.utils = 3;
-//                    Utils.isTrue = 2;
-//                    Intent intent = new Intent(LoginVerifyActivity.this,MainActivity.class);
-//                    startActivity(intent);
+
                     break;
                 case R.id.login_verify_Tv_register:
                     Intent intent2 = new Intent(LoginVerifyActivity.this,RegisterActivity.class);

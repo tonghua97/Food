@@ -21,6 +21,7 @@ public class SearchTimeActivity extends Activity {
     private Button mBtnSearch;
     private TextView mEtSearch;
     private RelativeLayout rl;
+    private ImageView mIvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class SearchTimeActivity extends Activity {
     private void setListener() {
         back.setOnClickListener(myListener);
         mBtnSearch.setOnClickListener(myListener);
+        mIvSearch.setOnClickListener(myListener);
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -52,6 +54,13 @@ public class SearchTimeActivity extends Activity {
                 case R.id.Iv_search_back:
                     finish();
                     break;
+                case R.id.search_foodtime_Iv:
+                    Intent intent = new Intent(SearchTimeActivity.this, SearchListActivity.class);
+                    intent.putExtra("title",mEtSearch.getText().toString());
+                    intent.putExtra("Url", Urls.urlSearchTime);
+                    intent.putExtra("flag","2");
+                    startActivity(intent);
+                    break;
             }
         }
     };
@@ -61,6 +70,7 @@ public class SearchTimeActivity extends Activity {
         rl = (RelativeLayout) findViewById(R.id.RL_time);
         mEtSearch = (EditText) findViewById(R.id.Et_search_time);
         mBtnSearch = (Button)findViewById(R.id.search_time_btn);
+        mIvSearch = (ImageView)findViewById(R.id.search_foodtime_Iv);
     }
     private void initTimePicker(){
         CircularTimePicker timePicker = new CircularTimePicker(getApplicationContext(),R.drawable.time_point, CircularTimePicker.ViewType.TimePiker);

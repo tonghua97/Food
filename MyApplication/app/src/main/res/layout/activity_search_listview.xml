@@ -3,19 +3,19 @@
     android:orientation="horizontal"
     android:layout_width="300dp"
     android:layout_height="30dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:background="@color/white">
-    <!--<ImageView-->
-        <!--android:layout_width="20dp"-->
-        <!--android:layout_height="20dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:src="@drawable/sousuo"-->
-        <!--android:focusable="true"-->
-        <!--android:focusableInTouchMode="true"/>-->
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:src="@drawable/sousuo" />
     <TextView
         android:layout_width="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@android:color/black"
         android:gravity="center_vertical"
         android:textSize="18dp"
         android:id="@+id/search_listview_Tv_name"/>

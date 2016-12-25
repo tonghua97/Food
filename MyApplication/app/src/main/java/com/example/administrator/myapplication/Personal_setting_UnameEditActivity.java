@@ -130,13 +130,7 @@ public class Personal_setting_UnameEditActivity extends Activity {
                         }
                     };
                     t.start();
-//                    SharedPreferences spf = getSharedPreferences("UNAME_EDIT", Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = spf.edit();
-//                    editor.putString("UNAME",mEtUname.getText().toString());
-//                    editor.commit();
-//                    Toast.makeText(Personal_setting_UnameEditActivity.this,"用户名修改并保存成功！",Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(Personal_setting_UnameEditActivity.this,SetActivity.class);
-//                    startActivity(intent);
+
                     break;
 
                 /*清空用户名EditText*/
@@ -185,13 +179,5 @@ public class Personal_setting_UnameEditActivity extends Activity {
         }
     }
 
-//    /**
-//     * 保存用户名的修改
-//     */
-//    private void setUname(){
-//        SharedPreferences spf = getSharedPreferences("UNAME_EDIT",Context.MODE_PRIVATE);
-//        String Uname = spf.getString("UNAME","");
-//
-//        mEtUname.setText(Uname);
-//    }
+
 }

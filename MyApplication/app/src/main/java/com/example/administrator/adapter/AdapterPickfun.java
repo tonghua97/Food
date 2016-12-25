@@ -68,8 +68,6 @@ public class AdapterPickfun extends BaseAdapter {
 
         ImageView Iv_pickfun = (ImageView) view.findViewById(R.id.Iv_pickfun_image);
         Url = ldp.get(position).getUrl();
-        String string = Url.substring(7, Url.indexOf("/", 7));
-        Url = Url.replaceAll(string, Urls.mIp);
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片

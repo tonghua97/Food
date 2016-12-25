@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -52,6 +53,7 @@ public class SearchActivity extends Activity {
     private String array[];
     private String str;
     private ImageView mSearch;
+    private ImageView mBack;
 
 
     private Handler h = new Handler(){
@@ -101,17 +103,7 @@ public class SearchActivity extends Activity {
         if (recipesName != null){
             mEt.setText(recipesName);
             mEt.setFocusable(true);
-//            list.clear();
-//            new Thread(){
-//                @Override
-//                public void run() {
-//                    super.run();
-//                    getHttpRecipesName();
-//
-//                    Message m = new Message();
-//                    h.sendMessage(m);
-//                }
-//            }.start();
+
         }
 
         mEt.addTextChangedListener(new TextWatcher() {
@@ -165,6 +157,13 @@ public class SearchActivity extends Activity {
             }
         });
 
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
     public void getHttpRecipesName() {
@@ -205,6 +204,7 @@ public class SearchActivity extends Activity {
         mListView = (ListView)findViewById(R.id.search_list);
         mEt = (EditText)findViewById(R.id.search_Et);
         mSearch = (ImageView)findViewById(R.id.search_sousuo);
+        mBack = (ImageView)findViewById(R.id.Iv_search_back);
     }
 
 }

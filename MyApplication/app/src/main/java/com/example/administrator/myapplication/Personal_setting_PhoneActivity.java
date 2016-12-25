@@ -15,6 +15,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.ui.Urls;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
@@ -32,13 +53,24 @@ public class Personal_setting_PhoneActivity extends Activity {
     private int time = 60;
     private boolean flag = true;
     private TextView point;
+    private String str;
+    private String userId;
+    private String mPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setting_phone);
+
         //获取控件
         getViews();
+
+        SharedPreferences spf = getSharedPreferences("MYAPP",MODE_PRIVATE);
+        userId = spf.getString("userId","");
+        Intent i = getIntent();
+        mPhone = i.getStringExtra("setting_phone");
+        mEtPhone.setText(mPhone);
+
         //设置监听
         setListener();
         //保存手机号的修改
@@ -155,6 +187,15 @@ public class Personal_setting_PhoneActivity extends Activity {
                 time = 60;
                 point.setVisibility(View.GONE);
                 mBtnGetCord.setVisibility(View.VISIBLE);
+
+                if (str.equals("1")){
+                    Toast.makeText(Personal_setting_PhoneActivity.this,"手机号修改并保存成功！",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Personal_setting_PhoneActivity.this,SetActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(Personal_setting_PhoneActivity.this,"手机号修改失败！",Toast.LENGTH_SHORT).show();
+                }
             }
         };
     };
@@ -176,14 +217,18 @@ public class Personal_setting_PhoneActivity extends Activity {
                 //短信注册成功后，返回MainActivity,然后提示新好友
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {//提交验证码成功,验证通过
                     Toast.makeText(getApplicationContext(), "验证码校验成功", Toast.LENGTH_SHORT).show();
-                    handlerText.sendEmptyMessage(2);
-                    SharedPreferences spf = getSharedPreferences("PHONE_EDIT", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = spf.edit();
-                    editor.putString("PHONE",mEtPhone.getText().toString());
-                    editor.commit();
-                    Toast.makeText(Personal_setting_PhoneActivity.this,"手机号修改并保存成功！",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Personal_setting_PhoneActivity.this,SetActivity.class);
-                    startActivity(intent);
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+
+                            UpdateUserPhone();
+                            Message m = new Message();
+                            handlerText.sendEmptyMessage(2);
+                        }
+                    };
+                    thread.start();
+
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){//服务器验证码发送成功
                     reminderText();
                     Toast.makeText(getApplicationContext(), "验证码已经发送", Toast.LENGTH_SHORT).show();
@@ -204,6 +249,44 @@ public class Personal_setting_PhoneActivity extends Activity {
         }
 
     };
+
+    private void UpdateUserPhone() {
+        try {
+            str = "";
+            URI u = new URI(Urls.urlSetUserPhone);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(u);
+
+            NameValuePair pair1 = new BasicNameValuePair("userId",userId);
+            NameValuePair pair2 = new BasicNameValuePair("userNum",mEtPhone.getText().toString());
+            List<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(pair1);
+            pairs.add(pair2);
+
+            HttpEntity entity = new UrlEncodedFormEntity(pairs, "utf-8");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+
+            HttpEntity httpentity = response.getEntity();
+
+            if (httpentity != null) {
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
+                String string = "";
+
+                while ((string = buffer.readLine()) != null) {
+                    str += string;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onDestroy() {

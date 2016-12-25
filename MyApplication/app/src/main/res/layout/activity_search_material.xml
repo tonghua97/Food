@@ -6,45 +6,55 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/main_llay_default"
         android:orientation="horizontal">
         <!--返回按钮-->
-        <Button
+        <ImageView
             android:id="@+id/Btn_material_back"
             android:background="@drawable/icon_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp" />
         <LinearLayout
-            android:layout_centerHorizontal="true"
-            android:layout_width="227dp"
-            android:layout_height="wrap_content">
+            android:layout_width="300dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_height="40dp">
             <LinearLayout
-                android:layout_weight="1"
-                android:layout_margin="1dp"
-                android:layout_width="225dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@android:color/white">
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:background="@drawable/main_llay_default">
                 <EditText
-                    android:paddingTop="8dp"
-                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
                     android:background="@null"
                     android:id="@+id/Et_material_search"
-                    android:layout_width="200dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:minLines="1"
                     android:hint="搜索食材"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/sousuo"
+                    android:focusable="true"
+                    android:id="@+id/Ib_searchmatrial_search"
+                    android:focusableInTouchMode="true"/>
             </LinearLayout>
-            <ImageButton
-                android:id="@+id/Ib_searchmatrial_search"
-                android:layout_toRightOf="@+id/Et_material_search"
-                android:layout_centerVertical="true"
-                android:scaleType="fitXY"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/img_search"/>
+            <!--<ImageButton-->
+                <!--android:id="@+id/Ib_searchmatrial_search"-->
+                <!--android:layout_toRightOf="@+id/Et_material_search"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:src="@drawable/img_search"/>-->
         </LinearLayout>
     </RelativeLayout>
 
@@ -72,6 +82,12 @@
                 android:layout_width="match_parent"
                 android:numColumns="3">
             </GridView>
+            <!--<GridView-->
+                <!--android:id="@+id/gridview_meat"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:numColumns="3">-->
+            <!--</GridView>-->
 
             <TextView
                 android:id="@+id/Tv_searchmatrial_vegetabletitle"
@@ -90,6 +106,12 @@
                 android:layout_width="match_parent"
                 android:numColumns="3">
             </GridView>
+            <!--<GridView-->
+                <!--android:id="@+id/gridview_vegetable"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:numColumns="3">-->
+            <!--</GridView>-->
         </LinearLayout>
     </ScrollView>
 

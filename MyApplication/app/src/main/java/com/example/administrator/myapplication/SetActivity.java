@@ -143,8 +143,6 @@ public class SetActivity extends Activity {
 
         urlImage = data.getUserImage();
         if (urlImage.contains("http://")){
-            String string = urlImage.substring(7, urlImage.indexOf("/", 7));
-            urlImage = urlImage.replaceAll(string, Urls.mIp);
 
             DisplayImageOptions options = new DisplayImageOptions.Builder()
                     .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
@@ -344,13 +342,16 @@ public class SetActivity extends Activity {
                 case R.id.setting_Rlay_phone:
                      /*跳转到手机号修改页面*/
                     Intent intent3 = new Intent(SetActivity.this,Personal_setting_PhoneActivity.class);
+                    intent3.putExtra("setting_phone",mPhone.getText().toString());
                     startActivity(intent3);
+                    finish();
                     break;
                 case R.id.setting_Rlay_Email:
                      /*跳转到邮箱修改页面*/
                     Intent intent4 = new Intent(SetActivity.this,Personal_setting_EmailActivity.class);
                     intent4.putExtra("setting_email",mEmail.getText().toString());
                     startActivity(intent4);
+                    finish();
                     break;
                 case R.id.setting_Rlay_pwdedit:
                      /*跳转到密码修改页面*/
@@ -615,6 +616,10 @@ public class SetActivity extends Activity {
                     String result = new String(bytes);
                     if (result.equals("1")) {
 						Toast.makeText(getApplicationContext(), "更新成功", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SetActivity.this,MainActivity.class);
+                        Utils.utils = 3;
+                        startActivity(intent);
+                        finish();
                     } else {
 						Toast.makeText(getApplicationContext(), "更新失败", Toast.LENGTH_LONG).show();
                     }

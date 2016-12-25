@@ -110,19 +110,6 @@ public class FragmentHome extends Fragment{
         Tv3.setTextColor(Color.BLACK);
     }
 
-//    private void setDefaultPage() {
-//        //1、获取一个fragmentManager的对象
-//        FragmentManager fm = getFragmentManager();
-//        //2、获取fragmentTransaction对象
-//        FragmentTransaction transaction = fm.beginTransaction();
-//        mTuijian = new FragmentHomeRecommend();
-//        //3、设置页面
-//        transaction.replace(R.id.main_fragment_shouye_Flay,mTuijian);
-//        Tv1.setTextColor(getResources().getColor(R.color.yellow));
-//        //4、执行更改
-//        transaction.commit();
-//    }
-
     private void setListener() {
         Tv1.setOnClickListener(myListener);
         Tv2.setOnClickListener(myListener);

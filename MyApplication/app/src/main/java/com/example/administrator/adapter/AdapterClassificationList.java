@@ -63,8 +63,6 @@ public class AdapterClassificationList extends BaseAdapter {
         Tv_classification_material.setText(ldcla.get(position).getIntro());
         ImageView Im_classification_image = (ImageView) view.findViewById(R.id.Iv_classification);
         Url = ldcla.get(position).getImage();
-        String string = Url.substring(7, Url.indexOf("/", 7));
-        Url = Url.replaceAll(string, Urls.mIp);
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片

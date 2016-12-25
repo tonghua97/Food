@@ -88,6 +88,7 @@ public class MainActivity extends Activity {
      * 显示首页
      */
     private void setDefaultPage1() {
+        Utils.utils = 1;
         //1、获取一个fragmentManager的对象
         FragmentManager fm = getFragmentManager();
         //2、获取fragmentTransaction对象
@@ -99,12 +100,8 @@ public class MainActivity extends Activity {
         mLlayHomeIv.setImageResource(R.drawable.icon_home_down);
         mLlayHomeTv.setTextColor(getResources().getColor(R.color.yellow));
 
-        if (userId != ""){
-
-        }else {
-            mLaySearch.setVisibility(View.VISIBLE);
-            mTvPerson.setVisibility(View.GONE);
-        }
+        mLaySearch.setVisibility(View.VISIBLE);
+        mTvPerson.setVisibility(View.GONE);
 
         //5、执行更改
         transaction.commit();
@@ -114,6 +111,7 @@ public class MainActivity extends Activity {
      * 显示分类页
      */
     private void setDefaultPage2() {
+        Utils.utils = 2;
         //1、获取一个fragmentManager的对象
         FragmentManager fm = getFragmentManager();
         //2、获取fragmentTransaction对象
@@ -134,6 +132,7 @@ public class MainActivity extends Activity {
      * 显示个人中心页面
      */
     private void setDefaultPage3() {
+        Utils.utils = 3;
         //1、获取一个fragmentManager的对象
         FragmentManager fm = getFragmentManager();
         //2、获取fragmentTransaction对象

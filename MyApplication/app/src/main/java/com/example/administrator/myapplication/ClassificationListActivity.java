@@ -120,12 +120,10 @@ public class ClassificationListActivity extends Activity{
             }
         };
         thread.start();
-//        getData();
+
         //设置Tvname
         Tvname.setText(name);
-        //设置adapter
-//        adapter_classification = new AdapterClassificationList(ldc,this);
-//        lv_classification.setAdapter(adapter_classification);
+
         //设置返回监听
         BtBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,16 +143,6 @@ public class ClassificationListActivity extends Activity{
         });
     }
 
-//    private void getData() {
-//        ldc.add((new DataClassificationList(0L,R.drawable.img_loading,"食趣","食趣",666666,66)));
-//        ldc.add((new DataClassificationList(1L,R.drawable.img_loading,"食趣","食趣",666666,66)));
-//        ldc.add((new DataClassificationList(2L,R.drawable.img_loading,"食趣","食趣",666666,66)));
-//        ldc.add((new DataClassificationList(3L,R.drawable.img_loading,"食趣","食趣",666666,66)));
-//        ldc.add((new DataClassificationList(4L,R.drawable.img_loading,"食趣","食趣",666666,66)));
-//        ldc.add((new DataClassificationList(5L,R.drawable.img_loading,"食趣","食趣",666666,66)));
-//        ldc.add((new DataClassificationList(6L,R.drawable.img_loading,"食趣","食趣",666666,66)));
-//
-//    }
 
     public void getViews() {
         lv_classification = (ListView)findViewById(R.id.Lv_classification);

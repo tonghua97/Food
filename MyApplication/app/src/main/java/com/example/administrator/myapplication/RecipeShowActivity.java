@@ -216,10 +216,7 @@ public class RecipeShowActivity extends Activity {
         mTitle.setText(mRecipe.getName());
 
         String Url = mRecipe.getImage();
-        //截取url中ip地址
-        String string = Url.substring(7, Url.indexOf("/", 7));
-        //替换ip
-        Url = Url.replaceAll(string, Urls.mIp);
+
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
                 .cacheInMemory(true)//设置下载的图片是否缓存在内存中

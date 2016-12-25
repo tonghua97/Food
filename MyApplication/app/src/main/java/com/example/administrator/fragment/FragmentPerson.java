@@ -101,8 +101,6 @@ public class FragmentPerson extends Fragment{
 
         urlImage = data.getUserImage();
         if (urlImage.contains("http://")){
-            String string = urlImage.substring(7, urlImage.indexOf("/", 7));
-            urlImage = urlImage.replaceAll(string, Urls.mIp);
 
             DisplayImageOptions options = new DisplayImageOptions.Builder()
                     .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
@@ -156,8 +154,11 @@ public class FragmentPerson extends Fragment{
         Id = spf.getString("userId","");
         userName = spf.getString("userName","");
 
+//        Toast.makeText(getActivity(),Id,Toast.LENGTH_SHORT).show();
         if (Id != ""){
             Utils.isTrue = 2;
+        }else {
+            Utils.isTrue = 1;
         }
 
         if (Utils.isTrue == 2){
@@ -165,6 +166,7 @@ public class FragmentPerson extends Fragment{
             mUsername.setVisibility(View.VISIBLE);
             mLlaylogin.setVisibility(View.VISIBLE);
             mLlayBottom.setVisibility(View.GONE);
+            mLlayname.setText(userName);
 //            mLlayname.setText(userName);
             setdata();
         }else {
@@ -172,6 +174,7 @@ public class FragmentPerson extends Fragment{
             mUsername.setVisibility(View.GONE);
             mLlaylogin.setVisibility(View.GONE);
             mLlayBottom.setVisibility(View.VISIBLE);
+            head.setImageResource(R.drawable.head);
         }
 
         setListener();
@@ -297,7 +300,7 @@ public class FragmentPerson extends Fragment{
 
             if (httpentity != null) {
                 BufferedReader buffer = new BufferedReader(new InputStreamReader(httpentity.getContent()));
-                String string = null;
+                String string = "";
 
                 while ((string = buffer.readLine()) != null) {
                     str += string;
@@ -316,7 +319,22 @@ public class FragmentPerson extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        setdata();
+//        setdata();
+        if (Utils.isTrue == 2){
+            mRlaymiddle.setVisibility(View.GONE);
+            mUsername.setVisibility(View.VISIBLE);
+            mLlaylogin.setVisibility(View.VISIBLE);
+            mLlayBottom.setVisibility(View.GONE);
+            mLlayname.setText(userName);
+//            mLlayname.setText(userName);
+            setdata();
+        }else {
+            mRlaymiddle.setVisibility(View.VISIBLE);
+            mUsername.setVisibility(View.GONE);
+            mLlaylogin.setVisibility(View.GONE);
+            mLlayBottom.setVisibility(View.VISIBLE);
+            head.setImageResource(R.drawable.head);
+        }
     }
 
 }

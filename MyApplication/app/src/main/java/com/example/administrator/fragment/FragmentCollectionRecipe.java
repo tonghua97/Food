@@ -106,9 +106,7 @@ public class FragmentCollectionRecipe extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_collection_recipe,container,false);
-//        collectionRecipe_adapter = new AdapterCollectionRecipe(ldcr,getActivity());
         lv_collection_recipe = (ListView)view.findViewById(R.id.Lv_collection_recipe);
-//        lv_collection_recipe.setAdapter(collectionRecipe_adapter);
         SharedPreferences spf = getActivity().getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
         userId = spf.getString("userId","");
 
@@ -141,15 +139,6 @@ public class FragmentCollectionRecipe extends Fragment{
                 }
             };
             thread.start();
-//            ldcr.add((new DataCollectionRecipe(0L,R.drawable.img_loading,"食谱","食谱")));
-//            ldcr.add((new DataCollectionRecipe(1L,R.drawable.img_loading,"食谱","食谱")));
-//            ldcr.add((new DataCollectionRecipe(2L,R.drawable.img_loading,"食谱","食谱")));
-//            ldcr.add((new DataCollectionRecipe(3L,R.drawable.img_loading,"食谱","食谱")));
-//            ldcr.add((new DataCollectionRecipe(0L,R.drawable.img_loading,"食谱","食谱")));
-//            ldcr.add((new DataCollectionRecipe(1L,R.drawable.img_loading,"食谱","食谱")));
-//            ldcr.add((new DataCollectionRecipe(2L,R.drawable.img_loading,"食谱","食谱")));
-//            ldcr.add((new DataCollectionRecipe(3L,R.drawable.img_loading,"食谱","食谱")));
-
         }
 
     public void getHttpData() {

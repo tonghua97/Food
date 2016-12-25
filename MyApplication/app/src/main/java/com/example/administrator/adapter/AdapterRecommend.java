@@ -69,9 +69,6 @@ public class AdapterRecommend extends BaseAdapter{
 //
         ImageView Rec_Image = (ImageView)view.findViewById(R.id.Iv_recommend_image);
         Url = mData.get(i).getImage();
-        String string = Url.substring(7, Url.indexOf("/", 7));
-        Url = Url.replaceAll(string, Urls.mIp);
-
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片
                 .showImageOnFail(R.drawable.img_fail)  //设置图片下载失败时显示的图片

@@ -118,17 +118,6 @@ public class FragmentCollectionPickfun extends Fragment{
             }
         });
     }
-//        private void getData() {
-//            ldcp.add((new DataCollectionPickfun(0L,R.drawable.img_loading,"食趣","食趣")));
-//            ldcp.add((new DataCollectionPickfun(1L,R.drawable.img_loading,"食趣","食趣")));
-//            ldcp.add((new DataCollectionPickfun(2L,R.drawable.img_loading,"食趣","食趣")));
-//            ldcp.add((new DataCollectionPickfun(3L,R.drawable.img_loading,"食趣","食趣")));
-//            ldcp.add((new DataCollectionPickfun(0L,R.drawable.img_loading,"食趣","食趣")));
-//            ldcp.add((new DataCollectionPickfun(1L,R.drawable.img_loading,"食趣","食趣")));
-//            ldcp.add((new DataCollectionPickfun(2L,R.drawable.img_loading,"食趣","食趣")));
-//            ldcp.add((new DataCollectionPickfun(3L,R.drawable.img_loading,"食趣","食趣")));
-//
-//        }
 
     private void getHttpData(){
         try {

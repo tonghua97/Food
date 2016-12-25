@@ -7,6 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/main_llay_default">
+        <ImageView
+            android:id="@+id/Iv_search_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/icon_back"/>
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -35,7 +43,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:dividerHeight="1dp"
+        android:divider="@color/gray2"
         android:id="@+id/search_list">
     </ListView>
 </LinearLayout>

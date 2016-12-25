@@ -12,9 +12,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.ui.BiuEditText;
 import com.example.administrator.ui.Urls;
 
 import java.util.ArrayList;
@@ -24,8 +26,8 @@ import java.util.HashMap;
  * Created by 姜佳妮 on 2016/11/28.
  */
 public class SearchMaterialActivity extends Activity {
-    private Button btn_back;        //返回按钮
-    private ImageButton ib_search;    //搜索按钮
+    private ImageView btn_back;        //返回按钮
+    private ImageView ib_search;    //搜索按钮
     private String search;          //显示选中的食材
 
     private GridView gridView_meat;
@@ -124,8 +126,8 @@ public class SearchMaterialActivity extends Activity {
         gridView_vegetable = (GridView)findViewById(R.id.gridview_vegetable);
 
         textview = (EditText) findViewById(R.id.Et_material_search);
-        btn_back = (Button)findViewById(R.id.Btn_material_back);
-        ib_search = (ImageButton) findViewById(R.id.Ib_searchmatrial_search);
+        btn_back = (ImageView)findViewById(R.id.Btn_material_back);
+        ib_search = (ImageView) findViewById(R.id.Ib_searchmatrial_search);
     }
 
     /**

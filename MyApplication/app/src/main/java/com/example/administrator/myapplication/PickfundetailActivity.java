@@ -143,8 +143,6 @@ public class PickfundetailActivity extends Activity {
         tvcontent.setText(data.getTvcontent());
 
         urlImage = data.getUrl();
-        String string = urlImage.substring(7, urlImage.indexOf("/", 7));
-        urlImage = urlImage.replaceAll(string, Urls.mIp);
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.img_loading)  //设置图片在下载期间显示的图片

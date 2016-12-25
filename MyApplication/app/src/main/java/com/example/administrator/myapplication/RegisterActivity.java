@@ -132,9 +132,6 @@ public class RegisterActivity extends Activity {
                         }
                     };
                     t.start();
-//                    Intent intent = new Intent(RegisterActivity.this,LoginVerifyActivity.class);
-//                    startActivity(intent);
-//                    finish();
                     break;
             }
 
@@ -171,7 +168,6 @@ public class RegisterActivity extends Activity {
                             mUserCpassword.setError(null);
                         }else{
                             mUserCpassword.setError("确认密码与密码不一致");
-//                            mUserCpassword.setText("");
                         }
                     }
                     break;

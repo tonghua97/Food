@@ -52,8 +52,6 @@ public class CollectionActivity extends Activity{
 //
         initView();
 
-//        设置默认的页面(fragment页面)
-//        setDefaultPage();
     }
 
     private void initView() {
@@ -99,18 +97,6 @@ public class CollectionActivity extends Activity{
         Tv2.setTextColor(Color.BLACK);
   }
 
-//    private void setDefaultPage() {
-//        //1、获取一个fragmentManager的对象
-//        FragmentManager fm = getFragmentManager();
-//        //2、获取fragmentTransaction对象
-//        FragmentTransaction transaction = fm.beginTransaction();
-//        mCrecipe = new FragmentCollectionRecipe();
-//        //3、设置页面
-//        transaction.replace(R.id.collection_fragment_flay,mCrecipe);
-//        Tv2.setTextColor(getResources().getColor(R.color.yellow));
-//        //4、执行更改
-//        transaction.commit();
-//    }
 
     private void setListener() {
         bt_back.setOnClickListener(myListener);
