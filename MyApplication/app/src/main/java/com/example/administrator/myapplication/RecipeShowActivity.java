@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -78,6 +79,7 @@ public class RecipeShowActivity extends Activity {
     public ImageLoader imageLoader = ImageLoader.getInstance();
     private String str;
     private String userId;
+    private ProgressDialog dialog;
 
     private Handler h = new Handler(){
         @Override
@@ -145,6 +147,7 @@ public class RecipeShowActivity extends Activity {
         mEffect = (TextView)findViewById(R.id.Tv_recipeshow_effect);
         mStep = (ListView)findViewById(R.id.Lv_recipeshow_step);
         mSv = (ScrollView)findViewById(R.id.SV_recipeshow);
+        dialog = new ProgressDialog(RecipeShowActivity.this);
     }
 
     private void setListener() {
@@ -254,6 +257,32 @@ public class RecipeShowActivity extends Activity {
         //2、发送请求
         client.get(getApplicationContext(), recipesUrl, new JsonHttpResponseHandler(){
             @Override
+            public void onStart() {
+                super.onStart();
+                dialog.setTitle("提示信息");
+                dialog.setMessage("数据加载中......");
+                dialog.show();
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+                }.start();
+
+            }
+
+            @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
@@ -282,6 +311,7 @@ public class RecipeShowActivity extends Activity {
                     e.printStackTrace();
                 }
             }
+
         });
     }
     public void stepString2ArrayList(String RecipeStep){

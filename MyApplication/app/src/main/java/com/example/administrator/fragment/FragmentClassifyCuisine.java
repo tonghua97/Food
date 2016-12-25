@@ -70,19 +70,23 @@ public class FragmentClassifyCuisine extends Fragment {
         ldcuisine.add((new DataCuisine(1,R.drawable.chuan,"川菜")));
         ldcuisine.add((new DataCuisine(2,R.drawable.xiang,"湘菜")));
         ldcuisine.add((new DataCuisine(3,R.drawable.yue,"粤菜")));
-        ldcuisine.add((new DataCuisine(4,R.drawable.lu,"鲁菜")));
-        ldcuisine.add((new DataCuisine(5,R.drawable.dongbei,"东北菜")));
-        ldcuisine.add((new DataCuisine(6,R.drawable.min,"闽菜")));
-        ldcuisine.add((new DataCuisine(7,R.drawable.jing,"京菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.shanghai,"上海菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.qingzhen,"清真")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.xinjiang,"新疆菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.yv,"豫菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.france,"法国菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.italy3,"意大利菜")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.japan,"日本料理")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.korea,"韩国料理")));
-        ldcuisine.add((new DataCuisine(8,R.drawable.thailand,"泰国菜")));
+        ldcuisine.add((new DataCuisine(4,R.drawable.su,"苏菜")));
+        ldcuisine.add((new DataCuisine(5,R.drawable.hui,"徽菜")));
+        ldcuisine.add((new DataCuisine(6,R.drawable.zhe,"浙菜")));
+        ldcuisine.add((new DataCuisine(7,R.drawable.lu,"鲁菜")));
+        ldcuisine.add((new DataCuisine(8,R.drawable.dongbei,"东北菜")));
+        ldcuisine.add((new DataCuisine(9,R.drawable.min,"闽菜")));
+        ldcuisine.add((new DataCuisine(10,R.drawable.jing,"京菜")));
+        ldcuisine.add((new DataCuisine(11,R.drawable.shanghai,"上海菜")));
+        ldcuisine.add((new DataCuisine(12,R.drawable.qingzhen,"清真")));
+        ldcuisine.add((new DataCuisine(13,R.drawable.xinjiang,"新疆菜")));
+        ldcuisine.add((new DataCuisine(14,R.drawable.yv,"豫菜")));
+        ldcuisine.add((new DataCuisine(15,R.drawable.france,"法国菜")));
+        ldcuisine.add((new DataCuisine(16,R.drawable.italy3,"意大利菜")));
+        ldcuisine.add((new DataCuisine(17,R.drawable.japan,"日本料理")));
+        ldcuisine.add((new DataCuisine(18,R.drawable.korea,"韩国料理")));
+        ldcuisine.add((new DataCuisine(19,R.drawable.thailand,"泰国菜")));
+        ldcuisine.add((new DataCuisine(20,R.drawable.qita,"其他")));
     }
 
 }
