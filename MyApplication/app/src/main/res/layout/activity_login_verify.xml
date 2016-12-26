@@ -14,8 +14,7 @@
         android:layout_weight="1"
         android:src="@drawable/icon_back"
         android:id="@+id/login_verify_Tv_back"
-        android:layout_marginLeft="10dp"
-        android:paddingTop="@dimen/activity_vertical_margin" />
+        android:layout_marginLeft="10dp"/>
     <LinearLayout
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
@@ -47,52 +46,54 @@
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"/>
         </RelativeLayout>
-        <RelativeLayout
+        <LinearLayout
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:layout_weight="0.1">
-            <EditText
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:id="@+id/login_verify_Et_username"
-                android:layout_centerInParent="true"
-                android:textSize="16sp"
-                android:hint="请输入用户名"
-                android:background="@drawable/main_llay_default"/>
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/login_name"
-                android:layout_toLeftOf="@id/login_verify_Et_username"
-                android:layout_marginRight="10dp"
+                android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:src="@drawable/register_name"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1">
-
             <EditText
                 android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/login_verify_Et_username"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:hint="请输入用户名"
+                android:background="@drawable/main_llay_default"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_weight="0.1">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/login_password"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/register_password1"/>
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:id="@+id/login_verify_Et_password"
                 android:textSize="16sp"
                 android:inputType="textPassword"
                 android:hint="请输入密码"
                 android:background="@drawable/main_llay_default"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/login_password"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@id/login_verify_Et_password"
-                android:src="@drawable/register_password1"/>
-        </RelativeLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:gravity="center"
@@ -100,7 +101,7 @@
             android:layout_weight="1">
             <Button
                 android:layout_marginLeft="10dp"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:id="@+id/login_verify_Btn_login"
                 android:text="登录"

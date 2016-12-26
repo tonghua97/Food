@@ -5,25 +5,23 @@
     android:id="@+id/activity_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="@drawable/beijing3"
+    android:background="@drawable/background_login"
     android:orientation="vertical"
     tools:context="com.example.administrator.myapplication.RegisterActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="24dp"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:textSize="20dp"
+        android:layout_weight="1"
         android:id="@+id/register_Tv_back"
-        android:text="返回" />
+        android:src="@drawable/icon_back" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="3">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="65dp"
@@ -36,80 +34,92 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/register_Tv_name"
             android:text="随食-有趣"
-            android:textColor="#807f7f"
+            android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/register_name"/>
         <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="300dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:id="@+id/register_userAccount"
             android:hint="请输入账号"
+            android:textSize="16sp"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/register_password"/>
         <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="300dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:inputType="textPassword"
             android:id="@+id/register_userPassword"
             android:hint="请输入密码"
+            android:textSize="16sp"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/register_password1"/>
         <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="300dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:inputType="textPassword"
             android:id="@+id/register_userCpassword"
             android:hint="请确认密码"
+            android:textSize="16sp"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/register_name1"/>
         <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="300dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:id="@+id/register_userName"
             android:hint="请输入昵称"
+            android:textSize="16sp"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
 
@@ -117,18 +127,21 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/register_phone"/>
         <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="300dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:id="@+id/register_userNum"
             android:hint="请输入手机号"
+            android:textSize="16sp"
             android:background="@drawable/main_llay_default"/>
     </LinearLayout>
 
@@ -138,11 +151,12 @@
         android:layout_height="0dp"
         android:layout_weight="1.5">
         <Button
-            android:layout_width="320dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/register_Btn_register"
             android:text="注册"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             android:background="@color/yellow"/>
     </LinearLayout>
@@ -151,8 +165,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
         <TextView
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="注册表示同意用户协议"

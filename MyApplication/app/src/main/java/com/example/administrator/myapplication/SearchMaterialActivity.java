@@ -1,8 +1,12 @@
 package com.example.administrator.myapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.ui.GifDialog;
 import com.example.administrator.ui.Urls;
 
 import java.util.ArrayList;
@@ -43,6 +48,7 @@ public class SearchMaterialActivity extends Activity {
     //把选中的checkbox添加到集合中；
     private ArrayList selectedItem;
 
+    private GifDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +58,13 @@ public class SearchMaterialActivity extends Activity {
         setListener();
 
         selectedItem = new ArrayList();
-
+        final GifDialog.Builder gifbuilder = new GifDialog.Builder(SearchMaterialActivity.this);
         initData();
         initCheckBox();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SearchMaterialActivity.this,R.style.gif_dialog);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.setView(R.layout.gif_dialog_view);
+        }
 
         adapter_meat = new MyAdapter_meat();
         adapter_vegetable = new MyAdapter_vegetable();
@@ -74,6 +84,23 @@ public class SearchMaterialActivity extends Activity {
                 if (holder.cb.isChecked() == true) {
                     //添加到集合中；
                     selectedItem.add(list_meat.get(position) + "、");
+                    gifbuilder.setImges(R.drawable.roulei);
+                    dialog = gifbuilder.create();
+                    dialog.show();
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Message m = new Message();
+                            handler.sendMessage(m);
+                        }
+                    };
+                    thread.start();
                 } else {
                     //从集合中移除元素。
                     selectedItem.remove(list_meat.get(position) + "、");
@@ -98,6 +125,23 @@ public class SearchMaterialActivity extends Activity {
                 if (holder.cb.isChecked() == true) {
                     //添加到集合中；
                     selectedItem.add(list_vegetable.get(position) + "、");
+                    gifbuilder.setImges(R.drawable.cailei);
+                    dialog = gifbuilder.create();
+                    dialog.show();
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Message m = new Message();
+                            handler.sendMessage(m);
+                        }
+                    };
+                    thread.start();
                 } else {
                     //从集合中移除元素。
                     selectedItem.remove(list_vegetable.get(position) + "、");
@@ -107,6 +151,7 @@ public class SearchMaterialActivity extends Activity {
                     s = s + selectedItem.get(i);
                 }
                 textview.setText(s);
+
             }
         });
     }
@@ -307,4 +352,12 @@ public class SearchMaterialActivity extends Activity {
     public static HashMap<Integer, Boolean> getIsSelected() {
         return map;
     }
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            dialog.dismiss();
+        }
+    };
 }

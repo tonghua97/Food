@@ -2,14 +2,13 @@ package com.example.administrator.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.administrator.ui.Urls;
@@ -17,7 +16,6 @@ import com.example.administrator.ui.Urls;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -38,7 +36,7 @@ import java.util.List;
 
 public class RegisterActivity extends Activity {
 
-    private TextView mTvBack;
+    private ImageView mTvBack;
     private Button mRegister;
     private EditText mUserAccount;
     private EditText mUserPassword;
@@ -98,7 +96,7 @@ public class RegisterActivity extends Activity {
 
     public void getViews() {
         //返回
-        mTvBack = (TextView)findViewById(R.id.register_Tv_back);
+        mTvBack = (ImageView)findViewById(R.id.register_Tv_back);
         //注册
         mRegister = (Button)findViewById(R.id.register_Btn_register);
         //用户账号

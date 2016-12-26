@@ -11,8 +11,8 @@
         <!--返回键-->
         <Button
             android:id="@+id/classification_Bt_Back"
-            android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:textSize="15sp"
             android:background="@drawable/icon_back"/>
@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/classification_Tv_name"
             android:textSize="23dp"
-            android:text="设置"
+            android:text="分类"
+            android:textColor="@color/black"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
