@@ -263,4 +263,9 @@ public class FragmentHomeRecommend extends Fragment implements BGARefreshLayout.
         }
     };
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRefreshLayout.beginRefreshing();
+    }
 }

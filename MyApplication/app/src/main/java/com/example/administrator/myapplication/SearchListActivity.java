@@ -132,9 +132,7 @@ public class SearchListActivity extends Activity {
         mSearchEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchListActivity.this,SearchActivity.class);
-                intent.putExtra("recipesName",mSearchEt.getText().toString());
-                startActivity(intent);
+                finish();
             }
         });
 
